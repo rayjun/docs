@@ -7,17 +7,17 @@
 ## 翻译进度
 
 - 序言
-    - [Release Notes](http://laragirl.com/docs/5.1/releases)
-    - [Upgrade Guide](http://laragirl.com/docs/5.1/upgrade)
-    - [Contribution Guide](http://laragirl.com/docs/5.1/contributions)
+    - [Release Notes](http://laragirl.com/docs/5.1/releases) - 翻译:Zehir 进度:100%
+    - [Upgrade Guide](http://laragirl.com/docs/5.1/upgrade) - 翻译:Zehir (未翻译)
+    - [Contribution Guide](http://laragirl.com/docs/5.1/contributions) - 翻译:Zehir 进度:100%
 - Setup
-    - [Installation](http://laragirl.com/docs/5.1/installation)
-    - [Homestead](http://laragirl.com/docs/5.1/homestead)
+    - [Installation](http://laragirl.com/docs/5.1/installation) - 翻译:Zehir 进度:100%
+    - [Homestead](http://laragirl.com/docs/5.1/homestead) - 翻译:Zehir 进度:100%
 - The Basics
-    - [Routing](http://laragirl.com/docs/5.1/routing)
-    - [Middleware](http://laragirl.com/docs/5.1/middleware)
-    - [Controllers](http://laragirl.com/docs/5.1/controllers)
-    - [Requests](http://laragirl.com/docs/5.1/requests)
+    - [Routing](http://laragirl.com/docs/5.1/routing) - 翻译:Zehir 进度:100%
+    - [Middleware](http://laragirl.com/docs/5.1/middleware) - 翻译:Zehir 进度:100%
+    - [Controllers](http://laragirl.com/docs/5.1/controllers) - 翻译:Zehir 进度:100%
+    - [Requests](http://laragirl.com/docs/5.1/requests) - 翻译:Zehir 进度:91%
     - [Responses](http://laragirl.com/docs/5.1/responses)
     - [Views](http://laragirl.com/docs/5.1/views)
     - [Blade Templates](http://laragirl.com/docs/5.1/blade)
