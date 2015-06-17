@@ -1,4 +1,4 @@
-# 安装
+# Installation
 
 - [Installation](#安装)
 - [Configuration](#配置)
