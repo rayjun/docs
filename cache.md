@@ -9,17 +9,18 @@
 - [Adding Custom Cache Drivers](#adding-custom-cache-drivers)
 
 <a name="configuration"></a>
-## Configuration
+## 配置
 
-Laravel provides a unified API for various caching systems. The cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Laravel supports popular caching backends like [Memcached](http://memcached.org) and [Redis](http://redis.io) out of the box.
+Laravel 为各种缓存系统提供了统一的 API, 缓存的配置放置于 `config/cache.php` 中，在这个文件中你可以指定在整个应用程序中默认被使用的缓存驱动，Laravel 支持流行的缓存后端程序如[Memcached](http://memcached.org/) 和[Redis](http://redis.io/) ，开箱即用。
 
-The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, Laravel is configured to use the `file` cache driver, which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached or APC. You may even configure multiple cache configurations for the same driver.
+缓存配置文件还包含各种其它的选项，这些选项在文件中都有注释，一定要读一遍这些选项。默认情况下，Laravel 配置的是使用 `file` 缓存驱动，存储序列化的，缓存的对象到文件系统中。对于较大的应用程序，推荐你使用一个内存（in-memory）缓存，例如 Memcached 或者 APC。你甚至可以为同一个驱动配置多个缓存配置。
 
-### Cache Prerequisites
+### 缓存必备条件
 
-#### Database
+#### 数据库
 
-When using the `database` cache driver, you will need to setup a table to contain the cache items. You'll find an example `Schema` declaration for the table below:
+当使用 `database` 缓存驱动，你需要建一个表来存储缓存项，以下是这个表 `Schema` 申明示例：
+
 
 	Schema::create('cache', function($table) {
 		$table->string('key')->unique();
@@ -29,9 +30,9 @@ When using the `database` cache driver, you will need to setup a table to contai
 
 #### Memcached
 
-Using the Memcached cache requires the [Memcached PECL package](http://pecl.php.net/package/memcached) to be installed.
+使用 Memcached 缓存需要先安装[Memcached PECL 包](http://pecl.php.net/package/memcached)。.
 
-The default [configuration](#configuration) uses TCP/IP based on [Memcached::addServer](http://php.net/manual/en/memcached.addserver.php):
+默认[配置](cache#configuration) 使用基于 TCP/IP 的[Memcached::addServer](http://php.net/manual/en/memcached.addserver.php):
 
 	'memcached' => [
 		[
@@ -41,7 +42,7 @@ The default [configuration](#configuration) uses TCP/IP based on [Memcached::add
 		],
 	],
 
-You may also set the `host` option to a UNIX socket path. If you do this, the `port` option should be set to `0`:
+你还可以将 `host` 设置为 UNIX 套接字（socket）路径，如果你这样做，`port` 应该设置为 `0`:
 
 	'memcached' => [
 		[
@@ -63,11 +64,11 @@ For more information on configuring Redis, consult its [Laravel documentation pa
 <a name="obtaining-a-cache-instance"></a>
 ### Obtaining A Cache Instance
 
-The `Illuminate\Contracts\Cache\Factory` and `Illuminate\Contracts\Cache\Repository` [contracts](/docs/{{version}}/contracts) provide access to Laravel's cache services. The `Factory` contract provides access to all cache drivers defined for your application. The `Repository` contract is typically an implementation of the default cache driver for your application as specified by your `cache` configuration file.
+`Illuminate\Contracts\Cache\Factory` 和 `Illuminate\Contracts\Cache\Repository` [contracts](/docs/{{version}}/contracts) 提供对 Laravel 的缓存服务的访问，`Factory` 提供对配置文件中定义的所有缓存驱动的访问。`Repository` Contract 通常是一个对 `cache` 配置文件中所指定的，应用程序默认缓存驱动的一个实现。
 
-However, you may also use the `Cache` facade, which is what we will use throughout this documentation. The `Cache` facade provides convenient, terse access to the underlying implementations of the Laravel cache contracts.
+然而，你还可以使用 `Cache` facade，这是我们将在整个文档中使用的方式。`Cache` facade 提供方便，简洁的方式，访问 Laravel 缓存 Contracts 的底层实现。
 
-For example, let's import the `Cache` facade into a controller:
+例如，让我们导入 `Cache` facade 到一个控制器中：
 
 	<?php
 
@@ -91,41 +92,42 @@ For example, let's import the `Cache` facade into a controller:
 		}
 	}
 
-#### Accessing Multiple Cache Stores
+#### 访问多个缓存存储
 
-Using the `Cache` facade, you may access various cache stores via the `store` method. The key passed to the `store` method should correspond to one of the stores listed in the `stores` configuration array in your `cache` configuration file:
+使用 `Cache` facade，你可以通过 `store` 方法访问各种缓存存储，传入到 `store` 中的键值应该对应于 `cache` 配置文件中 `stores` 数组中的一个：
 
 	$value = Cache::store('file')->get('foo');
 
 	Cache::store('redis')->put('bar', 'baz', 10);
 
 <a name="retrieving-items-from-the-cache"></a>
-### Retrieving Items From The Cache
+### 从缓存中检索缓存项
 
-The `get` method on the `Cache` facade is used to retrieve items from the cache. If the item does not exist in the cache, `null` will be returned. If you wish, you may pass a second argument to the `get` method specifying the custom default value you wish to be returned if the item doesn't exist:
+`Cache` facade 上的 `get` 方法被用于从缓存中检索获取缓存项，如果缓项在缓存中不存在，将返回 `null` 值，如果你想在缓存项不存在的时返回一个你自定义的默认值，你可以向 `get` 方法传入第二个参数来指定：
 
 	$value = Cache::get('key');
 
 	$value = Cache::get('key', 'default');
 
 
-You may even pass a `Closure` as the default value. The result of the `Closure` will be returned if the specified item does not exist in the cache. Passing a Closure allows you to defer the retrieval of default values from a database or other external service:
+你甚至可以传入一个 `Closure` 作为默认值，如果指定的缓存项在缓存中不存，将返回 `Closure` 的结果，传入闭包使得你可以将默认值的获取委托给数据库或其它外部服务：
 
 	$value = Cache::get('key', function() {
 		return DB::table(...)->get();
 	});
 
-#### Checking For Item Existence
+#### 检查缓存项是否存在
 
-The `has` method may be used to determine if an item exists in the cache:
+`has` 方法可能被用来判断一个缓存项在缓存中是否存在：
 
 	if (Cache::has('key')) {
 		//
 	}
 
-#### Incrementing / Decrementing Values
+#### 自增 / 自减值
 
-The `increment` and `decrement` methods may be used to adjust the value of integer items in the cache. Both of these methods optionally accept a second argument indicating the amount by which to increment or decrement the item's value:
+`increment` 和 `decrement` 方法可以被用来调整缓存中的整数型缓存项的大小，两个方法都可以接收第二个参数表示增加或减少量：
+
 
 	Cache::increment('key');
 
@@ -135,62 +137,63 @@ The `increment` and `decrement` methods may be used to adjust the value of integ
 
 	Cache::decrement('key', $amount);
 
-#### Retrieve Or Update
+#### 检索或者更新
 
-Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. For example, you may wish to retrieve all users from the cache or, if they don't exist, retrieve them from the database and add them to the cache. You may do this using the `Cache::remember` method:
+有时你可能想从缓存中获取一个缓存项，当请求的缓存项不存在时存储一个默认值，例如，你可能想从缓存中获取所有的用户，当它们不存在时，从数据库中检索出来并且将其加入到缓存中，你可以用 `Cache::remember` 方法做到这一点：
 
 	$value = Cache::remember('users', $minutes, function() {
 		return DB::table('users')->get();
 	});
 
-If the item does not exist in the cache, the `Closure` passed to the `remember` method will be executed and its result will be placed in the cache.
+如果这个缓存项在缓存中不存在，传入 `remember` 方法中的 `Closure` 将会被执行且其结果会被放到缓存中。
 
-You may also combine the `remember` and `forever` methods:
+你还可以将 `remember` 和 `forever` 方法合并：
+
 
 	$value = Cache::rememberForever('users', function() {
 		return DB::table('users')->get();
 	});
 
-#### Retrieve And Delete
+#### 检索和删除
 
-If you need to retrieve an item from the cache and then delete it, you may use the `pull` method. Like the `get` method, `null` will be returned if the item does not exist in the cache:
+如果你想从缓存中检索出一个缓存项然后再将其删除，你可以使用 `pull` 方法，跟 `get` 方法一样，如果缓存中不存在此缓存项将返回 `null`：
 
 	$value = Cache::pull('key');
 
 <a name="storing-items-in-the-cache"></a>
-### Storing Items In The Cache
+### 存储缓存项
 
-You may use the `put` method on the `Cache` facade to store items in the cache. When you place an item in the cache, you will need to specify the number of minutes for which the value should be cached:
+你可以使用 `Cache` facade 上的 `put` 的方法来将缓存项存储到缓存中，当加入缓存项时，你需要指定缓存项将被缓存多少分钟：
 
 	Cache::put('key', 'value', $minutes);
 
-Instead of passing the number of minutes until the item expires, you may also pass a PHP `DateTime` instance representing the expiration time of the cached item:
+你还可以传入一个 PHP `DateTime` 的实例来表示缓存项的过期时间，而不是多少分钟后过期：
 
 	$expiresAt = Carbon::now()->addMinutes(10);
 
 	Cache::put('key', 'value', $expiresAt);
 
-The `add` method will only add the item to the cache if it does not already exist in the cache store. The method will return `true` if the item is actually added to the cache. Otherwise, the method will return `false`:
+`add` 方法只有当缓存项还不存在时才会将其添加到缓存存储中，如果被实际添加将返回 `true`，否则，返回 `false`:
 
 	Cache::add('key', 'value', $minutes);
 
-The `forever` method may be used to store an item in the cache permanently. These values must be manually removed from the cache using the `forget` method:
+`forever` 可以将缓存项永久性地存储到缓存中，这些值必须使用 `forget` 方法手动将其从缓存中移除：
 
 	Cache::forever('key', 'value');
 
 <a name="removing-items-from-the-cache"></a>
-### Removing Items From The Cache
+### 移除缓存项
 
-You may remove items from the cache using the `forget` method on the `Cache` facade:
+你可以使用 `Cache` facade 上的 `forget` 方法将缓存项从缓存中移除：
 
 	Cache::forget('key');
 
 <a name="adding-custom-cache-drivers"></a>
-## Adding Custom Cache Drivers
+## 添加定义缓存驱动
 
-To extend the Laravel cache with a custom driver, we will use the `extend` method on the `Cache` facade, which is used to bind a custom driver resolver to the manager. Typically, this is done within a [service provider](/docs/{{version}}/providers).
+给 Laravel 缓存扩展一个自定义的驱动，我们将使用 `Cache` facade 上的 `extend` 方法，将实例化自定义驱动绑定到驱动管理器上，通常，这个由[服务提供者](/docs/{{version}}/providers)来做的。
 
-For example, to register a new cache driver named "mongo":
+例如，注册一个名为 "mongo" 的新缓存驱动：
 
 	<?php
 
@@ -225,11 +228,13 @@ For example, to register a new cache driver named "mongo":
 		}
 	}
 
-The first argument passed to the `extend` method is the name of the driver. This will correspond to your `driver` option in the `config/cache.php` configuration file. The second argument is a Closure that should return an `Illuminate\Cache\Repository` instance. The Closure will be passed an `$app` instance, which is an instance of the [service container](/docs/{{version}}/container).
+传入 `extend` 方法的第一个参数是驱动器的名字，这个将对应于你在 `config/cache.php` 配置文件中定义的 `driver` 选项，第二个参数是一个闭包函数，应该返回一个 `Illuminate\Cache\Repository` 实例，此闭包函数将被传入一个 `$app`，是[服务容器](/docs/{{version}}/container)的一个实例：
 
-The call to `Cache::extend` could be done in the `boot` method of the default `App\Providers\AppServiceProvider` that ships with fresh Laravel applications, or you may create your own service provider to house the extension - just don't forget to register the provider in the `config/app.php` provider array.
+对 `Cache::extend` 调用可以放在默认的 `App\Providers\AppServiceProvider` 的 `boot` 方法中，这个服务提供类是 Laravel 自带的，或者你可以创建你自己的服务提供者来控制这个缓存扩展，只是别忘了将这个提供者类注册类到 `config/app.php` 的提供者数组中。
 
-To create our custom cache driver, we first need to implement the `Illuminate\Contracts\Cache\Store` [contract](/docs/{{version}}/contracts) contract. So, our MongoDB cache implementation would look something like this:
+要创建我们自己的缓存驱动，首先需要实现 `Illuminate\Contracts\Cache\Store`[Contract](contracts),所以，我们的 MongoDB 缓存实现应该像这样：
+
+The first argument passed to the `extend` method is the name of the driver. This will correspond to your `driver` option in the `config/cache.php` configuration file. The second argument is a Closure that should return an `Illuminate\Cache\Repository` instance. The Closure will be passed an `$app` instance, which is an instance of the [service container](/docs/{{version}}/contracts).
 
 	<?php
 
@@ -246,12 +251,12 @@ To create our custom cache driver, we first need to implement the `Illuminate\Co
 		public function flush() {}
 	}
 
-We just need to implement each of these methods using a MongoDB connection. Once our implementation is complete, we can finish our custom driver registration:
+我们只需要使用 MongoDB 连接来实现其中的每一个方法，一旦开发完，我们可以完成对自定义驱动的注册：
 
 	Cache::extend('mongo', function($app) {
 		return Cache::repository(new MongoStore);
 	});
 
-Once your extension is complete, simply update your `config/cache.php` configuration file's `driver` option to the name of your extension.
+一旦你的扩展完成，只需要将你的 `config/cache.php` 配置文件中的 `driver` 选项，更新为此扩展的名字即可。
 
-If you're wondering where to put your custom cache driver code, consider making it available on Packagist! Or, you could create an `Extensions` namespace within your `app` directory. However, keep in mind that Laravel does not have a rigid application structure and you are free to organize your application according to your preferences.
+如果你正在考虑将你自定义的驱动代码放在哪里，可以考虑将其放到 Packagist 上! 或者，你可以在你的 `app` 目录中创建一个 `Extensions` 命名空间。然后，请记住，Laravel 没有一个严格规则的应用程序目录结构，你可以根据你的喜好自由组织你的应用程序。
