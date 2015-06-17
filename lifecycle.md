@@ -1,52 +1,67 @@
 # Request Lifecycle
 
-- [Introduction](#introduction)
-- [Lifecycle Overview](#lifecycle-overview)
+- [简介](#introduction)
+- [生命周期概述](#lifecycle-overview)
 - [Focus On Service Providers](#focus-on-service-providers)
 
 <a name="introduction"></a>
-## Introduction
+## 简介
 
-When using any tool in the "real world", you feel more confident if you understand how that tool works. Application development is no different. When you understand how your development tools function, you feel more comfortable and confident using them.
+在现实生活中，如果你了解正在使用的工具的工作原理，你会更自信使用它。应用开发也不例外。
+当你理解开发工具如何运作，你会更得心应手。
 
-The goal of this document is to give you a good, high-level overview of how the Laravel framework "works". By getting to know the overall framework better, everything feels less "magical" and you will be more confident building your applications.
+这篇文档的目的是给你一个对于Laravel原理的高维度的概括。对整理更好的把握，
+让Laravel变得不那么"神奇"，同时让你更自信构建自己的应用。
 
-If you don't understand all of the terms right away, don't lose heart! Just try to get a basic grasp of what is going on, and your knowledge will grow as you explore other sections of the documentation.
+如果你现在不能理解所有的术语，别灰心。只要大体上理解概念，学习其他章节的时候，
+知识自然会得到积累。
+
 
 <a name="lifecycle-overview"></a>
-## Lifecycle Overview
+## 生命周期概述
 
-### First Things
+#### 基本内容
 
-The entry point for all requests to a Laravel application is the `public/index.php` file. All requests are directed to this file by your web server (Apache / Nginx) configuration. The `index.php` file doesn't contain much code. Rather, it is simply a starting point for loading the rest of the framework.
+Laravel应用所有请求的入口是`public/index.php`文件。所有的请求都被你的web服务器
+定向到这个文件。`index.php`文件并没有太多代码，它仅仅是一个加载框架的启动文件。
+`index.php`加载了Composer生成的自动加载定义，并且从`bootstrap/app.php`脚本中寻找
+Laravel应用实例。Laravel的第一步动作就是创建一个应用实例/[服务容器](/docs/{{version}}/container)
 
-The `index.php` file loads the Composer generated autoloader definition, and then retrieves an instance of the Laravel application from `bootstrap/app.php` script. The first action taken by Laravel itself is to create an instance of the application / [service container](/docs/{{version}}/container).
 
-### HTTP / Console Kernels
+#### HTTP / Console 核心
 
-Next, the incoming request is sent to either the HTTP kernel or the console kernel, depending on the type of request that is entering the application. These two kernels serve as the central location that all requests flow through. For now, let's just focus on the HTTP kernel, which is located in `app/Http/Kernel.php`.
+接着，根据请求的类型，请求被分发到HTTP核心或者Console核心。这两个核心的处于中心地位，所有的
+请求都会经过核心。现在，我们先看位于`app/Http/Kernel.php`的HTTP核心。
 
-The HTTP kernel extends the `Illuminate\Foundation\Http\Kernel` class, which defines an array of `bootstrappers` that will be run before the request is executed. These bootstrappers configure error handling, configure logging, [detect the application environment](/docs/{{version}}/installation#environment-configuration), and perform other tasks that need to be done before the request is actually handled.
+HTTP核心类继承了`Illuminate\Foundation\Http\Kernel`，其中定义了一个数组`bootstrappers`，数组中的启动器会在请求被处理之前执行。
+这些启动器配置了错误处理、日志、检测环境，等其他需要在请求被处理之前被初始化的任务。
 
-The HTTP kernel also defines a list of HTTP [middleware](/docs/{{version}}/middleware) that all requests must pass through before being handled by the application. These middleware handle reading and writing the [HTTP session](/docs/{{version}}/session), determine if the application is in maintenance mode, [verifying the CSRF token](/docs/{{version}}/routing#csrf-protection), and more.
+HTTP核心定义了一组HTTP[中间件](/docs/{{version}}/middleware)，所有的请求在被处理之前必须
+经过这些中间件。中间件可以读写HTTP session，判断应用是否处于维护状态，验证CSRF token等。
 
-The method signature for the HTTP kernel's `handle` method is quite simple: receive a `Request` and return a `Response`. Think of the Kernel as being a big black box that represents your entire application. Feed it HTTP requests and it will return HTTP responses.
+HTTP核心的`handle`方法非常简单：接受一个`Request`并且返回一个`Response`。把核心想象为一个
+黑盒，它代表整个应用。给它传入HTTP请求，它就会返回HTTP响应。
 
-#### Service Providers
+#### 服务提供者
 
-One of the most important Kernel bootstrapping actions is loading the [service providers](/docs/{{version}}/providers) for your application. All of the service providers for the application are configured in the `config/app.php` configuration file's `providers` array. First, the `register` method will be called on all providers, then, once all providers have been registered, the `boot` method will be called.
+核心初始化中非常重要的一部分就是为应用加载服务提供者。所有的服务提供者在`config/app.php`
+文件中的`providers`数组中配置。首先，`register`方法会被服务提供者调用。然后，当所有
+的服务提供者被注册之后，`boot`方法才会被调用。
 
-Service providers are responsible for bootstrapping all of the framework's various components, such as the database, queue, validation, and routing components. Since they bootstrap and configure every feature offered by the framework, service providers are the most important aspect of the entire Laravel bootstrap process.
+#### 分发请求
 
-#### Dispatch Request
-
-Once the application has been bootstrapped and all service providers have been registered, the `Request` will be handed off to the router for dispatching. The router will dispatch the request to a route or controller, as well as run any route specific middleware.
+当应用初始化完成，并且所有服务提供者被注册后，`Request`会被交给路由器分发。
+路由器会分发请求到控制器，同时会运行针对路径的中间件。
 
 <a name="focus-on-service-providers"></a>
-## Focus On Service Providers
+## 关注服务提供者
 
-Service providers are truly the key to bootstrapping a Laravel application. The application instance is created, the service providers are registered, and the request is handed to the bootstrapped application. It's really that simple!
+服务提供者是初始化Laravel应用的关键所在。应用运行过程很简单：创建应用实例，注册服务提供者，
+请求被交给初始化后的应用处理。
 
-Having a firm grasp of how a Laravel application is built and bootstrapped via service providers is very valuable. Of course, your application's default service providers are stored in the `app/Providers` directory.
+清晰了解Laravel应用是如何通过服务提供者被构建，初始化的是非常重要的。当然，默认的服务提供者
+在`app/Providers`目录下。
 
-By default, the `AppServiceProvider` is fairly empty. This provider is a great place to add your application's own bootstrapping and service container bindings. Of course, for large applications, you may wish to create several service providers, each with a more granular type of bootstrapping.
+`AppServiceProvider`默认是空的。这个服务提供者是添加你自己的初始化过程和绑定服务容器的绝佳位置。
+当然，对于大型应用，你可能会希望创建自己的服务提供者，
+每个服务提供者可以有其各自的初始化粒度。

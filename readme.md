@@ -22,12 +22,12 @@
     - [Views](http://laragirl.com/docs/5.1/views)
     - [Blade Templates](http://laragirl.com/docs/5.1/blade)
 - Architecture Foundations
-    - [Request Lifecycle](http://laragirl.com/docs/5.1/lifecycle)
-    - [Application Structure](http://laragirl.com/docs/5.1/structure)
-    - [Service Providers](http://laragirl.com/docs/5.1/providers)
-    - [Service Container](http://laragirl.com/docs/5.1/container)
-    - [Contracts](http://laragirl.com/docs/5.1/contracts)
-    - [Facades](http://laragirl.com/docs/5.1/facades)
+    - [Request Lifecycle](http://laragirl.com/docs/5.1/lifecycle) @silentred
+    - [Application Structure](http://laragirl.com/docs/5.1/structure) @silentred
+    - [Service Providers](http://laragirl.com/docs/5.1/providers) @silentred
+    - [Service Container](http://laragirl.com/docs/5.1/container) @silentred
+    - [Contracts](http://laragirl.com/docs/5.1/contracts) @silentred
+    - [Facades](http://laragirl.com/docs/5.1/facades) @silentred
 - 服务
     - [**authentication.md**](http://laragirl.com/docs/5.1/authentication) @Artiship
     - [**artisan.md**](http://laragirl.com/docs/5.1/artisan)  @Artiship
