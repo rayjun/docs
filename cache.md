@@ -1,12 +1,12 @@
 # Cache
 
-- [Configuration](#configuration)
-- [Cache Usage](#cache-usage)
-	- [Obtaining A Cache Instance](#obtaining-a-cache-instance)
-	- [Retrieving Items From The Cache](#retrieving-items-from-the-cache)
-	- [Storing Items In The Cache](#storing-items-in-the-cache)
-	- [Removing Items From The Cache](#removing-items-from-the-cache)
-- [Adding Custom Cache Drivers](#adding-custom-cache-drivers)
+- [配置](#configuration)
+- [缓存使用](#cache-usage)
+	- [获取一个缓存实例](#obtaining-a-cache-instance)
+	- [从缓存中检索缓存项](#retrieving-items-from-the-cache)
+	- [存储缓存项](#storing-items-in-the-cache)
+	- [移除缓存项](#removing-items-from-the-cache)
+- [添加定义缓存驱动](#adding-custom-cache-drivers)
 
 <a name="configuration"></a>
 ## 配置
@@ -59,10 +59,10 @@ Before using a Redis cache with Laravel, you will need to install the `predis/pr
 For more information on configuring Redis, consult its [Laravel documentation page](/docs/{{version}}/redis#configuration).
 
 <a name="cache-usage"></a>
-## Cache Usage
+## 缓存用法
 
 <a name="obtaining-a-cache-instance"></a>
-### Obtaining A Cache Instance
+### 获取一个缓存实例
 
 `Illuminate\Contracts\Cache\Factory` 和 `Illuminate\Contracts\Cache\Repository` [contracts](/docs/{{version}}/contracts) 提供对 Laravel 的缓存服务的访问，`Factory` 提供对配置文件中定义的所有缓存驱动的访问。`Repository` Contract 通常是一个对 `cache` 配置文件中所指定的，应用程序默认缓存驱动的一个实现。
 
