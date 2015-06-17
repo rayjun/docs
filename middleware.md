@@ -7,18 +7,18 @@
 - [Terminable Middleware](#terminable-middleware)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-HTTP middleware provide a convenient mechanism for filtering HTTP requests entering your application. For example, Laravel includes a middleware that verifies the user of your application is authenticated. If the user is not authenticated, the middleware will redirect the user to the login screen. However, if the user is authenticated, the middleware will allow the request to proceed further into the application.
+HTTP 中间件（Middleware）提供一个便利机制来过滤你应用的 HTTP 请求。例如，Laravel 默认包含了中间件来验证用户身份。如果用户没有通过验证，这个中间件会将用户重定向到登录页面，然而，如果用户已经过验证，中间件则会允许请求进一步前进到应用。
 
-Of course, additional middleware can be written to perform a variety of tasks besides authentication. A CORS middleware might be responsible for adding the proper headers to all responses leaving your application. A logging middleware might log all incoming requests to your application.
+当然，中间件不仅仅是用来验证用户身份的。如 CORS 中间件负责给所有离开应用的响应添加一个正确的头。日志中间件负责记录所有进入你应用的请求。
 
-There are several middleware included in the Laravel framework, including middleware for maintenance, authentication, CSRF protection, and more. All of these middleware are located in the `app/Http/Middleware` directory.
+Laravel 框架默认包括了几个中间件，锁包括的中间件含有维护，身份验证，CSRF 保护 等。所有中间件都位于 `app/Http/Middleware` 目录。
 
 <a name="defining-middleware"></a>
-## Defining Middleware
+## 定义中间件
 
-To create a new middleware, use the `make:middleware` Artisan command:
+要创建一个中间件，可以使用 `make:middleware` Artisan 命令:
 
 	php artisan make:middleware OldMiddleware
 
