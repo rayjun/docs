@@ -81,8 +81,8 @@
 
 QQ交流群：**201793588**
 
-## License 说明
+### License
 
 - 所有人可以使用，修改文档中的翻译内容
-- 如果需要转载到其他网站上，请注明翻译的作者名，邮件以及 [laragirl.com](laragirl.com)
+- 如果需要转载到其他网站上，请注明出处，包括翻译作者、邮件和 [laragirl.com](http://laragirl.com)
 
