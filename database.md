@@ -1,15 +1,15 @@
-# Database: Getting Started
+# Database: Getting Started 开始
 
-- [Introduction](#introduction)
+- [介绍](#introduction)
 - [Running Raw SQL Queries](#running-queries)
 	- [Listening For Query Events](#listening-for-query-events)
 - [Database Transactions](#database-transactions)
 - [Using Multiple Database Connections](#accessing-connections)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-Laravel makes connecting with databases and running queries extremely simple across a variety of database back-ends using either raw SQL, the [fluent query builder](/docs/{{version}}/queries), and the [Eloquent ORM](/docs/{{version}}/eloquent). Currently, Laravel supports four database systems:
+Laravel 在各种数据库后端使用原始SQL、[fluent query builder 查询生成器](/docs/{{version}}/queries) 以及 [Eloquent ORM](/docs/{{version}}/eloquent).连接数据库和运行查询非常简单， 目前 Laravel支持四个数据库系统:
 
 - MySQL
 - Postgres
