@@ -53,10 +53,10 @@
     - [Testing](http://laragirl.com/docs/5.1/testing)
     - [Validation](http://laragirl.com/docs/5.1/validation)
 - Database
-    - [Getting Started](http://laragirl.com/docs/5.1/database)  @yinxiaodong
-    - [Query Builder](http://laragirl.com/docs/5.1/queries)
-    - [Migrations](http://laragirl.com/docs/5.1/migrations)
-    - [Seeding](http://laragirl.com/docs/5.1/seeding)
+    - [Getting Started](http://laragirl.com/docs/5.1/database)  @jixunqiang @yinxiaodong
+    - [Query Builder](http://laragirl.com/docs/5.1/queries) @jixunqiang
+    - [Migrations](http://laragirl.com/docs/5.1/migrations) @jixunqiang
+    - [Seeding](http://laragirl.com/docs/5.1/seeding) @jixunqiang
 - Eloquent ORM
     - [Getting Started](http://laragirl.com/docs/5.1/eloquent)
     - [Relationships](http://laragirl.com/docs/5.1/eloquent-relationships)
