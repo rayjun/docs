@@ -53,7 +53,7 @@
     - [Testing](http://laragirl.com/docs/5.1/testing)
     - [Validation](http://laragirl.com/docs/5.1/validation)
 - Database
-    - [Getting Started](http://laragirl.com/docs/5.1/database)
+    - [Getting Started](http://laragirl.com/docs/5.1/database)  @yinxiaodong
     - [Query Builder](http://laragirl.com/docs/5.1/queries)
     - [Migrations](http://laragirl.com/docs/5.1/migrations)
     - [Seeding](http://laragirl.com/docs/5.1/seeding)
