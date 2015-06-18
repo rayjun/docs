@@ -46,14 +46,14 @@
     - [Localization](http://laragirl.com/docs/5.1/localization)
     - [Mail](http://laragirl.com/docs/5.1/mail)
     - [Package Development](http://laragirl.com/docs/5.1/packages)
-    - [Pagination](http://laragirl.com/docs/5.1/pagination)
+    - [Pagination](http://laragirl.com/docs/5.1/pagination) @everettjf
     - [Queues](http://laragirl.com/docs/5.1/queues)
     - [Redis](http://laragirl.com/docs/5.1/redis)
     - [Session](http://laragirl.com/docs/5.1/session)
     - [SSH Tasks](http://laragirl.com/docs/5.1/envoy)
     - [Task Scheduling](http://laragirl.com/docs/5.1/scheduling)
     - [Testing](http://laragirl.com/docs/5.1/testing)
-    - [Validation](http://laragirl.com/docs/5.1/validation)
+    - [Validation](http://laragirl.com/docs/5.1/validation) @everettjf
 - Database
     - [Getting Started](http://laragirl.com/docs/5.1/database)  @jixunqiang
     - [Query Builder](http://laragirl.com/docs/5.1/queries) @jixunqiang
