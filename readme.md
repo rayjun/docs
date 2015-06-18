@@ -66,6 +66,8 @@
 
 ## 参与翻译
 
+中文文档风格指南 [https://open.leancloud.cn/copywriting-style-guide.html](https://open.leancloud.cn/copywriting-style-guide.html)
+
 ### 任务领取
 
 通过在章节后加上自己的名字来领取任务
