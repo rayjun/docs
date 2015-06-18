@@ -2,6 +2,8 @@
 
 ## 阅读最新文档
 
+所有最新提交的翻译，将会在一分钟后自动更新到以下网站
+
 [http://www.laragirl.com/docs](http://www.laragirl.com/docs)
 
 ## 翻译进度
@@ -70,14 +72,17 @@
 
 怎样改进英式中文 [https://open.leancloud.cn/improve-chinese.html](https://open.leancloud.cn/improve-chinese.html)
 
-### 任务领取
+### 翻译方法
 
-通过在章节后加上自己的名字来领取任务
-
-### 任务提交
-
-翻译完成提交时，将对应的章节文字加粗表示已经改成
+- 翻译之前先更新此文档（readme.md），将选取的未翻译的章节后面属上自己的名字，提交此文档表示任务被领取
+- 翻译时可以直接在线编辑文档，然后提交，直接提交权限需要加入翻译组，请加 QQ 群了解
 
 ### 参与讨论
 
 QQ交流群：**201793588**
+
+## License 说明
+
+- 所有人可以使用，修改文档中的翻译内容
+- 如果需要转载到其他网站上，请注明翻译的作者名，邮件以及 [laragirl.com](laragirl.com)
+
