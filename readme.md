@@ -67,6 +67,7 @@
 ## 参与翻译
 
 中文文档风格指南 [https://open.leancloud.cn/copywriting-style-guide.html](https://open.leancloud.cn/copywriting-style-guide.html)
+
 怎样改进英式中文 [https://open.leancloud.cn/improve-chinese.html](https://open.leancloud.cn/improve-chinese.html)
 
 ### 任务领取
