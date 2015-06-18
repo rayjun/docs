@@ -60,10 +60,10 @@
     - [Migrations](http://laragirl.com/docs/5.1/migrations) @jixunqiang
     - [Seeding](http://laragirl.com/docs/5.1/seeding) @jixunqiang
 - Eloquent ORM
-    - [Getting Started](http://laragirl.com/docs/5.1/eloquent)  @jixunqiang @yinxiaodong
-    - [Relationships](http://laragirl.com/docs/5.1/eloquent-relationships)  @yinxiaodong
-    - [Collections](http://laragirl.com/docs/5.1/eloquent-collections)  @yinxiaodong
-    - [Mutators](http://laragirl.com/docs/5.1/eloquent-mutators)  @yinxiaodong
+    - [Getting Started](http://laragirl.com/docs/5.1/eloquent)  @jixunqiang 
+    - [Relationships](http://laragirl.com/docs/5.1/eloquent-relationships)  
+    - [Collections](http://laragirl.com/docs/5.1/eloquent-collections)  
+    - [Mutators](http://laragirl.com/docs/5.1/eloquent-mutators)  
     - [Serialization](http://laragirl.com/docs/5.1/eloquent-serialization)  @yinxiaodong
 
 ## 参与翻译
