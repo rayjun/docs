@@ -53,16 +53,16 @@
     - [Testing](http://laragirl.com/docs/5.1/testing)
     - [Validation](http://laragirl.com/docs/5.1/validation)
 - Database
-    - [Getting Started](http://laragirl.com/docs/5.1/database)  @jixunqiang @yinxiaodong
+    - [Getting Started](http://laragirl.com/docs/5.1/database)  @jixunqiang
     - [Query Builder](http://laragirl.com/docs/5.1/queries) @jixunqiang
     - [Migrations](http://laragirl.com/docs/5.1/migrations) @jixunqiang
     - [Seeding](http://laragirl.com/docs/5.1/seeding) @jixunqiang
 - Eloquent ORM
-    - [Getting Started](http://laragirl.com/docs/5.1/eloquent)
-    - [Relationships](http://laragirl.com/docs/5.1/eloquent-relationships)
-    - [Collections](http://laragirl.com/docs/5.1/eloquent-collections)
-    - [Mutators](http://laragirl.com/docs/5.1/eloquent-mutators)
-    - [Serialization](http://laragirl.com/docs/5.1/eloquent-serialization)
+    - [Getting Started](http://laragirl.com/docs/5.1/eloquent)   @yinxiaodong
+    - [Relationships](http://laragirl.com/docs/5.1/eloquent-relationships)  @yinxiaodong
+    - [Collections](http://laragirl.com/docs/5.1/eloquent-collections)  @yinxiaodong
+    - [Mutators](http://laragirl.com/docs/5.1/eloquent-mutators)  @yinxiaodong
+    - [Serialization](http://laragirl.com/docs/5.1/eloquent-serialization)  @yinxiaodong
 
 ## 参与翻译
 
