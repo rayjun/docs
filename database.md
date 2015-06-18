@@ -9,7 +9,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 在各种数据库后端使用原始SQL、[fluent query builder 查询生成器](/docs/{{version}}/queries) 以及 [Eloquent ORM](/docs/{{version}}/eloquent).连接数据库和运行查询非常简单， 目前 Laravel支持四个数据库系统:
+Laravel 非常简单地与数据库后端通过Raw SQL、[fluent query builder 查询生成器](/docs/{{version}}/queries) 以及 [Eloquent ORM](/docs/{{version}}/eloquent).连接和查询, 目前 Laravel支持四个数据库系统:
 
 - MySQL
 - Postgres
@@ -17,9 +17,9 @@ Laravel 在各种数据库后端使用原始SQL、[fluent query builder 查询�
 - SQL Server
 
 <a name="configuration"></a>
-### Configuration
+### 配置
 
-Laravel makes connecting with databases and running queries extremely simple. The database configuration for your application is located at `config/database.php`. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for all of the supported database systems are provided in this file.
+Laravel非常简单地与数据库连接和查询。应用数据库配置在`config/database.php`文件中。这个文件中你可以配置可支持的多个数据库连接方式,并指定默认连接。
 
 By default, Laravel's sample [environment configuration](/docs/{{version}}/installation#environment-configuration) is ready to use with [Laravel Homestead](/docs/{{version}}/homestead), which is a convenient virtual machine for doing Laravel development on your local machine. Of course, you are free to modify this configuration as needed for your local database.
 
