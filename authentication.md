@@ -442,8 +442,6 @@ Laravel 自带 `Auth\PasswordController`，其中包含重置用户密码必要�
 > **注意:** 默认情况下，密码重置标志将会在一个小时后过期，你可通过更改你的 `config/auth.php` 文件中 `reminder.expire` 参数来修改这个过期时间。
 
 <a name="social-authentication"></a>
-## Social Authentication
-
 ## 社交网站账号登陆认证
 
 除了典型的，基于表单认证，Laravel 也提供了一个使用[Laravel Socialite](https://github.com/laravel/socialite)来认证每三方的 OAuth，Socialite 目前支持 Facebook, Twitter, Google, GitHub 和 Bitbucket 认证。
