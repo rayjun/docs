@@ -6,51 +6,51 @@
 - [Appending Values To JSON](#appending-values-to-json)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-When building JSON APIs, you will often need to convert your models and relationships to arrays or JSON. Eloquent includes convenient methods for making these conversions, as well as controlling which attributes are included in your serializations.
+在构建JSON API时,你会经常需要将模型和关系转换为数组或JSON。Eloquent可以方便的进行转换,以及设置序列化中的关系。
 
 <a name="basic-usage"></a>
-## Basic Usage
+## 基本用法
 
-#### Converting A Model To An Array
+#### 模型转换为数组
 
-To convert a model and its loaded [relationships](/docs/{{version}}/eloquent-relationships) to an array, you may use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
+将模型及其加载  [关系relationships](/docs/{{version}}/eloquent-relationships) 转化为一个数组,你可以使用`toArray`方法。这是递归的方法,所以所有属性和关系将被转换成数组:
 
 	$user = App\User::with('roles')->first();
 
 	return $user->toArray();
 
-You may also convert [collections](/docs/{{version}}/eloquent-collections) to arrays:
+你也可以将[集合collections](/docs/{{version}}/eloquent-collections)转换为数组:
 
 	$users = App\User::all();
 
 	return $users->toArray();
 
-#### Converting A Model To JSON
+#### 模型转换为JSON
 
-To convert a model to JSON, you may use the `toJson` method. Like `toArray`, the `toJson` method is recursive, so all attributes and relations will be converted to JSON:
+模型使用 `toJson` 方法转换为JSON。 同 `toArray`方法, `toJson` 方法也是递归式, 所有属性和关系都被转换成JSON:
 
 	$user = App\User::find(1);
 
 	return $user->toJson();
 
-Alternatively, you may cast a model or collection to a string, which will automatically call the `toJson` method:
+或者,你可以强制把一个模型或集合转成字符串,它将自动调用 `toJson` 方法:
 
 	$user = App\User::find(1);
 
 	return (string) $user;
 
-Since models and collections are converted to JSON when cast to a string, you can return Eloquent objects directly from your application's routes or controllers:
+从应用的路由或控制器返回的对象，可以直接转换为JSON。
 
 	Route::get('users', function () {
 		return App\User::all();
 	});
 
 <a name="hiding-attributes-from-json"></a>
-## Hiding Attributes From JSON
+## 隐藏 JSON 中的属性
 
-Sometimes you may wish to limit the attributes, such as passwords, that are included in your model's array or JSON representation. To do so, add a `$hidden` property definition to your model:
+有时候可能希望隐藏模型、数组或 JSON 中的某个属性, 比如密码, 可以在模型中添加 `$hidden` 属性:
 
 	<?php
 
