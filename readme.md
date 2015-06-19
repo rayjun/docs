@@ -9,62 +9,62 @@
 ## 翻译进度
 
 - 序言
-    - [Release Notes](http://laragirl.com/docs/5.1/releases) - 翻译:Zehir 进度:100%
-    - [Upgrade Guide](http://laragirl.com/docs/5.1/upgrade) - 翻译:Zehir (未翻译)
-    - [Contribution Guide](http://laragirl.com/docs/5.1/contributions) - 翻译:Zehir 进度:100%
-- Setup
-    - [Installation](http://laragirl.com/docs/5.1/installation) - 翻译:Zehir 进度:100%
-    - [Homestead](http://laragirl.com/docs/5.1/homestead) - 翻译:Zehir 进度:100%
-- The Basics
-    - [Routing](http://laragirl.com/docs/5.1/routing) - 翻译:Zehir 进度:100%
-    - [Middleware](http://laragirl.com/docs/5.1/middleware) - 翻译:Zehir 进度:100%
-    - [Controllers](http://laragirl.com/docs/5.1/controllers) - 翻译:Zehir 进度:100%
-    - [Requests](http://laragirl.com/docs/5.1/requests) - 翻译:Zehir 进度:91%
-    - [Responses](http://laragirl.com/docs/5.1/responses)
-    - [Views](http://laragirl.com/docs/5.1/views)
-    - [Blade Templates](http://laragirl.com/docs/5.1/blade)
-- Architecture Foundations
-    - [Request Lifecycle](http://laragirl.com/docs/5.1/lifecycle) @silentred
-    - [Application Structure](http://laragirl.com/docs/5.1/structure) @silentred
-    - [Service Providers](http://laragirl.com/docs/5.1/providers) @silentred
-    - [Service Container](http://laragirl.com/docs/5.1/container) @silentred
-    - [Contracts](http://laragirl.com/docs/5.1/contracts) @silentred
-    - [Facades](http://laragirl.com/docs/5.1/facades) @silentred
+    - [releases.md](http://laragirl.com/docs/5.1/releases) - 翻译:Zehir 进度:100%
+    - [upgrade.md](http://laragirl.com/docs/5.1/upgrade) - 翻译:Zehir (未翻译)
+    - [contributing.md](http://laragirl.com/docs/5.1/contributions) - 翻译:Zehir 进度:100%
+- 安装
+    - [installation.md](http://laragirl.com/docs/5.1/installation) - 翻译:Zehir 进度:100%
+    - [homestead.md](http://laragirl.com/docs/5.1/homestead) - 翻译:Zehir 进度:100%
+- 基本知识
+    - [routing.md](http://laragirl.com/docs/5.1/routing) - 翻译:Zehir 进度:100%
+    - [middleware.md](http://laragirl.com/docs/5.1/middleware) - 翻译:Zehir 进度:100%
+    - [controllers.md](http://laragirl.com/docs/5.1/controllers) - 翻译:Zehir 进度:100%
+    - [requests.md](http://laragirl.com/docs/5.1/requests) - 翻译:Zehir 进度:91%
+    - [responses.md](http://laragirl.com/docs/5.1/responses)
+    - [views.md](http://laragirl.com/docs/5.1/views)
+    - [blade.md](http://laragirl.com/docs/5.1/blade)
+- 架构基础
+    - [lifecycle.md](http://laragirl.com/docs/5.1/lifecycle) @silentred
+    - [structure.md](http://laragirl.com/docs/5.1/structure) @silentred
+    - [providers.md](http://laragirl.com/docs/5.1/providers) @silentred
+    - [container.md](http://laragirl.com/docs/5.1/container) @silentred
+    - [contracts.md](http://laragirl.com/docs/5.1/contracts) @silentred
+    - [facades.md](http://laragirl.com/docs/5.1/facades) @silentred
 - 服务
     - [**authentication.md**](http://laragirl.com/docs/5.1/authentication) @Artiship
     - [**artisan.md**](http://laragirl.com/docs/5.1/artisan)  @Artiship
-    - [Billing](http://laragirl.com/docs/5.1/billing)
+    - [billing.md](http://laragirl.com/docs/5.1/billing)
     - [**cache.md**](http://laragirl.com/docs/5.1/cache)  @Artiship
-    - [Collections](http://laragirl.com/docs/5.1/collections) @Artiship
-    - [Elixir](http://laragirl.com/docs/5.1/elixir) @Artiship
+    - [collections.md](http://laragirl.com/docs/5.1/collections) @Artiship
+    - [elixir.md](http://laragirl.com/docs/5.1/elixir) @Artiship
     - [Encryption](http://laragirl.com/docs/5.1/encryption) @Artiship
-    - [Errors & Logging](http://laragirl.com/docs/5.1/errors)
-    - [Events](http://laragirl.com/docs/5.1/events)
-    - [Filesystem / Cloud Storage](http://laragirl.com/docs/5.1/filesystem)
-    - [Hashing](http://laragirl.com/docs/5.1/hashing)
-    - [Helpers](http://laragirl.com/docs/5.1/helpers)
-    - [Localization](http://laragirl.com/docs/5.1/localization)
-    - [Mail](http://laragirl.com/docs/5.1/mail)
-    - [Package Development](http://laragirl.com/docs/5.1/packages)
-    - [Pagination](http://laragirl.com/docs/5.1/pagination) @everettjf
-    - [Queues](http://laragirl.com/docs/5.1/queues)
-    - [Redis](http://laragirl.com/docs/5.1/redis)
-    - [Session](http://laragirl.com/docs/5.1/session)
-    - [SSH Tasks](http://laragirl.com/docs/5.1/envoy)
-    - [Task Scheduling](http://laragirl.com/docs/5.1/scheduling)
-    - [Testing](http://laragirl.com/docs/5.1/testing)
-    - [Validation](http://laragirl.com/docs/5.1/validation) @everettjf
-- Database
-    - [Getting Started](http://laragirl.com/docs/5.1/database)  @jixunqiang
-    - [Query Builder](http://laragirl.com/docs/5.1/queries) @jixunqiang
-    - [Migrations](http://laragirl.com/docs/5.1/migrations) @jixunqiang
-    - [Seeding](http://laragirl.com/docs/5.1/seeding) @jixunqiang
+    - [errors.md](http://laragirl.com/docs/5.1/errors)
+    - [events.md](http://laragirl.com/docs/5.1/events)
+    - [filesystem.md](http://laragirl.com/docs/5.1/filesystem)
+    - [hashing.md](http://laragirl.com/docs/5.1/hashing)
+    - [helpers.md](http://laragirl.com/docs/5.1/helpers)
+    - [localization.md](http://laragirl.com/docs/5.1/localization)
+    - [mail.md](http://laragirl.com/docs/5.1/mail)
+    - [packages.md](http://laragirl.com/docs/5.1/packages)
+    - [pagination.md](http://laragirl.com/docs/5.1/pagination) @everettjf
+    - [queues.md](http://laragirl.com/docs/5.1/queues)
+    - [redis.md](http://laragirl.com/docs/5.1/redis)
+    - [session.md](http://laragirl.com/docs/5.1/session)
+    - [envoy.md](http://laragirl.com/docs/5.1/envoy)
+    - [scheduling.md](http://laragirl.com/docs/5.1/scheduling)
+    - [testing.md](http://laragirl.com/docs/5.1/testing)
+    - [validation.md](http://laragirl.com/docs/5.1/validation) @everettjf
+- 数据库
+    - [database.md](http://laragirl.com/docs/5.1/database)  @jixunqiang
+    - [queries.md](http://laragirl.com/docs/5.1/queries) @jixunqiang
+    - [migrations.md](http://laragirl.com/docs/5.1/migrations) @jixunqiang
+    - [seeding.md](http://laragirl.com/docs/5.1/seeding) @jixunqiang
 - Eloquent ORM
-    - [Getting Started](http://laragirl.com/docs/5.1/eloquent)  @jixunqiang 
-    - [Relationships](http://laragirl.com/docs/5.1/eloquent-relationships)  
-    - [Collections](http://laragirl.com/docs/5.1/eloquent-collections)  
-    - [Mutators](http://laragirl.com/docs/5.1/eloquent-mutators)  
-    - [Serialization](http://laragirl.com/docs/5.1/eloquent-serialization)  @yinxiaodong
+    - [eloquent.md](http://laragirl.com/docs/5.1/eloquent)  @jixunqiang 
+    - [eloquent-relationships.md](http://laragirl.com/docs/5.1/eloquent-relationships)  
+    - [eloquent-collections.md](http://laragirl.com/docs/5.1/eloquent-collections)  
+    - [eloquent-mutators.md](http://laragirl.com/docs/5.1/eloquent-mutators)  
+    - [eloquent-serialization.md](http://laragirl.com/docs/5.1/eloquent-serialization)  @yinxiaodong
 
 ## 参与翻译
 
