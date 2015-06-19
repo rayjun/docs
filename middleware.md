@@ -13,7 +13,7 @@ HTTP 中间件（Middleware）提供一个便利机制来过滤你应用的 HTTP
 
 当然，中间件不仅仅是用来验证用户身份的。如 CORS 中间件负责给所有离开应用的响应添加一个正确的头。日志中间件负责记录所有进入你应用的请求。
 
-Laravel 框架默认包括了几个中间件，锁包括的中间件含有维护，身份验证，CSRF 保护 等。所有中间件都位于 `app/Http/Middleware` 目录。
+Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保护等，所有这些中间件都位于 `app/Http/Middleware` 目录。
 
 <a name="defining-middleware"></a>
 ## 定义中间件
