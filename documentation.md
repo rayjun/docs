@@ -2,7 +2,6 @@
     - [版本说明](/docs/{{version}}/releases)
     - [升级指南](/docs/{{version}}/upgrade)
     - [贡献指南](/docs/{{version}}/contributions)
-    - [API Documentation](/api/{{version}})
 - 安装
     - [安装](/docs/{{version}}/installation)
     - [Homestead](/docs/{{version}}/homestead)
