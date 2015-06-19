@@ -1,13 +1,13 @@
 # Installation
 
-- [Installation](#安装)
-- [Configuration](#配置)
-	- [Basic Configuration](#基本配置)
-	- [Environment Configuration](#环境配置)
-	- [Configuration Caching](#配置缓存)
-	- [Accessing Configuration Values](#访问配置值)
-	- [Naming Your Application](#命名应用)
-- [Maintenance Mode](#维护模式)
+- [安装](#installation)
+- [配置](#configuration)
+	- [基本配置](#basic-configuration)
+	- [环境配置](#environment-configuration)
+	- [配置缓存](#configuration-caching)
+	- [获取配置](#accessing-configuration-values)
+	- [应用程序命名](#naming-your-application)
+- [Maintenance Mode](#maintenance-mode)
 
 <a name="installation"></a>
 ## 安装
@@ -96,7 +96,7 @@ Laravel 安装后几乎不需要任何配置即可开始使用。你可以很轻
 		try_files $uri $uri/ /index.php?$query_string;
 	}
 
-当然，在使用 [Homestead](http://www.kancloud.cn/zehirpx/laravel-5-1/homestead) 时，"美观的 URL" 已被自动配置！
+当然，在使用 [Homestead](/docs/{{version}}/homestead) 时，"美观的 URL" 已被自动配置！
 
 <a name="environment-configuration"></a>
 ### 环境配置
@@ -113,7 +113,7 @@ Laravel 通过 DotEnv Vance Lucas 写的一个 PHP 类库。 在全新安装好�
 
 如果你是一个团队的开发者，不妨将 `.env.example` 文件包含到你的应用。通过在配置文件中预留值，你的团队中其他开发人员将可以很清楚地看到执行你的应用程序所需的哪些环境配置。
 
-#### 取得当前应用环境
+#### 获取配置
 
 如果你需要访问当前应用环境，可以通过 `App` [facade](/docs/{{version}}/facades):
 
@@ -151,7 +151,7 @@ Laravel 通过 DotEnv Vance Lucas 写的一个 PHP 类库。 在全新安装好�
 	config(['app.timezone' => 'America/Chicago']);
 
 <a name="naming-your-application"></a>
-### 给你的应用命名
+### 应用程序命名
 
 在安装 Laravel 后，你不妨来命名你的应用。默认情况下，`app` 目录下的命名空间为 `App`，且 Compsoer 自动加载使用 [PSR-4 自动载入标准](http://www.php-fig.org/psr/psr-4/)。然而，你可能会将命名空间改变为与你应用程序相匹配的名字。你可以很容易地通过 `app:name` Artisan 命令来更改。
 
