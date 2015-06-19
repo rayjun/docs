@@ -54,9 +54,9 @@ Laravel 为各种缓存系统提供了统一的 API, 缓存的配置放置于 `c
 
 #### Redis
 
-Before using a Redis cache with Laravel, you will need to install the `predis/predis` package (~1.0) via Composer.
+在使用 Redis 缓存之前，你需要通过 Composer 安装 `predis/predis` (~1.0) 包。
 
-For more information on configuring Redis, consult its [Laravel documentation page](/docs/{{version}}/redis#configuration).
+更多有关配置 Redis 的信息，最查看它的[Laravel 文档页](/docs/{{version}}/redis#configuration)。
 
 <a name="cache-usage"></a>
 ## 缓存用法
