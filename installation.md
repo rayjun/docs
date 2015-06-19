@@ -7,7 +7,7 @@
 	- [配置缓存](#configuration-caching)
 	- [获取配置](#accessing-configuration-values)
 	- [应用程序命名](#naming-your-application)
-- [Maintenance Mode](#maintenance-mode)
+- [维护模式](#maintenance-mode)
 
 <a name="installation"></a>
 ## 安装
@@ -178,6 +178,6 @@ Laravel 通过 DotEnv Vance Lucas 写的一个 PHP 类库。 在全新安装好�
 
 默认的维护模式模板文件位于: `resources/views/errors/503.blade.php.`
 
-### 维护模式 & 队列
+### 维护模式和队列
 
 当你的应用处于维护模式，将不会有 [队列 Jobs](/docs/{{version}}/queues) 被处理。这些 Jobs 将在应用关闭维护模式后继续正常处理。
