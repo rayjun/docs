@@ -234,8 +234,6 @@ For more information on configuring Redis, consult its [Laravel documentation pa
 
 要创建我们自己的缓存驱动，首先需要实现 `Illuminate\Contracts\Cache\Store`[Contract](contracts),所以，我们的 MongoDB 缓存实现应该像这样：
 
-The first argument passed to the `extend` method is the name of the driver. This will correspond to your `driver` option in the `config/cache.php` configuration file. The second argument is a Closure that should return an `Illuminate\Cache\Repository` instance. The Closure will be passed an `$app` instance, which is an instance of the [service container](/docs/{{version}}/contracts).
-
 	<?php
 
 	namespace App\Extensions;
