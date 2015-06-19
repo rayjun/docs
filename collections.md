@@ -1,13 +1,13 @@
 # Collections
 
-- [Introduction](#introduction)
-- [Creating Collections](#creating-collections)
-- [Available Methods](#available-methods)
+- [介绍](#introduction)
+- [创建集合](#creating-collections)
+- [可用方法](#available-methods)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-The `Illuminate\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll use the `collect` helper to create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
+`Illuminate\Support\Collection` 提供流畅方便的工具来操作数组型数据，例如，看下面的代码，我们使用`collect`方法，将数组转化成集合 ，然后对集合中的每一个项执行 `strtoupper`，最后移除所有为空的项：
 
 	$collection = collect(['taylor', 'abigail', null])->map(function ($name) {
 		return strtoupper($name);
@@ -17,23 +17,24 @@ The `Illuminate\Support\Collection` class provides a fluent, convenient wrapper 
 	});
 
 
-As you can see, the `Collection` class allows you to chain its methods to perform fluent mapping and reducing of the underlying array. In general, every `Collection` method returns an entirely new `Collection` instance.
+如你所见，`Collection` 类允许你将它的所有方法串连起来以一种流式操作对底动数组执行 mapping 和 reducing 操作。通常，每一个 `Collection` 方法返回一个完整的 `Collection` 实例。
+
 
 <a name="creating-collections"></a>
-## Creating Collections
+## 创建集合
 
-As mentioned above, the `collect` helper returns a new `Illuminate\Support\Collection` instance for the given array. So, creating a collection is as simple as:
+正如上面所提到的，`collect` 方法为给定的数组返回一个新的 `Illuminate\Support\Collection` 实例，所以创建一个集合就是这么简单：
 
 	$collection = collect([1, 2, 3]);
 
-By default, collections of [Eloquent](/docs/{{version}}/eloquent) models are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
+默认情况下，[Eloquent](/docs/{{version}}/eloquent) 模型集合通常 `Collection` 实例的形式返回，然而，请随意在任何方便你的程序的地方使用 `Collection` 类。
 
 <a name="available-methods"></a>
-## Available Methods
+## 可用方法
 
-For the remainder of this documentation, we'll discuss each method available on the `Collection` class. Remember, all of these methods may be chained for fluently manipulating the underlying array. Furthermore, almost every method returns a new `Collection` instance, allowing you to preserve the original copy of the collection when necessary.
+对于该文档剩余部分，我们将讨论 `Collection` 类上的每一个可用的方法。请记住，所有这些方法都可以串联起来流式地操作底层数组，而且每个一个方法都返回一个新的 `Collection` 实例，允许保存你在必要时保存一份集合的原始拷贝。
 
-You may select any method from this table to see an example of its usage:
+你可以从表格中选择任何方法来查看其使用方法的示例：
 
 <style>
 	#collection-method-list > p {
@@ -102,7 +103,7 @@ You may select any method from this table to see an example of its usage:
 </div>
 
 <a name="method-listing"></a>
-## Method Listing
+## 方法列表
 
 <style>
 	#collection-method code {
@@ -117,7 +118,7 @@ You may select any method from this table to see an example of its usage:
 <a name="method-all"></a>
 #### `all()` {#collection-method .first-collection-method}
 
-The `all` method simply returns the underlying array represented by the collection:
+`all` 方法仅返回用集合表示的层底数组：
 
 	collect([1, 2, 3])->all();
 
@@ -126,7 +127,7 @@ The `all` method simply returns the underlying array represented by the collecti
 <a name="method-chunk"></a>
 #### `chunk()` {#collection-method}
 
-The `chunk` method breaks the collection into multiple, smaller collections of a given size:
+`chunk` 方法根据给定的尺寸大小将集合分为多个更小的集合：
 
 	$collection = collect([1, 2, 3, 4, 5, 6, 7]);
 
@@ -136,7 +137,7 @@ The `chunk` method breaks the collection into multiple, smaller collections of a
 
 	// [[1, 2, 3, 4], [5, 6, 7]]
 
-This method is especially useful in [views](/docs/{{version}}/views) when working with a grid system such as [Bootstrap](http://getbootstrap.com/css/#grid). Imagine you have a collection of [Eloquent](/docs/{{version}}/eloquent) models you want to display in a grid:
+当在[视图](/docs/{{version}}/views)使用[Bootstrap](http://getbootstrap.com/css/#grid)这样的网格系统时，这个方法尤其有用，想像一下你需要将一个[Eloquent](/docs/{{version}}/eloquent)模型集合显示到网格中：
 
 	@foreach ($products->chunk(3) as $chunk)
 		<div class="row">
@@ -149,7 +150,7 @@ This method is especially useful in [views](/docs/{{version}}/views) when workin
 <a name="method-collapse"></a>
 #### `collapse()` {#collection-method}
 
-The `collapse` method collapses a collection of arrays into a flat collection:
+`collapse` 方法将多个数据合并为一个扁平的集合：
 
 	$collection = collect([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
 
@@ -162,7 +163,7 @@ The `collapse` method collapses a collection of arrays into a flat collection:
 <a name="method-contains"></a>
 #### `contains()` {#collection-method}
 
-The `contains` method determines whether the collection contains a given item:
+`contains` 方法用于判断集合是否包含某项：
 
 	$collection = collect(['name' => 'Desk', 'price' => 100]);
 
