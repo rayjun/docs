@@ -17,28 +17,6 @@
 - [Events](#events)
 
 <a name="introduction"></a>
-## Introduction
-
-The Eloquent ORM included with Laravel provides a beautiful, simple ActiveRecord implementation for working with your database. Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
-
-Before getting started, be sure to configure a database connection in `config/database.php`. For more information on configuring your database, check out [the documentation](/docs/{{version}}/database#configuration).
-
-<a name="defining-models"></a>
-## Defining Models
-
-To get started, let's create an Eloquent model. Models typically live in the `app` directory, but you are free to place them anywhere that can be auto-loaded according to your `composer.json` file. All Eloquent models extend `Illuminate\Database\Eloquent\Model` class.
-
-The easiest way to create a model instance is using the `make:model` [Artisan command](/docs/{{version}}/artisan):
-
-	php artisan make:model User
-
-If you would like to generate a [database migration](/docs/{{version}}/schema#database-migrations) when you generate the model, you may use the `--migration` or `-m` option:
-
-	php artisan make:model User --migration
-
-	php artisan make:model User -m
-
-<a name="eloquent-model-conventions"></a>
 ## [简介](http://laravel.com/docs/5.1/eloquent#introduction)
 
 Eloquent ORM 包含了 laravel 数据库使用提供的一个完美的，简洁的 ActiveRecord 实现。每个数据表都有一个与它相对应、相互作用的"Model"。Models 允许在表中查询数据，及向表内插入新的记录. 
@@ -183,7 +161,7 @@ class FlightController extends Controller
 
 #### 获取 Column 值
 
-如果你有一个 Eloquent 模型实例，你可以通过访问 model 相对应的属性来获取对应的 column值，例如，让我们来遍历每个 `Flight` 我们查询返回的实例并且输出列名为 `name` 的值:
+如果你有一个 Eloquent 模型实例，你可以通过访问 model 相对应的属性来获取对应的 column 值，例如，让我们来遍历每个 `Flight` 我们查询返回的实例并且输出列名为 `name` 的值:
 
 ~~~
 foreach ($flights as $flight) {
@@ -206,7 +184,7 @@ $flights = App\Flight::where('active', 1)
 
 #### 集合
 
-Eloquent 方法如 `all` 和 `get` 都是取回多个结果，返回了一个`Illuminate\Database\Eloquent\Collection` 实例。该 `Collection` 类提供了使用于 Eloquent 结果集的 [a variety of helpful methods](http://laravel.com/docs/5.1/eloquent-collections)。当然，你可以像遍历数组一般简单地遍历 collection:
+Eloquent 方法如 `all` 和 `get` 都是取回多个结果，返回了一个 `Illuminate\Database\Eloquent\Collection` 实例。该 `Collection` 类提供了使用于 Eloquent 结果集的 [a variety of helpful methods](http://laravel.com/docs/5.1/eloquent-collections)。当然，你可以像遍历数组一般简单地遍历 collection:
 
 ~~~
 foreach ($flights as $flight) {
@@ -332,7 +310,7 @@ App\Flight::where('active', 1)
           ->update(['delayed' => 1]);
 ~~~
 
-`update`方法期望更新由列值对表示的块数组。
+`update`方法期待更新由列值对形式的数组。
 
 ### Mass Assignment
 
@@ -428,7 +406,7 @@ App\Flight::destroy(1, 2, 3);
 
 #### 通过查询删除模型
 
-当然了，你也可以在一组模型上运行删除查询。这下面的例子中，我们将删除所有的被标记为inactive的flights:
+当然了，你也可以在一组模型上运行删除查询。这下面的例子中，我们将删除所有的被标记为 inactive 的 flights:
 
 ~~~
 $deletedRows = App\Flight::where('votes', '>', 100)->delete();
@@ -460,7 +438,7 @@ class Flight extends Model
 }
 ~~~
 
-当然，你可以在你的数据库表中添加 `deleted_at` 列。 Laravel的[构造生成器](http://laravel.com/docs/5.1/schema)包含了创建该列的铺助方法:
+当然，你可以在你的数据库表中添加 `deleted_at` 列。 Laravel 的[构造生成器](http://laravel.com/docs/5.1/schema)包含了创建该列的铺助方法:
 
 ~~~
 Schema::table('flights', function ($table) {
