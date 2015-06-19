@@ -127,7 +127,7 @@
 <a name="method-chunk"></a>
 #### `chunk()` {#collection-method}
 
-`chunk` 方法根据给定的尺寸大小将集合分为多个更小的集合：
+`chunk` 方法根据给定的尺寸将集合拆分为多个更小的集合：
 
 	$collection = collect([1, 2, 3, 4, 5, 6, 7]);
 
@@ -175,7 +175,7 @@
 
 	// false
 
-You may also pass a key / value pair to the `contains` method, which will determine if the given pair exists in the collection:
+你也可以向 `contains` 方法中传入一个键值对，些方法用于判断给定键值对是否存在于集合中：
 
 	$collection = collect([
 		['product' => 'Desk', 'price' => 200],
@@ -186,7 +186,7 @@ You may also pass a key / value pair to the `contains` method, which will determ
 
 	// false
 
-Finally, you may also pass a callback to the `contains` method to perform your own truth test:
+最后，你也可以向 `contains` 方法中传入一个回调函数来执行你自己的真值测试：
 
 	$collection = collect([1, 2, 3, 4, 5]);
 
@@ -199,7 +199,7 @@ Finally, you may also pass a callback to the `contains` method to perform your o
 <a name="method-count"></a>
 #### `count()` {#collection-method}
 
-The `count` method returns the total number of items in the collection:
+`count` 方法返回集合中项的总数：
 
 	$collection = collect([1, 2, 3, 4]);
 
@@ -210,7 +210,7 @@ The `count` method returns the total number of items in the collection:
 <a name="method-diff"></a>
 #### `diff()` {#collection-method}
 
-The `diff` method compares the collection against another collection or a plain PHP `array`:
+`diff` 方法用于比较一个集合跟另外一个集合，或者一个 PHP `array`:
 
 	$collection = collect([1, 2, 3, 4, 5]);
 
@@ -223,13 +223,13 @@ The `diff` method compares the collection against another collection or a plain 
 <a name="method-each"></a>
 #### `each()` {#collection-method}
 
-The `each` method iterates over the items in the collection and passes each item to a given callback:
+`each` 方法遍历集合中每一项且将每一项传入给定的回调中：
 
 	$collection = $collection->each(function ($item, $key) {
 		//
 	});
 
-Return `false` from your callback to break out of the loop:
+从回调中返回 `false` 退出循环：
 
 	$collection = $collection->each(function ($item, $key) {
 		if (/* some condition */) {
@@ -240,7 +240,7 @@ Return `false` from your callback to break out of the loop:
 <a name="method-filter"></a>
 #### `filter()` {#collection-method}
 
-The `filter` method filters the collection by a given callback, keeping only those items that pass a given truth test:
+`filter` 方法通过给定的回调函数来过滤集合，只保留通过真值过滤的项：
 
 	$collection = collect([1, 2, 3, 4]);
 
@@ -252,12 +252,12 @@ The `filter` method filters the collection by a given callback, keeping only tho
 
 	// [3, 4]
 
-For the inverse of `filter`, see the [reject](#method-reject) method.
+`filter` 相对的，请查看[reject](collections#method-reject)方法：
 
 <a name="method-first"></a>
 #### `first()` {#collection-method}
 
-The `first` method returns the first element in the collection that passes a given truth test:
+`first` 方法返回集合中的第一个通过真值测试的项:
 
 	collect([1, 2, 3, 4])->first(function ($key, $value) {
 		return $value > 2;
@@ -265,7 +265,7 @@ The `first` method returns the first element in the collection that passes a giv
 
 	// 3
 
-You may also call the `first` method with no arguments to get the first element in the collection. If the collection is empty, `null` is returned:
+你还可以调用无参的 `first` 方法获取集合中的第一项，如果集合为空，返回 `null`:
 
 	collect([1, 2, 3, 4])->first();
 
@@ -274,7 +274,7 @@ You may also call the `first` method with no arguments to get the first element 
 <a name="method-flatten"></a>
 #### `flatten()` {#collection-method}
 
-The `flatten` method flattens a multi-dimensional collection into a single dimension:
+`flatten` 方法用于将多维集合转化为单维集合：
 
 	$collection = collect(['name' => 'taylor', 'languages' => ['php', 'javascript']]);
 
@@ -287,7 +287,7 @@ The `flatten` method flattens a multi-dimensional collection into a single dimen
 <a name="method-flip"></a>
 #### `flip()` {#collection-method}
 
-The `flip` method swaps the collection's keys with their corresponding values:
+`flip` 方法用于交换集合中的键与其相应的值：
 
 	$collection = collect(['name' => 'taylor', 'framework' => 'laravel']);
 
@@ -300,7 +300,7 @@ The `flip` method swaps the collection's keys with their corresponding values:
 <a name="method-forget"></a>
 #### `forget()` {#collection-method}
 
-The `forget` method removes an item from the collection by its key:
+`forget` 方法根据键从集合中移除项：
 
 	$collection = collect(['name' => 'taylor', 'framework' => 'laravel']);
 
@@ -310,12 +310,12 @@ The `forget` method removes an item from the collection by its key:
 
 	// [framework' => 'laravel']
 
-> **Note:** Unlike most other collection methods, `forget` does not return a new modified collection; it modifies the collection it is called on.
+> **注意:** 不像其它大多数集合方法，`forget` 方法不返回新集合，只修改被调用集合
 
 <a name="method-forpage"></a>
 #### `forPage()` {#collection-method}
 
-The `forPage` method returns a new collection containing the items that would be present on a given page number:
+`forPage` 方法根据页码返回一个包含所有应该显示的项的新集合：
 
 	$collection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9])->forPage(2, 3);
 
@@ -323,12 +323,12 @@ The `forPage` method returns a new collection containing the items that would be
 
 	// [4, 5, 6]
 
-The method requires the page number and the number of items to show per page, respectively.
+此方法分别需要页码和每页需要显示的项数作为参数。
 
 <a name="method-get"></a>
 #### `get()` {#collection-method}
 
-The `get` method returns the item at a given key. If the key does not exist, `null` is returned:
+`get` 方法根据给定的 key 获取对应项，如果 key 不存在，返回 `null`:
 
 	$collection = collect(['name' => 'taylor', 'framework' => 'laravel']);
 
@@ -336,7 +336,7 @@ The `get` method returns the item at a given key. If the key does not exist, `nu
 
 	// taylor
 
-You may optionally pass a default value as the second argument:
+你可以选择是否传入一个默认值作为第二个参数：
 
 	$collection = collect(['name' => 'taylor', 'framework' => 'laravel']);
 
@@ -344,7 +344,7 @@ You may optionally pass a default value as the second argument:
 
 	// default-value
 
-You may even pass a callback as the default value. The result of the callback will be returned if the specified key does not exist:
+你甚至可以传入一个回调作为默认值，如果指定的 key 不存在，则返回此回调的结果：
 
 	$collection->get('email', function () {
 		return 'default-value';
@@ -355,7 +355,7 @@ You may even pass a callback as the default value. The result of the callback wi
 <a name="method-groupby"></a>
 #### `groupBy()` {#collection-method}
 
-The `groupBy` method groups the collection's items by a given key:
+`groupBy` 方法根据给定的 key 对集合分组：
 
 	$collection = collect([
 		['account_id' => 'account-x10', 'product' => 'Chair'],
@@ -379,7 +379,7 @@ The `groupBy` method groups the collection's items by a given key:
 		]
 	*/
 
-In addition to passing a string `key`, you may also pass a callback. The callback should return the value you wish to key the group by:
+除了传入字符串 `key`，你还可以传入一个回调，改变分组的 key：
 
 	$grouped = $collection->groupBy(function ($item, $key) {
 		return substr($item['account_id'], -3);
