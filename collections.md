@@ -402,7 +402,7 @@
 <a name="method-has"></a>
 #### `has()` {#collection-method}
 
-The `has` method determines if a given key exists in the collection:
+`has`用于判断一个给定的 key 是否存在于集合中：
 
 	$collection = collect(['account_id' => 1, 'product' => 'Desk']);
 
@@ -413,9 +413,9 @@ The `has` method determines if a given key exists in the collection:
 <a name="method-implode"></a>
 #### `implode()` {#collection-method}
 
-The `implode` method joins the items in a collection. Its arguments depend on the type of items in the collection.
+`implode` 方法用于合并集合中的对象，其参数取决于集合中对象的类型。
 
-If the collection contains arrays or objects, you should pass the key of the attributes you wish to join, and the "glue" string you wish to place between the values:
+如果集合包含数组和对象，你应该传入你想合并属性的 key, 以及值之间的连接符:
 
 	$collection = collect([
 		['account_id' => 1, 'product' => 'Desk'],
@@ -426,7 +426,7 @@ If the collection contains arrays or objects, you should pass the key of the att
 
 	// Desk, Chair
 
-If the collection contains simple strings or numeric values, simply pass the "glue" as the only argument to the method:
+如果集合仅包含字符串或者数字，只用向方法传入连接符这一个参数：
 
 	collect([1, 2, 3, 4, 5])->implode('-');
 
@@ -435,7 +435,7 @@ If the collection contains simple strings or numeric values, simply pass the "gl
 <a name="method-intersect"></a>
 #### `intersect()` {#collection-method}
 
-The `intersect` method removes any values that are not present in the given `array` or collection:
+`intersect` 方法用于删除任何不存在于给定 `array` 或集合中的值：
 
 	$collection = collect(['Desk', 'Sofa', 'Chair']);
 
@@ -445,12 +445,12 @@ The `intersect` method removes any values that are not present in the given `arr
 
 	// [0 => 'Desk', 2 => 'Chair']
 
-As you can see, the resulting collection will preserve the original collection's keys.
+如你所见，结果集合将保留原集合的 key。
 
 <a name="method-isempty"></a>
 #### `isEmpty()` {#collection-method}
 
-The `isEmpty` method returns `true` if the collection is empty; otherwise, `false` is returned:
+如果集合为空时，`isEmpty` 方法返回 `true`，否则，返回 `false`：
 
 	collect([])->isEmpty();
 
@@ -459,7 +459,7 @@ The `isEmpty` method returns `true` if the collection is empty; otherwise, `fals
 <a name="method-keyby"></a>
 #### `keyBy()` {#collection-method}
 
-Keys the collection by the given key:
+根据给定的 key 索引集合：
 
 	$collection = collect([
 		['product_id' => 'prod-100', 'name' => 'desk'],
@@ -477,9 +477,9 @@ Keys the collection by the given key:
 		]
 	*/
 
-If multiple items have the same key, only the last one will appear in the new collection.
+如果多个对象具有相同的 key, 只有最后一个会出现在新的集合中。
 
-You may also pass your own callback, which should return the value to key the collection by:
+你还可以传入你自己的回调，返回索引集合的 key：
 
 	$keyed = $collection->keyBy(function ($item) {
 		return strtoupper($item['product_id']);
@@ -498,7 +498,7 @@ You may also pass your own callback, which should return the value to key the co
 <a name="method-keys"></a>
 #### `keys()` {#collection-method}
 
-The `keys` method returns all of the collection's keys:
+`keys` 方法返回集合中所有的 keys: 
 
 	$collection = collect([
 		'prod-100' => ['product_id' => 'prod-100', 'name' => 'Desk'],
@@ -514,7 +514,7 @@ The `keys` method returns all of the collection's keys:
 <a name="method-last"></a>
 #### `last()` {#collection-method}
 
-The `last` method returns the last element in the collection that passes a given truth test:
+`last` 方法返回集合最一个通过给定测试的元素：
 
 	collect([1, 2, 3, 4])->last(function ($key, $value) {
 		return $value < 3;
@@ -522,7 +522,7 @@ The `last` method returns the last element in the collection that passes a given
 
 	// 2
 
-You may also call the `last` method with no arguments to get the last element in the collection. If the collection is empty, `null` is returned:
+你还可以调用无参的 `last` 方法获取集合中的最后一个元素，如果集合为空，返回 `null`：
 
 	collect([1, 2, 3, 4])->last();
 
@@ -531,7 +531,7 @@ You may also call the `last` method with no arguments to get the last element in
 <a name="method-map"></a>
 #### `map()` {#collection-method}
 
-The `map` method iterates through the collection and passes each value to the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items:
+`map` 遍历整个集合且将每个一个值传入给定的回调，这个回调函数可以自由修改对象并返回，因此而返回一个包含已修改对象的新集合：
 
 	$collection = collect([1, 2, 3, 4, 5]);
 
@@ -543,11 +543,12 @@ The `map` method iterates through the collection and passes each value to the gi
 
 	// [2, 4, 6, 8, 10]
 
-> **Note:** Like most other collection methods, `map` returns a new collection instance; it does not modify the collection it is called on. If you want to transform the original collection, use the [`transform`](#method-transform) method.
+> **注意:** 跟其它大多数集合方法一样，`map` 方法返回一个新的集合实例而不会修改集合，如果想转换原始集合，可以使用[`transform`](#method-transform)。
 
 <a name="method-merge"></a>
 #### `merge()` {#collection-method}
 
+`merge` 将给定的数组合并为一个集合，
 The `merge` method merges the given array into the collection. Any string key in the array matching a string key in the collection will overwrite the value in the collection:
 
 	$collection = collect(['product_id' => 1, 'name' => 'Desk']);
