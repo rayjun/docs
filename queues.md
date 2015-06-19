@@ -105,7 +105,7 @@ Job classes are very simple, normally containing only a `handle` method which is
 	    		//
 	    	});
 
-	    	$user->reminders()->create(...);
+	    	$this->user->reminders()->create(...);
 	    }
 	}
 
@@ -353,7 +353,7 @@ In this example, the `numprocs` directive will instruct Supervisor to run 8 `que
 
 	sudo supervisorctl update
 
-	sudo supervisorctl start laravel-worker
+	sudo supervisorctl start laravel-worker:*
 
 For more information on configuring and using Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html). Alternatively, you may use [Laravel Forge](https://forge.laravel.com) to automatically configure and manage your Supervisor configuration from a convenient web interface.
 

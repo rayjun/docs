@@ -42,6 +42,10 @@ php artisan make:model User -m
 ~~~
 
 
+<<<<<<< HEAD
+=======
+Now, let's look at an example `Flight` model class, which we will use to retrieve and store information from our `flights` database table:
+>>>>>>> laravel/5.1
 
 ### Eloquent 模型规范
 
@@ -422,8 +426,12 @@ $deletedRows = App\Flight::where('votes', '>', 100)->delete();
 
 namespace App;
 
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+=======
+	$deletedRows = App\Flight::where('active', 0)->delete();
+>>>>>>> laravel/5.1
 
 class Flight extends Model
 {

@@ -313,9 +313,8 @@ redirector 上的 `intended` 方法会在被认证过滤器拦截之前将用户
 
     use Auth;
     use Closure;
-    use Illuminate\Contracts\Routing\Middleware;
 
-    class AuthenticateOnceWithBasicAuth implements Middleware
+    class AuthenticateOnceWithBasicAuth
     {
         /**
          * Handle an incoming request.
@@ -444,7 +443,11 @@ Laravel 自带 `Auth\PasswordController`，其中包含重置用户密码必要�
 <a name="social-authentication"></a>
 ## 社交网站账号登陆认证
 
+<<<<<<< HEAD
 除了典型的，基于表单认证，Laravel 也提供了一个使用[Laravel Socialite](https://github.com/laravel/socialite)来认证每三方的 OAuth，Socialite 目前支持 Facebook, Twitter, Google, GitHub 和 Bitbucket 认证。
+=======
+In addition to typical, form based authentication, Laravel also provides a simple, convenient way to authenticate with OAuth providers using [Laravel Socialite](https://github.com/laravel/socialite). Socialite currently supports authentication with Facebook, Twitter, LinkedIn, Google, GitHub and Bitbucket.
+>>>>>>> laravel/5.1
 
 使用 Socialite，将组件依赖加入到 `composer.json` 文件中：
 
@@ -464,7 +467,11 @@ Laravel 自带 `Auth\PasswordController`，其中包含重置用户密码必要�
 
     'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
+<<<<<<< HEAD
 你还需要给你的应用程序使用的 OAuth 服务添加凭证信息。这些凭证信息应该放在 `config/services.php` 配置文件中，并且需要根据你的应用程序的需要，使用 `facebook`, `twitter`, `google`, or `github` 作为相应的 key, 例如：
+=======
+You will also need to add credentials for the OAuth services your application utilizes. These credentials should be placed in your `config/services.php` configuration file, and should use the key `facebook`, `twitter`, `linkedin`, `google`, `github` or `bitbucket`, depending on the providers your application requires. For example:
+>>>>>>> laravel/5.1
 
     'github' => [
         'client_id' => 'your-github-app-id',
