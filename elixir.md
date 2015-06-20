@@ -1,21 +1,21 @@
 # Laravel Elixir
 
-- [Introduction](#introduction)
-- [Installation & Setup](#installation)
-- [Running Elixir](#running-elixir)
-- [Working With Stylesheets](#working-with-stylesheets)
+- [介绍](#introduction)
+- [安装](#installation)
+- [运行 Elixir](#running-elixir)
+- [操作样式表](#working-with-stylesheets)
 	- [Less](#less)
 	- [Sass](#sass)
 	- [Plain CSS](#plain-css)
 	- [Source Maps](#css-source-maps)
-- [Working With Scripts](#working-with-scripts)
+- [操作脚本](#working-with-scripts)
 	- [CoffeeScript](#coffeescript)
 	- [Browserify](#browserify)
 	- [Babel](#babel)
 	- [Scripts](#javascript)
-- [Versioning / Cache Busting](#versioning-and-cache-busting)
-- [Calling Existing Gulp Tasks](#calling-existing-gulp-tasks)
-- [Writing Elixir Extensions](#writing-elixir-extensions)
+- [版本控制 / Cache 破坏](#versioning-and-cache-busting)
+- [调用已有的 Gulp 任务](#calling-existing-gulp-tasks)
+- [编写 Elixir 扩展](#writing-elixir-extensions)
 
 <a name="introduction"></a>
 ## Introduction
