@@ -35,17 +35,17 @@
     - [**artisan.md**](https://github.com/Laragirl/docs/blob/5.1/artisan.md)  @Artiship
     - [billing.md](https://github.com/Laragirl/docs/blob/5.1/billing.md)
     - [**cache.md**](https://github.com/Laragirl/docs/blob/5.1/cache.md)  @Artiship
-    - [collections.md](https://github.com/Laragirl/docs/blob/5.1/collections.md) @Artiship
-    - [elixir.md](https://github.com/Laragirl/docs/blob/5.1/elixir.md) @Artiship
-    - [encryption.md](https://github.com/Laragirl/docs/blob/5.1/encryption.md) @Artiship
-    - [errors.md](https://github.com/Laragirl/docs/blob/5.1/errors.md)
-    - [events.md](https://github.com/Laragirl/docs/blob/5.1/events.md)
-    - [filesystem.md](https://github.com/Laragirl/docs/blob/5.1/filesystem.md)
-    - [hashing.md](https://github.com/Laragirl/docs/blob/5.1/hashing.md)
-    - [helpers.md](https://github.com/Laragirl/docs/blob/5.1/helpers.md)
-    - [localization.md](https://github.com/Laragirl/docs/blob/5.1/localization.md)
-    - [mail.md](https://github.com/Laragirl/docs/blob/5.1/mail.md)
-    - [packages.md](https://github.com/Laragirl/docs/blob/5.1/packages.md)
+    - [**collections.md**](https://github.com/Laragirl/docs/blob/5.1/collections.md) @Artiship
+    - [**elixir.md**](https://github.com/Laragirl/docs/blob/5.1/elixir.md) @Artiship
+    - [**encryption.md**](https://github.com/Laragirl/docs/blob/5.1/encryption.md) @Artiship
+    - [errors.md](https://github.com/Laragirl/docs/blob/5.1/errors.md) @Artiship
+    - [events.md](https://github.com/Laragirl/docs/blob/5.1/events.md) @Artiship
+    - [filesystem.md](https://github.com/Laragirl/docs/blob/5.1/filesystem.md) @Artiship
+    - [hashing.md](https://github.com/Laragirl/docs/blob/5.1/hashing.md) @Artiship
+    - [helpers.md](https://github.com/Laragirl/docs/blob/5.1/helpers.md) @Artiship
+    - [localization.md](https://github.com/Laragirl/docs/blob/5.1/localization.md) @Artiship
+    - [mail.md](https://github.com/Laragirl/docs/blob/5.1/mail.md) @Artiship
+    - [packages.md](https://github.com/Laragirl/docs/blob/5.1/packages.md) @Artiship
     - [pagination.md](https://github.com/Laragirl/docs/blob/5.1/pagination.md) @everettjf
     - [queues.md](https://github.com/Laragirl/docs/blob/5.1/queues.md)
     - [redis.md](https://github.com/Laragirl/docs/blob/5.1/redis.md)
