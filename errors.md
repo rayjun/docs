@@ -1,37 +1,37 @@
 # Errors & Logging
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [The Exception Handler](#the-exception-handler)
-	- [Report Method](#report-method)
-	- [Render Method](#render-method)
-- [HTTP Exceptions](#http-exceptions)
-	- [Custom HTTP Error Pages](#custom-http-error-pages)
-- [Logging](#logging)
+- [介绍](#introduction)
+- [配置](#configuration)
+- [异常处理](#the-exception-handler)
+	- [Report 方法](#report-method)
+	- [Render 方法](#render-method)
+- [HTTP 异常](#http-exceptions)
+	- [自定义 HTTP 错误页面](#custom-http-error-pages)
+- [日志](#logging)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-When you start a new Laravel project, error and exception handling is already configured for you. In addition, Laravel is integrated with the [Monolog](https://github.com/Seldaek/monolog) logging library, which provides support for a variety of powerful log handlers.
+当你开始一个新的 Laravel 项目时，错误和异常处理已经为你配置好了，除些之外，Laravel 还集成了[Monolog](https://github.com/Seldaek/monolog)日志工具库，提供各种强大的日志处理程序。
 
 <a name="configuration"></a>
-## Configuration
+## 配置
 
-#### Error Detail
+#### 错误详情
 
-The amount of error detail your application displays through the browser is controlled by the `debug` configuration option in your `config/app.php` configuration file. By default, this configuration option is set to respect the `APP_DEBUG` environment variable, which is stored in your `.env` file.
+你的应用程序通过浏览器显示的错误详情的量，是由 `config/app.php` 配置文件中的 `debug` 选项来控制的，默认情况下，这个配置项是遵循 `APP_DEBUG` 环境变量来设置的，这个变量存放在 `.env` 文件中。
 
-For local development, you should set the `APP_DEBUG` environment variable to `true`. In your production environment, this value should always be `false`.
+对于本地开发，应该将 `APP_DEBUG` 环境变量设置为 `true`。在生产环境中，这个值应该总是为 `false`。
 
-#### Log Modes
+#### 日志模式
 
-Out of the box, Laravel supports `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `log` value in your `config/app.php` configuration file:
+在框架之外，Laravel 支持 `single`, `daily`, `syslog` 和 `errorlog` 多种日志模式，例如，如果你希望使用按天的日志文件而不是单个文件，你只需要将 `config/app.php` 中的 `log` 配置为：
 
 	'log' => 'daily'
 
-#### Custom Monolog Configuration
+#### 配置 Monolog 
 
-If you would like to have complete control over how Monolog is configured for your application, you may use the application's `configureMonologUsing` method. You should place a call to this method in your `bootstrap/app.php` file right before the `$app` variable is returned by the file:
+如果你希望完全控制应用程序中 Monolog 的配置方式，你可以使用程序中 `configureMonologUsing` 方法，你应该在 `bootstrap/app.php` 文件中，返回 `$app` 变量之前，调用此方法：
 
 	$app->configureMonologUsing(function($monolog) {
 		$monolog->pushHandler(...);
@@ -40,14 +40,14 @@ If you would like to have complete control over how Monolog is configured for yo
 	return $app;
 
 <a name="the-exception-handler"></a>
-## The Exception Handler
+##  异常处理
 
-All exceptions are handled by the `App\Exceptions\Handler` class. This class contains two methods: `report` and `render`. We'll examine each of these methods in detail.
+所有异常都是由 `App\Exceptions\Handler` 类来处理的，这个类包含有两个方法：`report` 和 `render`，后面我们将详细查看这些方法。
 
 <a name="report-method"></a>
-### The Report Method
+### Report 方法
 
-The `report` method is used to log exceptions or send them to an external service like [BugSnag](https://bugsnag.com). By default, the `report` method simply passes the exception to the base class where the exception is logged. However, you are free to log exceptions however you wish.
+`report` 方法像[BugSnag](https://bugsnag.com)一样，用于记录或发送异常信息到外部的服务，默认情况下，`report` 仅将异常传入基本类中记录日志的地方，然而，你可以你喜欢的方式记录异常信息。
 
 For example, if you need to report different types of exceptions in different ways, you may use the PHP `instanceof` comparison operator:
 
