@@ -1,21 +1,21 @@
-# Encryption
+# 加密
 
-- [Configuration](#configuration)
-- [Basic Usage](#basic-usage)
+- [配置](#configuration)
+- [基本用法](#basic-usage)
 
 <a name="configuration"></a>
-## Configuration
+## 配置
 
-Before using Laravel's encrypter, you should set the `key` option of your `config/app.php` configuration file to a 32 character, random string. If this value is not properly set, all values encrypted by Laravel will be insecure.
+在使用 Laravel 加密器之前，你需要将 `config/app.php` 配置文件中的 key 设置为 32 位的随机字符串，如果此配置项未正确设置，所有被 Laravel 加密的值将会不安全：
 
 <a name="basic-usage"></a>
-## Basic Usage
+## 基本用法
 
-#### Encrypting A Value
+#### 加密
 
-You may encrypt a value using the `Crypt` [facade](/docs/{{version}}/facades). All encrypted values are encrypted using OpenSSL and the `AES-256-CBC` cipher. Furthermore, all encrypted values are signed with a message authentication code (MAC) to detect any modifications to the encrypted string.
+你可以使用 `Crypt` [facade](/docs/{{version}}/facades) 加密码一个值，所有被加密码的值使用的是 OpenSSL 和 `AES-256-CBC` 算法，此外，所有被加密的值署有一个消息验证码（MAC），用来侦测任何对加密字符串的篡改：
 
-For example, we may use the `encrypt` method to encrypt a secret and store it on an [Eloquent model](/docs/{{version}}/eloquent):
+例如，我们可以使用 `encrypt` 方法对密码加密且将其存储到[Eloquent 模型](/docs/{{version}}/eloquent)中：
 
 	<?php
 
@@ -45,9 +45,9 @@ For example, we may use the `encrypt` method to encrypt a secret and store it on
 		}
 	}
 
-#### Decrypting A Value
+#### 解密
 
-Of course, you may decrypt values using the `decrypt` method on the `Crypt` facade. If the value can not be properly decrypted, such as when the MAC is invalid, an `Illuminate\Contracts\Encryption\DecryptException` will be thrown:
+当然，你可以通过 `Crypt` facade 上的 `decrypt` 方法将一个值解密，如果此值未被正确加密，例如，当 MAC 无效时，一个 `Illuminate\Contracts\Encryption\DecryptException` 异常将被抛出：
 
 	use Illuminate\Contracts\Encryption\DecryptException;
 
