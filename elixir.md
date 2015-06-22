@@ -13,9 +13,9 @@
 	- [Browserify](#browserify)
 	- [Babel](#babel)
 	- [Scripts](#javascript)
-- [版本控制 / Cache 破坏](#versioning-and-cache-busting)
-- [调用已有的 Gulp 任务](#calling-existing-gulp-tasks)
-- [编写 Elixir 扩展](#writing-elixir-extensions)
+- [版本控制 / 缓存破坏](#versioning-and-cache-busting)
+- [调用既有 Gulp 任务 ](#calling-existing-gulp-tasks)
+- [编写 Elixir 扩展程序](#writing-elixir-extensions)
 
 <a name="introduction"></a>
 ## 介绍
@@ -171,7 +171,7 @@ elixir(function(mix) {
 ```
 
 <a name="working-with-scripts"></a>
-## 操作 Scripts
+## 操作脚本
 
 Elixir 还提供了一些方法来帮助你操作脚本文件，例如编译 ECMAScript 6，编译 CoffeeScript, Browserify, minification 和仅仅连结纯脚文件。
 
@@ -189,10 +189,9 @@ elixir(function(mix) {
 <a name="browserify"></a>
 ### Browserify
 
-Elixir 还包含 `browserify` 方法，将加载模块的所有特点都在浏览器中发挥出来，并且它使用的是 EcmaScript 6。
-Elixir also ships with a `browserify` method, which gives you all the benefits of  requiring modules in the browser and using .
+Elixir 还包含 `browserify` 方法，使得可以方便地加载所有模块和使用 EcmaScript 6。
 
-This task assumes that your scripts are stored in `resources/assets/js` and will place the resulting file in `public/js/bundle.js`:
+这个任务假设你要编译的脚本文件存放在 `resources/assets/js` 目录中，生成的结果将存放于 `public/js/bundle.js` 中：
 
 ```javascript
 elixir(function(mix) {
@@ -203,7 +202,7 @@ elixir(function(mix) {
 <a name="babel"></a>
 ### Babel
 
-The `babel` method may be used to compile [EcmaScript 6 and 7](https://babeljs.io/docs/learn-es2015/) into plain JavaScript. This function accepts an array of files relative to the `resources/assets/js` directory, and generates a single `all.js` file in the `public/js` directory:
+`babel` 方法还可以用于将[EcmaScript 6 and 7](https://babeljs.io/docs/learn-es2015/)文件编译生成纯脚本文件，这个方法接受文件数组作为参数，文件路径相对于 `resources/assets/js` 目录，此方法将生成单个文件 `all.js` 到 `public/js` 目录：
 
 ```javascript
 elixir(function(mix) {
@@ -214,15 +213,15 @@ elixir(function(mix) {
 });
 ```
 
-To choose a different output location, simply specify your desired path as the second argument. The signature and functionality of this method are identical to `mix.scripts()`, excluding the Babel compilation.
+改变默认输出路径，只需要指定你希望的的路径作为第二个参数，除了编译方式，Babel 方法的签名和功能与 `mix.scripts()` 相同：
 
 
 <a name="javascript"></a>
-### Scripts
+### 脚本
 
-If you have multiple JavaScript files that you would like to combine into a single file, you may use the `scripts` method.
+如果你有多个脚本文件想要编译生成单个文件，你可以使用 `scripts` 方法：
 
-The `scripts` method assumes all paths are relative to the `resources/assets/js` directory, and will place the resulting JavaScript in `public/js/all.js` by default:
+`scripts` 方法假设所有的文件路径都相对于 `resources/assets/js` 目录，并且默认会将结果存放于 `public/js/all.js` 中：
 
 ```javascript
 elixir(function(mix) {
@@ -233,7 +232,7 @@ elixir(function(mix) {
 });
 ```
 
-If you need to combine multiple sets of scripts into different files, you may make multiple calls to the `scripts` method. The second argument given to the method determines the resulting file name for each concatenation:
+如果你需要将多个脚本集合并为到不同的文件，你可以调用 `scripts` 方法多次，传入方法的第二个参数决定每个合并操作结果的文件名：
 
 ```javascript
 elixir(function(mix) {
@@ -242,7 +241,7 @@ elixir(function(mix) {
 });
 ```
 
-If you need to combine all of the scripts in a given directory, you may use the `scriptsIn` method. The resulting JavaScript will be placed in `public/js/all.js`:
+如果你需要将所有的脚本文件合并到指定目录，你可以使用 `scriptsIn` 方法，结果存放于 `public/js/all.js`:
 
 ```javascript
 elixir(function(mix) {
@@ -251,11 +250,11 @@ elixir(function(mix) {
 ```
 
 <a name="versioning-and-cache-busting"></a>
-## Versioning / Cache Busting
+## 版本控制 / 缓存失效
 
-Many developers suffix their compiled assets with a timestamp or unique token to force browsers to load the fresh assets instead of serving stale copies of the code. Elixir can handle this for you using the `version` method.
+很多程序员在编译后的 assets 文件名前面加上时间戳或者唯一标记，从而强制浏览器加载最新的 assets 而不是仍旧使用过期的代码。Elixir 通过 `version` 来实现这一点。
 
-The `version` method accepts a file name relative to the `public` directory, and will append a unique hash to the filename, allowing for cache-busting. For example, the generated file name will look something like: `all-16d570a7.css`:
+`version` 方法接收一个相对于 `public` 目录的文件名且会添加一个唯一的哈希码到文件后，从而使缓存失效，例如，生成的文件名可能像这样 `all-16d570a7.css`：
 
 ```javascript
 elixir(function(mix) {
@@ -263,13 +262,13 @@ elixir(function(mix) {
 });
 ```
 
-After generating the versioned file, you may use Laravel's global `elixir` PHP helper function within your [views](/docs/{{version}}/views) to load the appropriately hashed asset. The `elixir` function will automatically determine the name of the hashed file:
+生成版本文件之后，你还可以在 [视图](/docs/{{version}}/views) 中使用 Laravel 全局方法 `elixir`，帮助你正确加载 asset 文件，`elixir` 方法会自动判断出哈希后的文件：
 
 	<link rel="stylesheet" href="{{ elixir('css/all.css') }}">
 
-#### Versioning Multiple Files
+#### 版本控制多个文件
 
-You may pass an array to the `version` method to version multiple files:
+可以通过向 `version` 方法传入数组的方式实现多文件版本控制
 
 ```javascript
 elixir(function(mix) {
@@ -277,16 +276,16 @@ elixir(function(mix) {
 });
 ```
 
-Once the files have been versioned, you may use the `elixir` helper function to generate links to the proper hashed files. Remember, you only need to pass the name of the un-hashed file to the `elixir` helper function. The helper will use the un-hashed name to determine the current hashed version of the file:
+一旦文件加入版本控制，你可以使用 `elixir` 方法定位正确的哈希文件，请记住，你只需要传入未哈希的文件，`elixir`将帮助你找到当前哈希后的文件：
 
 	<link rel="stylesheet" href="{{ elixir('css/all.css') }}">
 
 	<script src="{{ elixir('js/app.js') }}"></script>
 
 <a name="calling-existing-gulp-tasks"></a>
-## Calling Existing Gulp Tasks
+## 调用既有 Gulp 任务 
 
-If you need to call an existing Gulp task from Elixir, you may use the `task` method. As an example, imagine that you have a Gulp task that simply speaks a bit of text when called:
+如果你需要通过 Elixir 调用既有 Gulp 任务，你可以使用 `task` 方法，比如，你有一个 Gulp 任务，在调用时只输出一段文字：
 
 ```javascript
 gulp.task("speak", function() {
@@ -296,7 +295,7 @@ gulp.task("speak", function() {
 });
 ```
 
-If you wish to call this task from Elixir, use the `mix.task` method and pass the name of the task as the only argument to the method:
+如果你希望通过 Elixir 调用这个任务，使用 `mix.task`，以任务名作为唯一参数传入此方法：
 
 ```javascript
 elixir(function(mix) {
@@ -304,9 +303,9 @@ elixir(function(mix) {
 });
 ```
 
-#### Custom Watchers
+#### 自定义监听器
 
-If you need to register a watcher to run your custom task each time some files are modified, pass a regular expression as the second argument to the `task` method:
+如果你需要注册一个监听器，每当文件被修改时运行自定义的任务，可以向 `task` 方法中传入一个正则表达式作为第二个参数：
 
 ```javascript
 elixir(function(mix) {
@@ -315,9 +314,9 @@ elixir(function(mix) {
 ```
 
 <a name="writing-elixir-extensions"></a>
-## Writing Elixir Extensions
+## 编写 Elixir 扩展程序
 
-If you need more flexibility than Elixir's `task` method can provide, you may create custom Elixir extensions. Elixir extensions allow you to pass arguments to your custom tasks. For example, you could write an extension like so:
+如果你需要比 Elixir 所能提供的更多的灵活性，你可以创建自定义的 Elixir 扩展程序，扩展程序允许你传入参数到自定义任务中，例如，你可以像这样编写扩展：
 
 ```javascript
 // File: elixir-extensions.js
@@ -337,7 +336,7 @@ elixir.extend("speak", function(message) {
  });
 ```
 
-That's it! You may either place this at the top of your Gulpfile, or instead extract it to a custom tasks file. For example, if you place your extensions in `elixir-extensions.js`, you may require the file from your main `Gulpfile` like so:
+就是这样！你也可以将这段扩展程序放在 Gulp 文件的头部，或者将其抽离出来作为单独的自定义任务文件。例如，如果你将扩展程序放在 `elixir-extensions.js` 中，你可以如下在入口文件 `Gulpfile` 中引用：
 
 ```javascript
 // File: Gulpfile.js
@@ -351,9 +350,9 @@ elixir(function(mix) {
 });
 ```
 
-#### Custom Watchers
+#### 设置监听器
 
-If you would like your custom task to be re-triggered while running `gulp watch`, you may register a watcher:
+如果你想通过运行 `gulp watch` 反复触发自定的任务，你可以注册一个监听器：
 
 ```javascript
 this.registerWatcher("speak", "app/**/*.php");
