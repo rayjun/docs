@@ -141,7 +141,7 @@ Laravel 日志工具提供一个简单的控制层，构建于强大的[Monolog]
 		}
 	}
 
-[RFC 5424](http://tools.ietf.org/html/rfc5424)定义了日志程序提供的七层日志级别：**debug**, **info**, **notice**, **warning**, **error**, **critical**, and **alert**。
+[RFC 5424](http://tools.ietf.org/html/rfc5424)定义了日志程序提供的七层日志级别：**debug**, **info**, **notice**, **warning**, **error**, **critical**, 和 **alert**。
 
 	Log::debug($error);
 	Log::info($error);

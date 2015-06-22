@@ -38,7 +38,7 @@
     - [**collections.md**](https://github.com/Laragirl/docs/blob/5.1/collections.md) @Artiship
     - [**elixir.md**](https://github.com/Laragirl/docs/blob/5.1/elixir.md) @Artiship
     - [**encryption.md**](https://github.com/Laragirl/docs/blob/5.1/encryption.md) @Artiship
-    - [errors.md](https://github.com/Laragirl/docs/blob/5.1/errors.md) @Artiship
+    - [**errors.md**](https://github.com/Laragirl/docs/blob/5.1/errors.md) @Artiship
     - [events.md](https://github.com/Laragirl/docs/blob/5.1/events.md) @Artiship
     - [filesystem.md](https://github.com/Laragirl/docs/blob/5.1/filesystem.md) @Artiship
     - [hashing.md](https://github.com/Laragirl/docs/blob/5.1/hashing.md) @Artiship
