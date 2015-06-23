@@ -1,5 +1,5 @@
 - 序言
-    - [翻译规范](/docs/{{version}}/proper-names.md)
+    - [翻译规范](/docs/{{version}}/proper-names)
     - [版本说明](/docs/{{version}}/releases)
     - [升级指南](/docs/{{version}}/upgrade)
     - [贡献指南](/docs/{{version}}/contributions)
