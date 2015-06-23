@@ -127,6 +127,7 @@
 - Repository 储存库
 - Redirect 重定向
 - (Database's) Rollback 回滚
+- Resolve 实例化
 
 ## S
 

@@ -1,27 +1,27 @@
-# Events
+# 事件
 
-- [Introduction](#introduction)
-- [Registering Events / Listeners](#registering-events-and-listeners)
-- [Defining Events](#defining-events)
-- [Defining Listeners](#defining-listeners)
-	- [Queued Event Listeners](#queued-event-listeners)
-- [Firing Events](#firing-events)
-- [Broadcasting Events](#broadcasting-events)
-	- [Configuration](#broadcast-configuration)
-	- [Marking Events For Broadcast](#marking-events-for-broadcast)
-	- [Broadcast Data](#broadcast-data)
-	- [Consuming Event Broadcasts](#consuming-event-broadcasts)
-- [Event Subscribers](#event-subscribers)
+- [介绍](#introduction)
+- [注册事件 / 监听器](#registering-events-and-listeners)
+- [定义事件](#defining-events)
+- [定义监听器](#defining-listeners)
+	- [队列事件监听器](#queued-event-listeners)
+- [触发事件](#firing-events)
+- [广播事件](#broadcasting-events)
+	- [配置](#broadcast-configuration)
+	- [标记事件广播](#marking-events-for-broadcast)
+	- [广播数据](#broadcast-data)
+	- [接收事件广播](#consuming-event-broadcasts)
+- [事件订阅](#event-subscribers)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-Laravel's events provides a simple observer implementation, allowing you to subscribe and listen for events in your application. Event classes are typically stored in the `app/Events` directory, while their listeners are stored in `app/Listeners`.
+Laravel 事件提供一个简单的观察者模式的实现，允许你订阅和监听应用程序中的事件，事件类一般存储在 `app/Events` 目录中，而相应的监听器存储在 `app/Listeners`中。
 
 <a name="registering-events-and-listeners"></a>
-## Registering Events / Listeners
+## 注册事件 / 监听器
 
-The `EventServiceProvider` included with your Laravel application provides a convenient place to register all event listeners. The `listen` property contains an array of all events (keys) and their listeners (values). Of course, you may add as many events to this array as your application requires. For example, let's add our `PodcastWasPurchased` event:
+Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册所有的事件监听器，`listen` 属性包含一个所有事件（键）和相应监听器（值）的数组，所以，你可以根据应用程序的需要添加事件到数组中，例如，让我们来添加 `PodcastWasPurchased` 事件：
 
 	/**
 	 * The event listener mappings for the application.
@@ -34,16 +34,16 @@ The `EventServiceProvider` included with your Laravel application provides a con
 		],
 	];
 
-### Generating Event / Listener Classes
+### 生成事件 / 监听器类
 
-Of course, manually creating the files for each event and listener is cumbersome. Instead, simply add listeners and events to your `EventServiceProvider` and use the `event:generate` command. This command will generate any events or listeners that are listed in your `EventServiceProvider`. Of course, events and listeners that already exist will be left untouched:
+当然，手动为每个事件和监听器生成文件很麻烦，另一种方式，你可以只添加监听器和事件到 `EventServiceProvider` 然后使用 `event:generate` 命令，这个命令将生成 `EventServiceProvider` 中列出的所有事件和监听器，当然，已经存在的事件和进监听器不包含在内：
 
 	php artisan event:generate
 
 <a name="defining-events"></a>
-## Defining Events
+## 定义事件
 
-An event class is simply a data container which holds the information related to the event. For example, let's assume our generated `PodcastWasPurchased` event receives a [Eloquent ORM](/docs/{{version}}/eloquent) object:
+一个事件类只是一个数据容器，持有与事件相关的信息，例如，假设一下我们生成的 `PodcastWasPurchased` 事件接受一个[Eloquent ORM](/docs/{{version}}/eloquent) 对象：
 
 	<?php
 
@@ -71,12 +71,12 @@ An event class is simply a data container which holds the information related to
 	    }
 	}
 
-As you can see, this event class contains no special logic. It is simply a container for the `Podcast` object that was purchased. The `SerializesModels` trait used by the event will gracefully serialize any Eloquent models if the event object is serialized using PHP's `serialize` function.
+正如你所见，这个事件类没有特殊逻辑，只是所购买的 `Podcast` 对象的一个容器，如果事件对象被 PHP 的 `serialize` 函数序列化，事件类引入的 `SerializesModels` trait 将会优雅地将所有 Eloquent 模型序列化。
 
 <a name="defining-listeners"></a>
-## Defining Listeners
+## 定义监听器
 
-Next, let's take a look at the listener for our example event. Event listeners receive the event instance in their `handle` method. The `event:generate` command will automatically import the proper event class and type-hint the event on the `handle` method. Within the `handle` method, you may perform any logic necessary to respond to the event.
+接下来，让我们来看一下示例事件对应的监听器，事件监听器通过 `handle` 方法接收相应的事件实例，`event:generate` 命令将自动导入正确的事件类且在 `handle` 方法上类型提示（type-hint）相应的事件类。在 `handle` 方法中，你可以执行任何必要的逻辑来响应事件：
 
 	<?php
 
@@ -110,7 +110,7 @@ Next, let's take a look at the listener for our example event. Event listeners r
 	    }
 	}
 
-Your event listeners may also type-hint any dependencies they need on their constructors. All event listeners are resolved via the Laravel [service container](/docs/{{version}}/container), so dependencies will be injected automatically:
+你的事件监听器还可以在构造函数上类型提示任何需要的依赖，所有的事件监听器都将通过 Laravel [服务容器](/docs/{{version}}/container) 来实例化，所以依赖将被自动注入：
 
 	use Illuminate\Contracts\Mail\Mailer;
 
@@ -119,14 +119,14 @@ Your event listeners may also type-hint any dependencies they need on their cons
 		$this->mailer = $mailer;
 	}
 
-#### Stopping The Propagation Of An Event
+#### 阻止事件传播
 
-Sometimes, you may wish to stop the propagation of an event to other listeners. You may do so using by returning `false` from your listener's `handle` method.
+有时候，你可能希望组织事件传播到其他监听器，你可以通过从监听器的 `handle` 方法返回 `false` 来做到这一点。
 
 <a name="queued-event-listeners"></a>
-### Queued Event Listeners
+### 队列事件监听器
 
-Need to [queue](/docs/{{version}}/queues) an event listener? It couldn't be any easier. Simply add the `ShouldQueue` interface to the listener class. Listeners generated by the `event:generate` Artisan command already have this interface imported into the current namespace, so you can use it immediately:
+需要将事件监听器加入[队列](/docs/{{version}}/queues)吗? 这个再容易不过了，只需要将 `ShouldQueue` 接口加入监听器类。由 `event:generate` Artisan 命令生成的监听器类已经将这个接口导入到了当前的命名空间中，所以你可以直接使用：
 
 	<?php
 
@@ -141,9 +141,9 @@ Need to [queue](/docs/{{version}}/queues) an event listener? It couldn't be any 
 		//
 	}
 
-That's it! Now, when this listener is called for an event, it will be queued automatically by the event dispatcher using Laravel's [queue system](/docs/{{version}}/queues). If no exceptions are thrown when the listener is executed by the queue, the queued job will automatically be deleted after it has processed.
+就是这样！现在，当监听器因为一个事件而被调用时，这个监听器将会被使用自 Laravel[队列系统](/docs/{{version}}/queues)的事件转发器自动加入队列。如果当监听器被队列执行的过程当中没有报出异常，这个被队列的任务将自动害处理完后被删除。
 
-#### Manually Accessing The Queue
+#### 手动访问队列
 
 If you need to access the underlying queue job's `delete` and `release` methods manually, you may do so. The `Illuminate\Queue\InteractsWithQueue` trait, which is imported by default on generated listeners, gives you access to these methods:
 
