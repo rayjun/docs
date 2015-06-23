@@ -9,17 +9,17 @@
 ## 翻译进度
 
 - 序言
-    - [releases.md](https://github.com/Laragirl/docs/blob/5.1/releases.md) - 翻译:Zehir 进度:100%
-    - [upgrade.md](https://github.com/Laragirl/docs/blob/5.1/upgrade.md) - 翻译:Zehir (未翻译)
-    - [contributing.md](https://github.com/Laragirl/docs/blob/5.1/contributions.md) - 翻译:Zehir 进度:100%
+    - [releases.md](https://github.com/Laragirl/docs/blob/5.1/releases.md) 
+    - [upgrade.md](https://github.com/Laragirl/docs/blob/5.1/upgrade.md) 
+    - [contributing.md](https://github.com/Laragirl/docs/blob/5.1/contributions.md)
 - 安装
-    - [installation.md](https://github.com/Laragirl/docs/blob/5.1/installation.md) - 翻译:Zehir 进度:100%
-    - [homestead.md](https://github.com/Laragirl/docs/blob/5.1/homestead.md) - 翻译:Zehir 进度:100%
+    - [installation.md](https://github.com/Laragirl/docs/blob/5.1/installation.md) @zehirpx
+    - [homestead.md](https://github.com/Laragirl/docs/blob/5.1/homestead.md) 
 - 基本知识
-    - [routing.md](https://github.com/Laragirl/docs/blob/5.1/routing.md) - 翻译:Zehir 进度:100%
-    - [middleware.md](https://github.com/Laragirl/docs/blob/5.1/middleware.md) - 翻译:Zehir 进度:100%
-    - [controllers.md](https://github.com/Laragirl/docs/blob/5.1/controllers.md) - 翻译:Zehir 进度:100%
-    - [requests.md](https://github.com/Laragirl/docs/blob/5.1/requests.md) - 翻译:Zehir 进度:91%
+    - [routing.md](https://github.com/Laragirl/docs/blob/5.1/routing.md) 
+    - [middleware.md](https://github.com/Laragirl/docs/blob/5.1/middleware.md) 
+    - [controllers.md](https://github.com/Laragirl/docs/blob/5.1/controllers.md) 
+    - [requests.md](https://github.com/Laragirl/docs/blob/5.1/requests.md) 
     - [responses.md](https://github.com/Laragirl/docs/blob/5.1/responses.md)
     - [views.md](https://github.com/Laragirl/docs/blob/5.1/views.md)
     - [blade.md](https://github.com/Laragirl/docs/blob/5.1/blade.md)
@@ -68,14 +68,18 @@
 
 ## 参与翻译
 
-中文文档风格指南 [https://open.leancloud.cn/copywriting-style-guide.html](https://open.leancloud.cn/copywriting-style-guide.html)
+### 翻译规范
 
-怎样改进英式中文 [https://open.leancloud.cn/improve-chinese.html](https://open.leancloud.cn/improve-chinese.html)
+[https://github.com/Laragirl/docs/blob/5.1/proper-names.md](https://github.com/Laragirl/docs/blob/5.1/proper-names.md)
 
-### 翻译方法
+### 参与方式
 
-- 翻译之前先更新此文档（readme.md），将选取的未翻译的章节后面属上自己的名字，提交此文档表示任务被领取
-- 翻译时可以直接在线编辑文档，然后提交，直接提交权限需要加入翻译组，请加 QQ 群了解
+- 更新此文档（readme.md），在选取的翻译的章节后面属上自己的名字，表示领取
+- 将章节名加粗表示翻译完成
+
+### 推荐工具
+
+推荐使用 sublime text，安装 Markdown Preview 和 Markdown Editing 插件编辑文档
 
 ### 参与讨论
 
