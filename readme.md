@@ -22,7 +22,7 @@
     - [requests.md](https://github.com/Laragirl/docs/blob/5.1/requests.md) 
     - [responses.md](https://github.com/Laragirl/docs/blob/5.1/responses.md)
     - [views.md](https://github.com/Laragirl/docs/blob/5.1/views.md)
-    - [blade.md](https://github.com/Laragirl/docs/blob/5.1/blade.md)
+    - [blade.md](https://github.com/Laragirl/docs/blob/5.1/blade.md) @kphcdr
 - 架构基础
     - [lifecycle.md](https://github.com/Laragirl/docs/blob/5.1/lifecycle.md) @silentred
     - [structure.md](https://github.com/Laragirl/docs/blob/5.1/structure.md) @silentred
