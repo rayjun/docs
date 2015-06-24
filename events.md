@@ -121,7 +121,7 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 #### 阻止事件传播
 
-有时候，你可能希望组织事件传播到其他监听器，你可以通过从监听器的 `handle` 方法返回 `false` 来做到这一点。
+有时候，你可能希望阻止事件传播到其他监听器，你可以通过使监听器的 `handle` 方法返回 `false` 来做到这一点。
 
 <a name="queued-event-listeners"></a>
 ### 队列事件监听器
