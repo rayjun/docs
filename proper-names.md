@@ -64,6 +64,7 @@
 - Filter 过滤器
 - Form 表彰
 - Function 函数
+- (Work) Factor (系数)
 
 ## G
 
@@ -168,7 +169,7 @@
 ## W
 
 - Workbench (指令，不翻)
-- web sockets 网络套接字
+- Web Sockets 网络套接字
 
 ## X
 

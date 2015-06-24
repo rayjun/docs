@@ -41,7 +41,7 @@
     - [**errors.md**](https://github.com/Laragirl/docs/blob/5.1/errors.md) @Artiship
     - [**events.md**](https://github.com/Laragirl/docs/blob/5.1/events.md) @Artiship
     - [filesystem.md](https://github.com/Laragirl/docs/blob/5.1/filesystem.md) @Artiship
-    - [hashing.md](https://github.com/Laragirl/docs/blob/5.1/hashing.md) @Artiship
+    - [**hashing.md**](https://github.com/Laragirl/docs/blob/5.1/hashing.md) @Artiship
     - [helpers.md](https://github.com/Laragirl/docs/blob/5.1/helpers.md) @Artiship
     - [localization.md](https://github.com/Laragirl/docs/blob/5.1/localization.md) @Artiship
     - [mail.md](https://github.com/Laragirl/docs/blob/5.1/mail.md) @Artiship
