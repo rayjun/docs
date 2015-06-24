@@ -49,6 +49,7 @@
 - Database-Transactions  数据库事务
 - Deferred Providers 缓载提供者
 - Driver 驱动
+- broadcast payload 广播负载
 
 ## E
 
@@ -83,6 +84,7 @@
 ## J
 
 - Job 任务
+- JavaScript (不翻)
 
 ## K
 
@@ -113,6 +115,7 @@
 - Prefix 前缀
 - Presenter
 - Pipeline 管道
+- Firing Events 激发事件
 
 ## Q
 
@@ -137,6 +140,7 @@
 - Service Providers 服务提供者
 - Session 会话
 - Seed 数据填充
+- SDK （不翻）
 
 ## T
 
@@ -164,6 +168,7 @@
 ## W
 
 - Workbench (指令，不翻)
+- web sockets 网络套接字
 
 ## X
 

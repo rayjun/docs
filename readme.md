@@ -13,7 +13,7 @@
     - [upgrade.md](https://github.com/Laragirl/docs/blob/5.1/upgrade.md) 
     - [contributing.md](https://github.com/Laragirl/docs/blob/5.1/contributions.md)
 - 安装
-    - [installation.md](https://github.com/Laragirl/docs/blob/5.1/installation.md) @zehirpx
+    - [**installation.md**](https://github.com/Laragirl/docs/blob/5.1/installation.md) @zehirpx
     - [homestead.md](https://github.com/Laragirl/docs/blob/5.1/homestead.md) 
 - 基本知识
     - [routing.md](https://github.com/Laragirl/docs/blob/5.1/routing.md) 
@@ -22,9 +22,9 @@
     - [requests.md](https://github.com/Laragirl/docs/blob/5.1/requests.md) 
     - [responses.md](https://github.com/Laragirl/docs/blob/5.1/responses.md)
     - [views.md](https://github.com/Laragirl/docs/blob/5.1/views.md)
-    - [blade.md](https://github.com/Laragirl/docs/blob/5.1/blade.md) @kphcdr
+    - [**blade.md**](https://github.com/Laragirl/docs/blob/5.1/blade.md) @kphcdr
 - 架构基础
-    - [lifecycle.md](https://github.com/Laragirl/docs/blob/5.1/lifecycle.md) @silentred
+    - [**lifecycle.md**](https://github.com/Laragirl/docs/blob/5.1/lifecycle.md) @silentred
     - [structure.md](https://github.com/Laragirl/docs/blob/5.1/structure.md) @silentred
     - [providers.md](https://github.com/Laragirl/docs/blob/5.1/providers.md) @silentred
     - [container.md](https://github.com/Laragirl/docs/blob/5.1/container.md) @silentred
@@ -39,7 +39,7 @@
     - [**elixir.md**](https://github.com/Laragirl/docs/blob/5.1/elixir.md) @Artiship
     - [**encryption.md**](https://github.com/Laragirl/docs/blob/5.1/encryption.md) @Artiship
     - [**errors.md**](https://github.com/Laragirl/docs/blob/5.1/errors.md) @Artiship
-    - [events.md](https://github.com/Laragirl/docs/blob/5.1/events.md) @Artiship
+    - [**events.md**](https://github.com/Laragirl/docs/blob/5.1/events.md) @Artiship
     - [filesystem.md](https://github.com/Laragirl/docs/blob/5.1/filesystem.md) @Artiship
     - [hashing.md](https://github.com/Laragirl/docs/blob/5.1/hashing.md) @Artiship
     - [helpers.md](https://github.com/Laragirl/docs/blob/5.1/helpers.md) @Artiship

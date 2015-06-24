@@ -5,12 +5,12 @@
 - [定义事件](#defining-events)
 - [定义监听器](#defining-listeners)
 	- [队列事件监听器](#queued-event-listeners)
-- [触发事件](#firing-events)
+- [激发事件](#firing-events)
 - [广播事件](#broadcasting-events)
 	- [配置](#broadcast-configuration)
-	- [标记事件广播](#marking-events-for-broadcast)
+	- [标记为广播事件](#marking-events-for-broadcast)
 	- [广播数据](#broadcast-data)
-	- [接收事件广播](#consuming-event-broadcasts)
+	- [消费事件广播](#consuming-event-broadcasts)
 - [事件订阅](#event-subscribers)
 
 <a name="introduction"></a>
@@ -145,7 +145,7 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 #### 手动访问队列
 
-If you need to access the underlying queue job's `delete` and `release` methods manually, you may do so. The `Illuminate\Queue\InteractsWithQueue` trait, which is imported by default on generated listeners, gives you access to these methods:
+如果你需要手动访问底层队列任务的 `delete` 和 `release` 方法，你可以这样做。`Illuminate\Queue\InteractsWithQueue` trait 是默认导入生成的监听器中的，使你可以访问这些方法：
 
 	<?php
 
@@ -168,9 +168,10 @@ If you need to access the underlying queue job's `delete` and `release` methods 
 	}
 
 <a name="firing-events"></a>
-## Firing Events
+## 激发事件
 
-To fire an event, you may use the `Event` [facade](/docs/{{version}}/facades), passing an instance of the event to the `fire` method. The `fire` method will dispatch the event to all of its registered listeners:
+
+激发一个事件，你可以使用 `Event` [facade](/docs/{{version}}/facades)，传递一个事件的实例给 `fire` 方法。`fire` 方法将这个事件转发给相关的注册事件：
 
 	<?php
 
@@ -200,37 +201,37 @@ To fire an event, you may use the `Event` [facade](/docs/{{version}}/facades), p
 		}
 	}
 
-Alternatively, you may use the global `event` helper function to fire events:
+可选的，你可以使用全局的 `event` 辅助函数激发事件：
 
 	event(new PodcastWasPurchased($podcast));
 
 <a name="broadcasting-events"></a>
-## Broadcasting Events
+## 广播事件
 
-In many modern web applications, web sockets are used to implement real-time, live-updating user interfaces. When some data is updated on the server, a message is typically sent over a websocket connection to be handled by the client.
+在许多现代的网络应用程序中，网络套接字（web sockets）被用于实现实时、在线更新的用户界面。当服务器上一些数据被更新时，一个消息通常会通过 websocket 连接发送到客户端进行处理。
 
-To assist you in building these types of applications, Laravel makes it easy to "broadcast" your events over a websocket connection. Broadcasting your Laravel events allows you to share the same event names between your server-side code and your client-side JavaScript framework.
+为了帮助你构建这些类型的应用程序，Laravel 让使用网络套接字「广播」事件变得很容易。广播 Laravel 事件允许你在服务器端代码与客户端 JavaScript 框架之间共享相同的事件名。
 
 <a name="broadcast-configuration"></a>
-### Configuration
+### 配置
 
-All of the event broadcasting configuration options are stored in the `config/broadcasting.php` configuration file. Laravel supports several broadcast drivers out of the box: [Pusher](https://pusher.com), [Redis](/docs/{{version}}/redis), and a `log` driver for local development and debugging. A configuration example is included for each of these drivers.
+所有的事件广播配置选项都存储在 `config/broadcasting.php` 配置文件中，Laravel 默认支持一些广播驱动:[Pusher](https://pusher.com), [Redis](/docs/{{version}}/redis) 和一个用于本地开发和调试的 `log` 驱动，其中每个驱动都包含一个配置示例文件。
 
-#### Broadcast Prerequisites
+#### 事件广播必备条件
 
-The following dependencies are needed for event broadcasting:
+事件广播需要以下依赖：
 
 - Pusher: `pusher/pusher-php-server ~2.0`
 - Redis: `predis/predis ~1.0`
 
-#### Queue Prerequisites
+#### 队列必备条件
 
-Before broadcasting events, you will also need to configure and run a [queue listener](/docs/{{version}}/queues). All event broadcasting is done via queued jobs so that the response time of your application is not seriously affected.
+在广播事件之前，你还需要配置和运行一个[队列监听器](/docs/{{version}}/queues)，所有事件广播都是通过队列任务来执行的，所以应用程序的响应时间不会被严重影响：
 
 <a name="marking-events-for-broadcast"></a>
-### Marking Events For Broadcast
+### 标记为广播事件
 
-To inform Laravel that a given event should be broadcast, implement the `Illuminate\Contracts\Broadcasting\ShouldBroadcast` interface on the event class. The `ShouldBroadcast` interface requires you to implement a single method: `broadcastOn`. The `broadcastOn` method should return an array of "channel" names that the event should be broadcast on:
+为了告知 Laravel 一个给定的事件需要广播，事件类需要实现 `Illuminate\Contracts\Broadcasting\ShouldBroadcast` 接口，`ShouldBroadcast` 接口只需要你实现一个方法：`broadcastOn`，`broadcastOn`返回一个「渠道」名数组，事件将在这些渠道上广播：
 
 	<?php
 
@@ -268,12 +269,12 @@ To inform Laravel that a given event should be broadcast, implement the `Illumin
 	    }
 	}
 
-Then, you only need to [fire the event](#firing-events) as you normally would. Once the event has been fired, a [queued job](/docs/{{version}}/queues) will automatically broadcast the event over your specified broadcast driver.
+然后，你只需要按照正常操作[激发事件](#firing-events)，一旦这个事件被激发，一个[队列任务](/docs/{{version}}/queues) 将通过你指定的广播驱动，将此事件自动广播出去。
 
 <a name="broadcast-data"></a>
-### Broadcast Data
+### 广播数据
 
-When an event is broadcast, all of its `public` properties are automatically serialized and broadcast as the event's payload, allowing you to access any of its public data from your JavaScript application. So, for example, if your event has a single public `$user` property that contains an Eloquent model, the broadcast payload would be:
+当一个事件被广播时，其所有的 `public` 属性将自动被序列化且作为事件负载（payload）被广播，从而使你通过 JavaScript 程序可以访问其所有的公共数据。所以，例如事件只有一个 `$user` 属性，此属性包含一个 Eloquent 模型，广播负载将如下：
 
 	{
 		"user": {
@@ -283,7 +284,7 @@ When an event is broadcast, all of its `public` properties are automatically ser
 		}
 	}
 
-However, if you wish to have even more fine-grained control over your broadcast payload, you may add a `broadcastWith` method to your event. This method should return the array of data that you wish to broadcast with the event:
+然而，如果你希望对广播负载有更细粒度的控制，你可以在事件中添加 `broadcastWith` 方法，此方法应该返回数组数据，表示你所希望广播的事件：
 
     /**
      * Get the data to broadcast.
@@ -296,11 +297,11 @@ However, if you wish to have even more fine-grained control over your broadcast 
     }
 
 <a name="consuming-event-broadcasts"></a>
-### Consuming Event Broadcasts
+### 消费事件广播
 
 #### Pusher
 
-You may conveniently consume events broadcast using the [Pusher](https://pusher.com) driver using Pusher's JavaScript SDK. For example, let's consume the `App\Events\ServerCreated` event from our previous examples:
+你可以通过 Pusher 的 JavaScript SDK 使用[Pusher](https://pusher.com)驱动方便地消费事件广播。例如，让我们在前一个示例中消费一个 `App\Events\ServerCreated` 事件：
 
 	this.pusher = new Pusher('pusher-key');
 
@@ -312,9 +313,9 @@ You may conveniently consume events broadcast using the [Pusher](https://pusher.
 
 #### Redis
 
-If you are using the Redis broadcaster, you will need to write your own Redis pub/sub consumer to receive the messages and broadcast them using the websocket technology of your choice. For example, you may choose to use the popular [Socket.io](http://socket.io) library which is written in Node.
+如果你使用 Redis 广播器，你需要编写你自己的 Redis 发布 / 订阅模型来接收消息和使用网络套接字技术将其广播。例如，你可以选择使用流行的[Socket.io](http://socket.io) 库，此库由 Node 编写的。
 
-Using the `socket.io` and `ioredis` Node libraries, you can quickly write an event broadcaster to publish all events that are broadcast by your Laravel application:
+使用 `socket.io` 和 `ioredis`  Node 库，你能很快地编写一个事件广播器，用于发布所有 Laravel 广播的事件：
 
 	var app = require('http').createServer(handler);
 	var io = require('socket.io')(app);
@@ -345,9 +346,9 @@ Using the `socket.io` and `ioredis` Node libraries, you can quickly write an eve
 	});
 
 <a name="event-subscribers"></a>
-## Event Subscribers
+## 事件订阅器
 
-Event subscribers are classes that may subscribe to multiple events from within the class itself, allowing you to define several event handlers within a single class. Subscribers should define a `subscribe` method, which will be passed an event dispatcher instance:
+事件订阅器是一种可以在其中订阅多个事件的类，你可以在单个类中定义多个事件处理器。订阅器应该定义一个 `subscribe` 方法，传入一个事件转发器实例：
 
 	<?php
 
@@ -386,9 +387,9 @@ Event subscribers are classes that may subscribe to multiple events from within 
 
 	}
 
-#### Registering An Event Subscriber
+#### 注册事件订阅器
 
-Once the subscriber has been defined, it may be registered with the event dispatcher. You may register subscribers using the `$subscribe` property on the `EventServiceProvider`. For example, let's add the `UserEventListener`.
+一旦订阅器被定义好后，可以将其注册到事件转发器中，你可以使用 `EventServiceProvider` 上的 `$subscribe` 属性注册订阅器，例如，让我们来添加 `UserEventListener`。
 
     <?php
 
