@@ -12,7 +12,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Blade 模板是由 Laravel 提供的简单又强大的模板引擎。和其他的知名PHP模板引擎相比， Blade 不会限制你在视图中使用普通的PHP代码。在被修改之前，所有的视图都会被转换为被编译成普通的 PHP 代码并生成缓存，这代表着 Blade 对整个系统而言不会增加额外的负担。Blade 视图文件使用 `.blade.php` 作为扩展名，存储在 `resources/views` 文件夹。
+Blade 模板是由 Laravel 提供的简单又强大的模板引擎。跟其它流行的 PHP 模板引擎不同的是， Blade 不会限制你在视图中使用普通的PHP代码。在被修改之前，所有的视图都会被转换为被编译成普通的 PHP 代码并生成缓存，这代表着 Blade 对整个系统而言不会增加额外的负担。Blade 视图文件使用 `.blade.php` 作为扩展名，存储在 `resources/views` 文件夹。
 
 <a name="template-inheritance"></a>
 ## 模板继承
