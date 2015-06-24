@@ -52,7 +52,7 @@ Bcrypt 算法是对密码加密的一个非常好的选择，因为其「加密�
 
 #### 根据哈希值验证密码
 
-`check` 方法验证一个给定纯文本字符串是否与一个哈希值相匹配，如果使用[Laravel 自带的](/docs/{{version}}/authentication) `AuthController`，你不必直接使用 `check` 方法，因为控制器将自动调用此验证方法：
+`check` 方法验证一个给定纯文本字符串是否与一个哈希值相匹配，如果使用 [Laravel 自带的](/docs/{{version}}/authentication) `AuthController`，你不必直接使用 `check` 方法，因为控制器将自动调用此验证方法：
 
 	if (Hash::check('plain-text', $hashedPassword)) {
 		// The passwords match...

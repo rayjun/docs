@@ -1,15 +1,15 @@
-# Helper Functions
+# 辅助函数（Helper Function）
 
-- [Introduction](#introduction)
-- [Available Methods](#available-methods)
+- [介绍](#introduction)
+- [可用方法](#available-methods)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-Laravel includes a variety of "helper" PHP functions. Many of these functions are used by the framework itself; however, you are free to use them in your own applications if you find them convenient.
+Laravel 包含各种的 PHP「辅助」函数，其中许多方法用于框架本身，然而，如果你觉得方便，你可以在你的应用程序中随意使用这些方法。
 
 <a name="available-methods"></a>
-## Available Methods
+## 可用方法
 
 <style>
 	.collection-method-list > p {
@@ -22,7 +22,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 	}
 </style>
 
-### Arrays
+### 数组
 
 <div class="collection-method-list" markdown="1">
 [array_add](#method-array-add)
@@ -43,7 +43,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 [last](#method-last)
 </div>
 
-### Paths
+### 路径
 
 <div class="collection-method-list" markdown="1">
 [app_path](#method-app-path)
@@ -54,7 +54,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 [storage_path](#method-storage-path)
 </div>
 
-### Strings
+### 字符串
 
 <div class="collection-method-list" markdown="1">
 [camel_case](#method-camel-case)
@@ -84,7 +84,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 [url](#method-url)
 </div>
 
-### Miscellaneous
+### 其它
 
 <div class="collection-method-list" markdown="1">
 [config](#method-config)
@@ -101,7 +101,7 @@ Laravel includes a variety of "helper" PHP functions. Many of these functions ar
 </div>
 
 <a name="method-listing"></a>
-## Method Listing
+## 方法列表
 
 <style>
 	#collection-method code {
