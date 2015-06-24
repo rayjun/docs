@@ -16,7 +16,7 @@
     - [**installation.md**](https://github.com/Laragirl/docs/blob/5.1/installation.md) @zehirpx
     - [homestead.md](https://github.com/Laragirl/docs/blob/5.1/homestead.md) 
 - 基本知识
-    - [routing.md](https://github.com/Laragirl/docs/blob/5.1/routing.md) 
+    - [routing.md](https://github.com/Laragirl/docs/blob/5.1/routing.md) @kphcdr
     - [middleware.md](https://github.com/Laragirl/docs/blob/5.1/middleware.md) 
     - [controllers.md](https://github.com/Laragirl/docs/blob/5.1/controllers.md) 
     - [requests.md](https://github.com/Laragirl/docs/blob/5.1/requests.md) 
