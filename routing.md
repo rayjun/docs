@@ -1,28 +1,28 @@
-# HTTP Routing
+# 路由
 
-- [Basic Routing](#basic-routing)
-- [Route Parameters](#route-parameters)
-	- [Required Parameters](#required-parameters)
-	- [Optional Parameters](#parameters-optional-parameters)
-	- [Regular Expression Constraints](#parameters-regular-expression-constraints)
-- [Named Routes](#named-routes)
-- [Route Groups](#route-groups)
-	- [Middleware](#route-group-middleware)
-	- [Namespaces](#route-group-namespaces)
-	- [Sub-Domain Routing](#route-group-sub-domain-routing)
-	- [Route Prefixes](#route-group-prefixes)
-- [CSRF Protection](#csrf-protection)
-	- [Introduction](#csrf-introduction)
+- [基本路由](#basic-routing)
+- [路由参数](#route-parameters)
+    - [必选参数](#required-parameters)
+	- [可选参数](#parameters-optional-parameters)
+	- [正则表达式约束](#parameters-regular-expression-constraints)
+- [命名空间](#named-routes)
+- [路由分组](#route-groups)
+	- [中间件](#route-group-middleware)
+	- [命名空间](#route-group-namespaces)
+	- [子域名路由](#route-group-sub-domain-routing)
+	- [路由前缀](#route-group-prefixes)
+- [CSRF保护](#csrf-protection)
+	- [介绍](#csrf-introduction)
 	- [Excluding URIs](#csrf-excluding-uris)
 	- [X-CSRF-Token](#csrf-x-csrf-token)
 	- [X-XSRF-Token](#csrf-x-xsrf-token)
-- [Form Method Spoofing](#form-method-spoofing)
-- [Throwing 404 Errors](#throwing-404-errors)
+- [方法欺骗](#form-method-spoofing)
+- [抛出404错误](#throwing-404-errors)
 
 <a name="basic-routing"></a>
-## Basic Routing
+## 基本路由
 
-You will define most of the routes for your application in the `app/Http/routes.php` file, which is loaded by the `App\Providers\RouteServiceProvider` class. The most basic Laravel routes simply accept a URI and a `Closure`:
+你可以在 `app/Http/routes.php` 中为你的应用定义路由规则，路由规则由 `App\Providers\RouteServiceProvider` 进行加载. 通常情况下，Laravel 路由需要一个URL和一个闭包函数：
 
 	Route::get('/', function () {
 		return 'Hello World';
@@ -40,52 +40,52 @@ You will define most of the routes for your application in the `app/Http/routes.
 		//
 	});
 
-#### Registering A Route For Multiple Verbs
+#### 为多种请求注册路由
 
-Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method on the `Route` [facade](/docs/{{version}}/facades):
+有时候你需要用一个路由去匹配多种请求，你可以在 Route 中使用 `match` [facade](/docs/{{version}}/facades)：
 
 	Route::match(['get', 'post'], '/', function () {
 		return 'Hello World';
 	});
 
-Or, you may even register a route that responds to all HTTP verbs using the `any` method:
+或者你可以直接使用 `any` 去匹配所有请求：
 
 	Route::any('foo', function () {
 		return 'Hello World';
 	});
 
-#### Generating URLs To Routes
+#### 生成URL
 
-You may generate URLs to your application's routes using the `url` helper:
+你可以生成用 `url` 方法去生成一个 URL：
 
 	$url = url('foo');
 
 <a name="route-parameters"></a>
-## Route Parameters
+## 路由参数
 
 <a name="required-parameters"></a>
-### Required Parameters
+### 必选参数
 
-Of course, sometimes you will need to capture segments of the URI within your route. For example, you may need to capture a user's ID from the URL. You may do so by defining route parameters:
+有时候你需要在 URL 中获取需要的参数，比如你需要在URL中获取用户的 ID ，你可以这样定义路由：
 
 	Route::get('user/{id}', function ($id) {
 		return 'User '.$id;
 	});
 
-You may define as many route parameters as required by your route:
+或者获取多个参数：
 
 	Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
 		//
 	});
 
-Route parameters are always encased within "curly" braces. The parameters will be passed into your route's `Closure` when the route is executed.
+路由中的参数需要放在 `{}` 中， 	参数会被传递到闭包函数。
 
-> **Note:** Route parameters cannot contain the `-` character. Use an underscore (`_`) instead.
+> **Note:** 路由中不应该用 `-`，而是用 `_`。
 
 <a name="parameters-optional-parameters"></a>
-### Optional Parameters
+### 可选参数
 
-Occasionally you may need to specify a route parameter, but make the presence of that route parameter optional. You may do so by placing a `?` mark after the parameter name:
+有时你不确定URL中是否存在这个参数，你可以使用 `?` 来初始化这个参数：
 
 	Route::get('user/{name?}', function ($name = null) {
 		return $name;
@@ -96,9 +96,9 @@ Occasionally you may need to specify a route parameter, but make the presence of
 	});
 
 <a name="parameters-regular-expression-constraints"></a>
-### Regular Expression Constraints
+### 正则表达式约束
 
-You may constrain the format of your route parameters using the `where` method on a route instance. The `where` method accepts the name of the parameter and a regular expression defining how the parameter should be constrained:
+你可以使用正则表达式约束传递来的参数，`where` 方法接受两个参数，需要约束的变量名和正则表达式，或者直接使用数组：
 
 	Route::get('user/{name}', function ($name) {
 		//
@@ -116,9 +116,9 @@ You may constrain the format of your route parameters using the `where` method o
 	->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 
 <a name="parameters-global-constraints"></a>
-#### Global Constraints
+#### 全局约束
 
-If you would like a route parameter to always be constrained by a given regular expression, you may use the `pattern` method. You should define these patterns in the `boot` method of your `RouteServiceProvider`:
+如果你想要自定义一个全局的约束，可以使用 `pattern` 的方法。这个方法在`RouteServiceProvider` 的 `boot` 方法中进行定义：
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -133,30 +133,30 @@ If you would like a route parameter to always be constrained by a given regular 
         parent::boot($router);
     }
 
-Once the pattern has been defined, it is automatically applied to all routes using that parameter name:
+定义之后，所有的指定名称都会被约束：
 
 	Route::get('user/{id}', function ($id) {
-		// Only called if {id} is numeric.
+		// 只验证$id是否为数字.
 	});
 
 <a name="named-routes"></a>
-## Named Routes
+## 命名路由
 
-Named routes allow you to conveniently generate URLs or redirects for a specific route. You may specify a name for a route using the `as` array key when defining the route:
+命名路线将一个URL指定到一个特定的路由。你可以使用 `as` 将一个URL指定为另一个URL：
 
 	Route::get('user/profile', ['as' => 'profile', function () {
 		//
 	}]);
 
-You may also specify route names for controller actions:
+你也可以指定到某个控制器：
 
 	Route::get('user/profile', [
 		'as' => 'profile', 'uses' => 'UserController@showProfile'
 	]);
 
-#### Route Groups & Named Routes
+#### 路由分组和命名路由
 
-If you are using [route groups](#route-groups), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
+如果你使用 [路由分组](#route-groups)，你可以在路由组中指定一个 `as` 关键词，并允许组内的路由共享这个关键词：
 
 	Route::group(['as' => 'admin::'], function () {
 		Route::get('dashboard', ['as' => 'dashboard', function () {
@@ -164,15 +164,15 @@ If you are using [route groups](#route-groups), you may specify an `as` keyword 
 		}]);
 	});
 
-#### Generating URLs To Named Routes
+#### 生成命名路由URL
 
-Once you have assigned a name to a given route, you may use the route's name when generating URLs or redirects via the `route` function:
+如果你指定了一个路由，可以使用 `route` 函数生成或重定向到该路由：
 
 	$url = route('profile');
 
 	$redirect = redirect()->route('profile');
 
-If the route defines parameters, you may pass the parameters as the second argument to the `route` method. The given parameters will automatically be inserted into the URL:
+如果这条路由定义了参数，你可以将参数作为第二个参数传递给 `route` 方法。传递的参数会自动插入到URL中：
 
 	Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
 		//
@@ -181,31 +181,31 @@ If the route defines parameters, you may pass the parameters as the second argum
 	$url = route('profile', ['id' => 1]);
 
 <a name="route-groups"></a>
-## Route Groups
+## 路由分组
 
-Route groups allow you to share route attributes, such as middleware or namespaces, across a large number of routes without needing to define those attributes on each individual routes. Shared attributes are specified in an array format as the first parameter to the `Route::group` method.
+路由分组允许你分享公共的路由属性，比如中间件、命名空间，无需再为每个路由依次设置。将共享的属性做为数组传递给 `Route::group`。
 
-To learn more about route groups, we'll walk through several common use-cases for the feature.
+想要了解更多的路由分组，我们接下来会介绍几种常见的功能。
 
 <a name="route-group-middleware"></a>
-### Middleware
+### 中间件
 
-To assign middleware to all routes within a group, you may use the `middleware` key in the group attribute array. Middleware will be executed in the order you define this array:
+你可以在路由分组中使用中间件，用数组的形式传递中间件，路由会依次去执行：
 
 	Route::group(['middleware' => 'auth'], function () {
 		Route::get('/', function ()	{
-			// Uses Auth Middleware
+			// 使用Auth中间件
 		});
 
 		Route::get('user/profile', function () {
-			// Uses Auth Middleware
+			// 使用Auth中间件
 		});
 	});
 
 <a name="route-group-namespaces"></a>
-### Namespaces
+### 命名空间
 
-Another common use-case for route groups is assigning the same PHP namespace to a group of controllers. You may use the `namespace` parameter in your group attribute array to specify the namespace for all controllers within the group:
+你还可以在路由分组中分配命名空间，同样以数组的形式去传递
 
 	Route::group(['namespace' => 'Admin'], function()
 	{
@@ -217,12 +217,12 @@ Another common use-case for route groups is assigning the same PHP namespace to 
 		});
 	});
 
-Remember, by default, the `RouteServiceProvider` includes your `routes.php` file within a namespace group, allowing you to register controller routes without specifying the full `App\Http\Controllers` namespace prefix. So, we only need to specify the portion of the namespace that comes after the base `App\Http\Controllers` namespace root.
+默认情况下 `RouteServiceProvider` 会包含 `routes.php` 的命名空间，所以你只需要指定 `App\Http\Controllers` 之后的部分。
 
 <a name="route-group-sub-domain-routing"></a>
-### Sub-Domain Routing
+### 子域名路由
 
-Route groups may also be used to route wildcard sub-domains. Sub-domains may be assigned route parameters just like route URIs, allowing you to capture a portion of the sub-domain for usage in your route or controller. The sub-domain may be specified using the `domain` key on the group attribute array:
+路由分组也可以去匹配子域名。使用通配符可以捕获域名的一部分并传递给路由或控制器：
 
 	Route::group(['domain' => '{account}.myapp.com'], function () {
 		Route::get('user/{id}', function ($account, $id) {
@@ -231,17 +231,17 @@ Route groups may also be used to route wildcard sub-domains. Sub-domains may be 
 	});
 
 <a name="route-group-prefixes"></a>
-### Route Prefixes
+### 路由前缀
 
-The `prefix` group array attribute may be used to prefix each route in the group with a given URI. For example, you may want to prefix all route URIs within the group with `admin`:
+你可以为分组内的route增加前缀。下面的示例为组内的路由增加 `admin` 前缀：
 
 	Route::group(['prefix' => 'admin'], function () {
 		Route::get('users', function ()	{
-			// Matches The "/admin/users" URL
+			// 匹配为 "/admin/users" 
 		});
 	});
 
-You may also use the `prefix` parameter to specify common parameters for your grouped routes:
+你可以在前缀中匹配某些参数：
 
 	Route::group(['prefix' => 'accounts/{account_id}'], function () {
 		Route::get('detail', function ($account_id)	{
@@ -250,33 +250,33 @@ You may also use the `prefix` parameter to specify common parameters for your gr
 	});
 
 <a name="csrf-protection"></a>
-## CSRF Protection
+## CSRF 防护
 
 <a name="csrf-introduction"></a>
-### Introduction
+### CSRF 介绍
 
-Laravel makes it easy to protect your application from [cross-site request forgeries](http://en.wikipedia.org/wiki/Cross-site_request_forgery). Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are performed on behalf of the authenticated user.
+Laravel 提供简单的方法，可以保护您的应用程序不受到 [跨站攻击](http://en.wikipedia.org/wiki/Cross-site_request_forgery)。跨网站请求伪造是一种恶意的攻击，伪造已经通过身份验证的用户执行授权的命令。
 
-Laravel automatically generates a CSRF "token" for each active user session managed by the application. This token is used to verify that the authenticated user is the one actually making the requests to the application. To generate a hidden input field `_token` containing the CSRF token, you may use the `csrf_field` helper function:
+Laravel会自动生成一个 token 存放在用户 session 中。这个 token 可以保证请求是通过应用正常生成的请求，你可以使用 `csrf`：
 
 	<?php echo csrf_field(); ?>
 
-The `csrf_field` helper function generates the following HTML:
+你也可以在HTML中使用：
 
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
-Of course, using the Blade [templating engine](/docs/{{version}}/blade):
+当然也可以使用 Blade [模板引擎](/docs/{{version}}/blade)：
 
 	{!! csrf_field() !!}
 
-You do not need to manually verify the CSRF token on POST, PUT, or DELETE requests. The `VerifyCsrfToken` [HTTP middleware](/docs/{{version}}/middleware) will verify token in the request input matches the token stored in the session.
+在POST、PUT、DELETE请求中你不需要手动验证CSRF令牌. `VerifyCsrfToken` [HTTP中间件](/docs/{{version}}/middleware) 会自动验证 session 中的CSRF令牌.
 
 <a name="csrf-excluding-uris"></a>
-### Excluding URIs From CSRF Protection
+### 不使URIs受CSRF保护
 
-Sometimes you may wish to exclude a set of URIs from CSRF protection. For example, if you are using [Stripe](https://stripe.com) to process payments and are utilizing their webhook system, you will need to exclude your webhook handler route from Laravel's CSRF protection.
+有时你希望特定的URL不受CSRF的保护。比如，如果你正在使用 [Stripe](https://stripe.com) 来处理支付或者 webhook 系统，你需要去除这些URL的SCRF的保护 
 
-You may exclude URIs by adding them to the `$except` property of the `VerifyCsrfToken` middleware:
+你可以将他们添加到 `$except` 的 `VerifyCsrfToken` 中间件中去：
 
 	<?php
 
@@ -299,11 +299,11 @@ You may exclude URIs by adding them to the `$except` property of the `VerifyCsrf
 <a name="csrf-x-csrf-token"></a>
 ### X-CSRF-TOKEN
 
-In addition to checking for the CSRF token as a POST parameter, the Laravel `VerifyCsrfToken` middleware will also check for the `X-CSRF-TOKEN` request header. You could, for example, store the token in a "meta" tag:
+除了检查 CSRF令牌 ，`VerifyCsrfToken` 中间件也可以检查 `X-CSRF-TOKEN` 请求。比如将令牌存在 "meta" 标签中：
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-Once you have created the `meta` tag, you can instruct a library like jQuery to add the token to all request headers. This provides simple, convenient CSRF protection for your AJAX based applications:
+如果你创建了 `meta` 标签，你可以使用类似 jQuery 去添加所有的请求头：
 
 	$.ajaxSetup({
 			headers: {
@@ -314,12 +314,12 @@ Once you have created the `meta` tag, you can instruct a library like jQuery to 
 <a name="csrf-x-xsrf-token"></a>
 ### X-XSRF-TOKEN
 
-Laravel also stores the CSRF token in a `XSRF-TOKEN` cookie. You can use the cookie value to set the `X-XSRF-TOKEN` request header. Some JavaScript frameworks, like Angular, do this automatically for you. It is unlikely that you will need to use this value manually.
+Laravel还在 cookie 中储存了 `XSRF-TOKEN` 。 你可以使用cookie的值来设置 `X-XSRF-TOKEN` 请求头. 一些 JavaScript 框架，比如Angular 会自动为你处理这些事情。
 
 <a name="form-method-spoofing"></a>
-## Form Method Spoofing
+## 方法欺骗
 
-HTML forms do not support `PUT`, `PATCH` or `DELETE` actions. So, when defining `PUT`, `PATCH` or `DELETE` routes that are called from an HTML form, you will need to add a hidden `_method` field to the form. The value sent with the `_method` field will be used as the HTTP request method:
+HTML 表单没有支持 `PUT` 、`PATCH` 或 `DELETE` 请求。所以，你可以在表单中定义一个 `_method` 字段，这个字段的值会被当做HTTP的请求去处理：
 
 	<form action="/foo/bar" method="POST">
 		<input type="hidden" name="_method" value="PUT">
@@ -327,12 +327,12 @@ HTML forms do not support `PUT`, `PATCH` or `DELETE` actions. So, when defining 
 	</form>
 
 <a name="throwing-404-errors"></a>
-## Throwing 404 Errors
+## 抛出404错误
 
-There are two ways to manually trigger a 404 error from a route. First, you may use the `abort` helper. The `abort` helper simply throws a `Symfony\Component\HttpFoundation\Exception\HttpException` with the specified status code:
+有两种方法可以让你手动在路由中抛出404错误。 第一种，使用 `abort` 函数. 这个函数可以简单的抛出 `Symfony\Component\HttpFoundation\Exception\HttpException` 中规定的状态码：
 
 	abort(404);
 
-Secondly, you may manually throw an instance of `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`.
+第二种，你可以手动抛出实体 `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`。
 
-More information on handling 404 exceptions and using custom responses for these errors may be found in the [errors](/docs/{{version}}/errors#http-exceptions) section of the documentation.
+更多信息的有关如何处理 404 异常状况和自定响应，可以参考 [错误](/docs/{{version}}/errors#http-exceptions) 部分的文档。
