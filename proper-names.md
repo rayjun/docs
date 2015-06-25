@@ -142,6 +142,7 @@
 - Session 会话
 - Seed 数据填充
 - SDK （不翻）
+- Stripe （不翻）
 
 ## T
 
