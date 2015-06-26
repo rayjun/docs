@@ -1,39 +1,40 @@
 # Eloquent: Getting Started
 
-- [Introduction](#introduction)
-- [Defining Models](#defining-models)
-	- [Eloquent Model Conventions](#eloquent-model-conventions)
-- [Retrieving Multiple Models](#retrieving-multiple-models)
-- [Retrieving Single Models / Aggregates](#retrieving-single-models)
-	- [Retrieving Aggregates](#retrieving-aggregates)
-- [Inserting & Updating Models](#inserting-and-updating-models)
-	- [Basic Inserts](#basic-inserts)
-	- [Basic Updates](#basic-updates)
+- [简介](#introduction)
+- [定义模型](#defining-models)
+	- [Eloquent 模型规范](#eloquent-model-conventions)
+- [检索多个模型](#retrieving-multiple-models)
+- [取得单一模型/集合](#retrieving-single-models)
+	- [取得集合](#retrieving-aggregates)
+- [插入和更新模型](#inserting-and-updating-models)
+	- [基本插入](#basic-inserts)
+	- [基本更新](#basic-updates)
 	- [Mass Assignment](#mass-assignment)
-- [Deleting Models](#deleting-models)
-	- [Soft Deleting](#soft-deleting)
-	- [Querying Soft Deleted Models](#querying-soft-deleted-models)
-- [Query Scopes](#query-scopes)
-- [Events](#events)
+- [删除模型](#deleting-models)
+	- [软删除](#soft-deleting)
+	- [查询软删除模型](#querying-soft-deleted-models)
+- [查询范围](#query-scopes)
+- [事件](#events)
 
 <a name="introduction"></a>
-## [简介](http://laravel.com/docs/5.1/eloquent#introduction)
+## 简介
 
 Eloquent ORM 包含了 laravel 数据库使用提供的一个完美的，简洁的 ActiveRecord 实现。每个数据表都有一个与它相对应、相互作用的"Model"。Models 允许在表中查询数据，及向表内插入新的记录. 
 
-在开始之前，务必在 'config/database.php' 配置数据连接。需要更多数据库配置信息，查看[文档](http://laravel.com/docs/5.1/database#configuration)。
+在开始之前，务必在 'config/database.php' 配置数据连接。需要更多数据库配置信息，查看[这份文档](/docs/{{version}}/database#configuration)。
 
-## [定义模型](http://laravel.com/docs/5.1/eloquent#defining-models)
+<a name="defining-models"></a>
+## 定义模型
 
 马上开始,让我们创建一个model。 models通常放置在'app'目录下，你可以根据 `composer.json` 文件自由地放置在可以自动加载的任何地方。 并且所有的Eloquent models 都要继承 'Illuminate\Database\Eloquent\Model' 类。
 
-创建一个model实例最简单地方法是使用 `make:model` [Artisan 命名](http://laravel.com/docs/5.1/artisan):
+创建一个model实例最简单地方法是使用 `make:model` [Artisan 命名](/docs/{{version}}/artisan):
 
 ~~~
 php artisan make:model User
 ~~~
 
-如果你想在生成model时生成 [database migration](http://laravel.com/docs/5.1/schema#database-migrations)，使用 `--migration` or `-m` 选项:
+如果你想在生成model时生成 [database migration](/docs/{{version}}/schema#database-migrations)，使用 `--migration` or `-m` 选项:
 
 ~~~
 php artisan make:model User --migration
@@ -41,7 +42,7 @@ php artisan make:model User --migration
 php artisan make:model User -m
 ~~~
 
-
+<a name="eloquent-model-conventions"></a>
 ### Eloquent 模型规范
 
 现在,让我们来看一个用于检索和存储 `flights` 数据库表信息的 `Flight` model 类的例子:
@@ -129,10 +130,10 @@ class Flight extends Model
 ~~~
 
 
+<a name="retrieving-multiple-models"></a>
+## 检索多个模型
 
-## [检索多样模型](http://laravel.com/docs/5.1/eloquent#retrieving-multiple-models)
-
-一旦你创建了 model 并[关联了数据库表](http://laravel.com/docs/5.1/schema)，准备开始在数据库中检索数据。认为每个 Eloquent 模型如同一个强大的[查询构造器](http://laravel.com/docs/5.1/queries)，该查询构造器允许流利地查询与 model 相关联的数据库表。例如:
+一旦你创建了 model 并[关联了数据库表](/docs/{{version}}/schema)，准备开始在数据库中检索数据。认为每个 Eloquent 模型如同一个强大的[查询构造器](/docs/{{version}}/queries)，该查询构造器允许流利地查询与 model 相关联的数据库表。例如:
 
 ~~~
 <?php
@@ -170,7 +171,7 @@ foreach ($flights as $flight) {
 
 #### 添加额外约束
 
-Eloquent `all` 方法返回 model's 表中的所有的结果集。由于每个Eloquent 模型服务相当于一个[查询构造器](http://laravel.com/docs/5.1/queries)，你可以在查询中加入约束条件，然后使用 `get` 方法取回结果集:
+Eloquent `all` 方法返回 model's 表中的所有的结果集。由于每个Eloquent 模型服务相当于一个[查询构造器](/docs/{{version}}/queries)，你可以在查询中加入约束条件，然后使用 `get` 方法取回结果集:
 
 ~~~
 $flights = App\Flight::where('active', 1)
@@ -179,11 +180,11 @@ $flights = App\Flight::where('active', 1)
                ->get();
 ~~~
 
-> **注意:** 由于Eloquent模型是查询构造器，你将要复习[查询构造器](http://laravel.com/docs/5.1/queries)所有有效的方法。在 Eloquent 查询中使用这些方法中的任何方法。
+> **注意:** 由于Eloquent模型是查询构造器，你将要复习[查询构造器](/docs/{{version}}/queries)所有有效的方法。在 Eloquent 查询中使用这些方法中的任何方法。
 
 #### 集合
 
-Eloquent 方法如 `all` 和 `get` 都是取回多个结果，返回了一个 `Illuminate\Database\Eloquent\Collection` 实例。该 `Collection` 类提供了使用于 Eloquent 结果集的 [a variety of helpful methods](http://laravel.com/docs/5.1/eloquent-collections)。当然，你可以像遍历数组一般简单地遍历 collection:
+Eloquent 方法如 `all` 和 `get` 都是取回多个结果，返回了一个 `Illuminate\Database\Eloquent\Collection` 实例。该 `Collection` 类提供了使用于 Eloquent 结果集的 [a variety of helpful methods](/docs/{{version}}/eloquent-collections)。当然，你可以像遍历数组一般简单地遍历 collection:
 
 ~~~
 foreach ($flights as $flight) {
@@ -205,7 +206,8 @@ Flight::chunk(200, function ($flights) {
 
 该方法的第一个参数设置每一个 "chunk" 有多少条记录。第二个参数是调用从数据库中检索到的每一个数据块的闭包。
 
-## [取得单一模型/集合](http://laravel.com/docs/5.1/eloquent#retrieving-single-models)
+<a name="retrieving-single-models"></a>
+## 取得单一模型/集合
 
 当然，除了在给定的表中取得所有的记录以外，你可以使用 `find` 和 `first` 取得单条记录。替代返回的模型集合，`find` 和 `first` 方法返回单一的模型实例:
 
@@ -235,11 +237,10 @@ Route::get('/api/flights/{id}', function ($id) {
 });
 ~~~
 
-
-
+<a name="retrieving-aggregates"></a>
 ### 取得集合
 
-当然，你也可以使用查询构造器集合函数像 `count`, `sum`, `max` 和其他[查询构造器](http://laravel.com/docs/5.1/queries)提供的集合函数。这些方法返回适当的数量值代替一个完整的模型实例:
+当然，你也可以使用查询构造器集合函数像 `count`, `sum`, `max` 和其他[查询构造器](/docs/{{version}}/queries)提供的集合函数。这些方法返回适当的数量值代替一个完整的模型实例:
 
 ~~~
 $count = App\Flight::where('active', 1)->count();
@@ -248,11 +249,11 @@ $max = App\Flight::where('active', 1)->max('price');
 ~~~
 
 
+<a name="inserting-and-updating-models"></a>
+## 插入和更新模型
 
-## [插入和更新模型](http://laravel.com/docs/5.1/eloquent#inserting-and-updating-models)
 
-
-
+<a name="basic-inserts"></a>
 ###基本插入
 
 在数据库中创建一条新纪录，简单地创造一个新模型实例，设置参数，然后调用 `save` 方法:
@@ -289,6 +290,7 @@ class FlightController extends Controller
 
 在这个例子中，我们把 HTTP 请求进来的 `name` 参数赋值给 `App\Flight` 模型实例的 `name` 变量，当我们调用 `save` 方法时就会向数据库中插入一条记录。当调用 `save` 方法时 `created_at` 和 `updated_at` 时间戳就会自动设置，不需要我们手动去设置。
 
+<a name="basic-updates"></a>
 ### 基本更新
 
 `save` 方法可以使用于更新数据库中已经存在的模型。更新模型，首先你必须得到模型，并设置要更新的参数，然后调用 `save` 方法。此外，`updated_at` 时间戳会自动更新，所有不需要手动设置 `updated_at` 值:
@@ -311,6 +313,7 @@ App\Flight::where('active', 1)
 
 `update`方法期待更新由列值对形式的数组。
 
+<a name="mass-assignment"></a>
 ### Mass Assignment
 
 你可以使用 `create` 方法保存新的模型。该方法返回了插入的模型实例，在使用 `create` 保存模型前，需要在模型上指定 `fillable` 或者 `guarded` 属性，所有的 Eloquent 模型都会防卫不利的 mass-assignment。
@@ -379,9 +382,8 @@ $flight = App\Flight::firstOrCreate(['name' => 'Flight 10']);
 $flight = App\Flight::firstOrNew(['name' => 'Flight 10']);
 ~~~
 
-
-
-## [删除模型](http://laravel.com/docs/5.1/eloquent#deleting-models)
+<a name="deleting-models"></a>
+## 删除模型
 
 要删除一个模型，只需要在模型实例中调用`delete`方法:
 
@@ -411,22 +413,20 @@ App\Flight::destroy(1, 2, 3);
 $deletedRows = App\Flight::where('votes', '>', 100)->delete();
 ~~~
 
+<a name="soft-deleting"></a>
 ### 软删除
 
 除了真实的移除数据库的记录之外，Eloquent 可以"软删除"模型。当模型被软删除时，并没有真正的从你的数据库中删除。而是在模型上设置 `deleted_at` 属性并把它插入到数据库中。如果一个模型的 `deleted_at` 值为非空，那么该模型已经被软删除。若要在模型中启用软删除，则需要在模型中使用`Illuminate\Database\Eloquent\SoftDeletes` 的特性，并把 `deleted_at` 列加入到 `$dates` 属性中：
-
 
 ~~~
 <?php
 
 namespace App;
 
-<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-=======
-	$deletedRows = App\Flight::where('active', 0)->delete();
->>>>>>> laravel/5.1
+
+$deletedRows = App\Flight::where('active', 0)->delete();
 
 class Flight extends Model
 {
@@ -441,7 +441,7 @@ class Flight extends Model
 }
 ~~~
 
-当然，你可以在你的数据库表中添加 `deleted_at` 列。 Laravel 的[构造生成器](http://laravel.com/docs/5.1/schema)包含了创建该列的铺助方法:
+当然，你可以在你的数据库表中添加 `deleted_at` 列。 Laravel 的[构造生成器](/docs/{{version}}/schema)包含了创建该列的铺助方法:
 
 ~~~
 Schema::table('flights', function ($table) {
@@ -460,7 +460,7 @@ if ($flight->trashed()) {
 ~~~
 
 
-
+<a name="querying-soft-deleted-models"></a>
 ### 查询软删除模型
 
 #### 包含软删除模型
@@ -473,7 +473,7 @@ $flights = App\Flight::withTrashed()
                 ->get();
 ~~~
 
-`withTrashed` 方法也可以使用[关联](http://laravel.com/docs/5.1/eloquent-relationships)查询:
+`withTrashed` 方法也可以使用[关联](/docs/{{version}}/eloquent-relationships)查询:
 
 ~~~
 $flight->history()->withTrashed()->get();
@@ -505,7 +505,7 @@ App\Flight::withTrashed()
         ->restore();
 ~~~
 
-像 `withTrashed` 方法一样，`restore` 方法也可以使用[关联](http://laravel.com/docs/5.1/eloquent-relationships):
+像 `withTrashed` 方法一样，`restore` 方法也可以使用[关联](/docs/{{version}}/eloquent-relationships):
 
 ~~~
 $flight->history()->restore();
@@ -524,8 +524,8 @@ $flight->history()->forceDelete();
 ~~~
 
 
-
-## [查询范围](http://laravel.com/docs/5.1/eloquent#query-scopes)
+<a name="query-scopes"></a>
+## 查询范围
 
 范围允许定义常见的约束集，以至于容易地重用于整个应用程序。例如，我们需要经常检索定义一个范围内所有被认为"受欢迎的"的用户。 `scope` 作为 Eloquent 模型方法的前缀:
 
@@ -600,8 +600,8 @@ $users = App\User::ofType('admin')->get();
 ~~~
 
 
-
-## [事件](http://laravel.com/docs/5.1/eloquent#events)
+<a name="events"></a>
+## 事件
 
 Eloquent 模型激发多个事件，允许在模型的生命周期使用的`creating`, `created`, `updating`, `updated`, `saving`, `saved`,`deleting`, `deleted`, `restoring`, `restored` 方法的各个点挂钩。事件允许你轻松地执行代码，每一次执行都会在数据库中保存或是更新一个特殊的模型类。
 
@@ -609,7 +609,7 @@ Eloquent 模型激发多个事件，允许在模型的生命周期使用的`crea
 
 无论何时都会第一时间保存一个新的模型，激发 `creating` 和 `created` 事。 如果模型存在于数据库中，并且`save` 方法被调用了，就会激发 `updating` / `updated` 事件。无论如何，都会激发 `saving` / `saved `事件。
 
-例如，让我们来定义一个 Eloquent 事件监听[服务提供者](http://laravel.com/docs/5.1/providers)。在我们事件监听的里面，我们要在给定的模型上调用 `isValid` 方法，如果该模型是无效的，则返回 `false` 。Eloquent 事件监听者返回的 `false` 将取消 `save` / `update` 操作:
+例如，让我们来定义一个 Eloquent 事件监听[服务提供者](/docs/{{version}}/providers)。在我们事件监听的里面，我们要在给定的模型上调用 `isValid` 方法，如果该模型是无效的，则返回 `false` 。Eloquent 事件监听者返回的 `false` 将取消 `save` / `update` 操作:
 
 ~~~
 <?php
