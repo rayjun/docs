@@ -20,12 +20,12 @@
 
 迁移如同数据库版本控制，允许一个团队更容易地修改和共享应用程序数据库模式。迁移一般与 Laravel 模式构造器搭配，更容易地构造你的应用程序数据库模式。流畅的 API 贯穿整个  Laravel 支持的数据库系统。
 
-Laravel `Schema` [facade](http://laravel.com/docs/5.1/facades) 提供了与数据库无关的创建和操纵表。它共享相同的表达式，
+Laravel `Schema` [facade](/docs/{{version}}/facades) 提供了与数据库无关的创建和操纵表。它共享相同的表达式，
 
 <a name="generating-migrations"></a>
 ## Generating Migrations
 
-创建一个迁移，使用`make:migration` [Artisan command](http://laravel.com/docs/5.1/artisan):
+创建一个迁移，使用`make:migration` [Artisan command](/docs/{{version}}/artisan):
 
 ~~~
 php artisan make:migration create_users_table
@@ -46,7 +46,7 @@ php artisan make:migration create_users_table --create=users
 
 一个迁移类包含 `up` 和 `down` 两个方法。`up` 方法用于添加新的表、列、或者数据库索引，`down` 方法简单地逆转 `up` 方法执行的操作。
 
-在这两个方法的内部，使用Laravel 模式构造器来表示创建和修改的表。[查看这个文档](http://laravel.com/docs/5.1/migrations#creating-tables)，学习 `模式` 构造器上所有有用的方法。例如，让我们看创建一张 `flights` 表简单迁移：
+在这两个方法的内部，使用Laravel 模式构造器来表示创建和修改的表。[查看这份文档](/docs/{{version}}/migrations#creating-tables)，学习 `模式` 构造器上所有有用的方法。例如，让我们看创建一张 `flights` 表简单迁移：
 
 ~~~
 <?php
@@ -87,7 +87,7 @@ class CreateFlightsTable extends Migration
 <a name="running-migrations"></a>
 ## 执行迁移
 
-执行应用程序中所有杰出的迁移，使用 `migrate` Artisan 命令。如果你使用的是 [Homestead 虚拟机]，你应该(http://laravel.com/docs/5.1/homestead),你就可以在虚拟机内执行执行这个命令:
+执行应用程序中所有杰出的迁移，使用 `migrate` Artisan 命令。如果你使用的是 [Homestead 虚拟机]，你应该(/docs/{{version}}/homestead),你就可以在虚拟机内执行执行这个命令:
 
 
 ~~~
@@ -145,8 +145,7 @@ Schema::create('users', function ($table) {
 });
 ~~~
 
-当然了，当创建表时，你可以使用任何的模式构造器[列方法]定义表的列。(http://laravel.com/docs/5.1/migrations#creating-columns)
-
+当然了，当创建表时，你可以使用任何的模式构造器[列方法]定义表的列。(/docs/{{version}}/migrations#creating-columns)
 
 #### 检查表/列是否存在
 
@@ -251,7 +250,6 @@ Schema::table('users', function ($table) {
 #### 修改器
 
 除了上面列举的列类型之外，这还有几个列 "修改器"可供添加使用。例如，使列 "nullable"，你可以使用 `nullable` 方法：
-In addition to the column types listed above, there are several other column "modifiers" which you may use while adding the column. For example, to make the column "nullable", you may use the `nullable` method:
 
 ~~~
 Schema::table('users', function ($table) {
@@ -259,8 +257,7 @@ Schema::table('users', function ($table) {
 });
 ~~~
 
-下面是所有有用的列修改器列表。该列表不包含 [index modifiers](http://laravel.com/docs/5.1/migrations#adding-indexes):
-Below is a list of all the available column modifiers. This list does not include the [index modifiers](http://laravel.com/docs/5.1/migrations#adding-indexes):
+下面是所有有用的列修改器列表。该列表不包含 [index modifiers](/docs/{{version}}/migrations#adding-indexes):
 
 | Modifier | Description |
 | --- | --- |

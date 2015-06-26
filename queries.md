@@ -53,7 +53,7 @@ class UserController extends Controller
 }
 ~~~
 
-如同[原生查询](http://laravel.com/docs/5.1/database),`get` 方法返回一个结果集数组，每一个结果集是  PHP `StdClass` 对象的一个实例。你可以像访问对象属性那样访问列来存取列的值：
+如同[原生查询](/docs/{{version}}/database),`get` 方法返回一个结果集数组，每一个结果集是  PHP `StdClass` 对象的一个实例。你可以像访问对象属性那样访问列来存取列的值：
 
 ~~~
 foreach ($users as $user) {
@@ -79,7 +79,7 @@ $email = DB::table('users')->where('name', 'John')->value('email');
 
 #### 分割表结果
 
-如果你需要处理成千上万的数据库记录，可以考虑使用 `chunk` 方法。`chunk` 方法每次只取回记录中的一小 "块"，并把每一块提供 `闭包` 中处理。该方法非常有益于编写处理成千上万的记录[Artisan 命令](http://laravel.com/docs/5.1/artisan)。例如，每次处理整张 `users` 表中每块为一百条的记录：
+如果你需要处理成千上万的数据库记录，可以考虑使用 `chunk` 方法。`chunk` 方法每次只取回记录中的一小 "块"，并把每一块提供 `闭包` 中处理。该方法非常有益于编写处理成千上万的记录[Artisan 命令](/docs/{{version}}/artisan)。例如，每次处理整张 `users` 表中每块为一百条的记录：
 
 ~~~
 DB::table('users')->chunk(100, function($users) {

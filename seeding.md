@@ -14,11 +14,11 @@ Laravel 包含了一个使用 seed 类向数据库中填充测试数据的简单
 <a name="writing-seeders"></a>
 ## 编写填充
 
-产生数据填充，使用 `make:seeder` [Artisan 命令](http://laravel.com/docs/5.1/artisan).通过 laravel 框架产生的所有的数据填充都会放置在 `database/seeders` 目录中：
+产生数据填充，使用 `make:seeder` [Artisan 命令](/docs/{{version}}/artisan)框架产生的所有的数据填充都会放置在 `database/seeders` 目录中：
 
 	php artisan make:seeder UserTableSeeder
 
-一个 seeder 类仅仅包含一个默认 `run` 的方法。当执行 `db:seed ` [Artisan 命令](http://laravel.com/docs/5.1/artisan)时这个方法就会被调用。你可以在 `run` 方法里面插入你想要插入的数据到数据库中，你可以使用[查询构造器](http://laravel.com/docs/5.1/queries)自动插入数据，或者使用[Eloquent 模式工厂](http://laravel.com/docs/5.1/testing#model-factories)。
+一个 seeder 类仅仅包含一个默认 `run` 的方法。当执行 `db:seed ` [Artisan 命令](/docs/{{version}}/artisan)时这个方法就会被调用。你可以在 `run` 方法里面插入你想要插入的数据到数据库中，你可以使用[查询构造器](/docs/{{version}}/queries)自动插入数据，或者使用[Eloquent 模式工厂](/docs/{{version}}/testing#model-factories)
 
 就像这个例子，让我们修改包含默认安装的 Laravel `DatabaseSeeder` 类。让我们添加一个数据库插入语句到 `run` 方法中：
 
@@ -48,7 +48,7 @@ Laravel 包含了一个使用 seed 类向数据库中填充测试数据的简单
 <a name="using-model-factories"></a>
 ### 使用模型工厂
 
-当然，手动指明每一个模型的属性填充是相当麻烦的。反而，你可以使用 [模型工厂](http://laravel.com/docs/5.1/testing#model-factories)更加便利地产生大量的数据库记录，首先，复习[模型工厂文档](http://laravel.com/docs/5.1/testing#model-factories)如何定义自己的工厂，一旦你有自定义的工厂，你可能使用 `factory` 助手方法插入记录到数据中。
+当然，手动指明每一个模型的属性填充是相当麻烦的。反而，你可以使用 [模型工厂](/docs/{{version}}/testing#model-factories)更加便利地产生大量的数据库记录，首先，复习[模型工厂文档](/docs/{{version}}/testing#model-factories)如何定义自己的工厂，一旦你有自定义的工厂，你可能使用 `factory` 助手方法插入记录到数据中。
 
 例如，让我们创建五十个用户，并关联上其他用户：
 

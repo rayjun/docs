@@ -1,13 +1,13 @@
 # Contracts
 
-*   [简介](https://github.com/Laragirl/docs/blob/5.1/contracts.md#简介)
-*   [为何要用 Contracts?](https://github.com/Laragirl/docs/blob/5.1/contracts.md#为何要用-contracts)
-*   [Contract 参考](https://github.com/Laragirl/docs/blob/5.1/contracts.md#contract-参考)
-*   [如何使用 Contracts](https://github.com/Laragirl/docs/blob/5.1/contracts.md#如何使用-contracts)
+*   [简介](#introduction)
+*   [为何要用 Contracts?](#why-contracts)
+*   [Contract 参考](#contract-reference)
+*   [如何使用 Contracts](#how-to-use-contracts)
 
 
-
-## [简介](https://github.com/Laragirl/docs/blob/5.1/contracts.md#简介)
+<a name="introduction"></a>
+## 简介
 
 Laravel 的 Contracts 是一组定义了框架核心服务的介面（ interfaces ）。例如，`Illuminate\Contracts\Queue\Queue` contract 定义了队列任务所需要的方法，而 `Illuminate\Contracts\Mail\Mailer` contract 定义了寄送 e-mail 需要的方法。
 
@@ -15,19 +15,19 @@ Laravel 的 Contracts 是一组定义了框架核心服务的介面（ interface
 
 Laravel 所有的 contracts 都放在 [各自的 GitHub 储存库](https://github.com/illuminate/contracts)。除了提供所有可用的 contracts 一个快速的参考，也可以单独作为一个低藕合的套件让其他套件开发者使用。
 
-### [Contracts Vs. Facades](https://github.com/Laragirl/docs/blob/5.1/contracts.md#contracts-vs-facades)
+### [Contracts Vs. Facades](/docs/{{version}}/contracts.md#contracts-vs-facades)
 
-Laravel 的 [facades](https://github.com/Laragirl/docs/blob/5.1/docs/%7B%7Bversion%7D%7D/facades) 提供一个简单的方法来使用服务，而不需要使用型别提示和在服务容器之外解析 contracts。然而，使用 contracts 可以明显地定义出类别的依赖，对大部分应用程序而言，使用 facade 就很足够了，然而，若你实在需要特别的低藕合，使用 contracts 可以做到这一点，就让我们继续看下去！
+Laravel 的 [facades](/docs/{{version}}/facades) 提供一个简单的方法来使用服务，而不需要使用型别提示和在服务容器之外解析 contracts。然而，使用 contracts 可以明显地定义出类别的依赖，对大部分应用程序而言，使用 facade 就很足够了，然而，若你实在需要特别的低藕合，使用 contracts 可以做到这一点，就让我们继续看下去！
 
 
-
-## [为何要用 Contracts?](https://github.com/Laragirl/docs/blob/5.1/contracts.md#为何要用-contracts)
+<a name="why-contracts"></a>
+## 为何要用 Contracts?
 
 你可能有很多关于 contracts 的问题。像是为什麽要使用介面？使用介面会不会变的更复杂？
 
 让我们用下面的标题来解释为什麽要使用介面：低藕合和简单性。
 
-### [低藕合](https://github.com/Laragirl/docs/blob/5.1/contracts.md#低藕合)
+### [低藕合](/docs/{{version}}/contracts.md#低藕合)
 
 首先，让我们来检视这一段和快取功能有高藕合的代码，如下：
 
@@ -101,15 +101,15 @@ class Repository
 
 现在上面的代码没有跟任何套件藕合，甚至是 Laravel。既然 contracts 套件没有包含实作和任何依赖，你可以很简单的对任何 contract 进行实作，你可以很简单的写一个替换的实作，甚至是替换 contracts，让你可以替换快取实作而不用修改任何用到快取的代码。
 
-### [简单性](https://github.com/laragirl/docs/blob/5.1/contracts.md#简单性)
+### [简单性](/docs/{{version}}/contracts.md#简单性)
 
 当所有的 Laravel 服务都简洁的使用简单的介面定义，就能够很简单的决定一个服务需要提供的功能。 **可以将 contracts 视为说明框架特色的简洁文件。**
 
 除此之外，当你依赖简洁的介面，你的代码能够很简单的被了解和维护。比起搜寻一个大型复杂的类别里有哪些可用的方法，你有一个简单，干净的介面可以参考。
 
 
-
-## [Contract 参考](https://github.com/Laragirl/docs/blob/5.1/contracts.md#contract-参考)
+<a name="contract-reference"></a>
+## Contract 参考
 
 以下是大部分 Laravel Contracts 的参考，以及相对应的「facade」：
 
@@ -150,12 +150,12 @@ class Repository
 | [Illuminate\Contracts\View\View](https://github.com/illuminate/contracts/blob/master/View/View.php) |
 
 
-
-## [如何使用 Contracts](https://github.com/laragirl/docs/blob/5.1/contracts.md#如何使用-contracts)
+<a href="how-to-use-contracts"></a>
+## 如何使用 Contracts
 
 所以，要如何实作一个 contract 呢？实际上非常的简单。
 
-很多 Laravel 的类别都是经由[服务容器](https://github.com/laragirl/docs/blob/5.1/docs/container) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
+很多 Laravel 的类别都是经由[服务容器](/docs/{{version}}/container) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
 
 例如，我们来看看这个事件监听程式：
 
@@ -200,4 +200,4 @@ class CacheUserInformation
 
 ~~~
 
-当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件](https://github.com/laragirl/docs/blob/5.1/docs/container).
+当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件]((/docs/{{version}}/container).
