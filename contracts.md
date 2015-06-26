@@ -1,9 +1,9 @@
 # Contracts
 
-*   [简介](https://github.com/Laragirl/docs/blob/5.1/contracts.md#introduction)
-*   [为何要用 Contracts?](https://github.com/Laragirl/docs/blob/5.1/contracts.md#why-contracts)
-*   [Contract 参考](https://github.com/Laragirl/docs/blob/5.1/contracts.md#contract-reference)
-*   [如何使用 Contracts](https://github.com/Laragirl/docs/blob/5.1/contracts.md#how-to-use-contracts)
+*   [简介](https://github.com/Laragirl/docs/blob/5.1/contracts.md#简介)
+*   [为何要用 Contracts?](https://github.com/Laragirl/docs/blob/5.1/contracts.md#为何要用-contracts)
+*   [Contract 参考](https://github.com/Laragirl/docs/blob/5.1/contracts.md#contract-参考)
+*   [如何使用 Contracts](https://github.com/Laragirl/docs/blob/5.1/contracts.md#如何使用-contracts)
 
 
 
@@ -15,7 +15,7 @@ Laravel 的 Contracts 是一组定义了框架核心服务的介面（ interface
 
 Laravel 所有的 contracts 都放在 [各自的 GitHub 储存库](https://github.com/illuminate/contracts)。除了提供所有可用的 contracts 一个快速的参考，也可以单独作为一个低藕合的套件让其他套件开发者使用。
 
-### [](https://github.com/Laragirl/docs/blob/5.1/contracts.md#contracts-vs-facades)Contracts Vs. Facades
+### [Contracts Vs. Facades](https://github.com/Laragirl/docs/blob/5.1/contracts.md#contracts-vs-facades)
 
 Laravel 的 [facades](https://github.com/Laragirl/docs/blob/5.1/docs/%7B%7Bversion%7D%7D/facades) 提供一个简单的方法来使用服务，而不需要使用型别提示和在服务容器之外解析 contracts。然而，使用 contracts 可以明显地定义出类别的依赖，对大部分应用程序而言，使用 facade 就很足够了，然而，若你实在需要特别的低藕合，使用 contracts 可以做到这一点，就让我们继续看下去！
 
@@ -155,7 +155,7 @@ class Repository
 
 所以，要如何实作一个 contract 呢？实际上非常的简单。
 
-很多 Laravel 的类别都是经由[服务容器](https://github.com/laragirl/docs/blob/5.1/docs/%7B%7Bversion%7D%7D/container) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
+很多 Laravel 的类别都是经由[服务容器](https://github.com/laragirl/docs/blob/5.1/docs/container) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
 
 例如，我们来看看这个事件监听程式：
 
@@ -200,4 +200,4 @@ class CacheUserInformation
 
 ~~~
 
-当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件](https://github.com/laragirl/docs/blob/5.1/docs/%7B%7Bversion%7D%7D/container).
+当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件](https://github.com/laragirl/docs/blob/5.1/docs/container).
