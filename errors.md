@@ -123,6 +123,7 @@ Laravel 日志工具提供一个简单的控制层，构建于强大的[Monolog]
 	namespace App\Http\Controllers;
 
 	use Log;
+	use App\User;
 	use App\Http\Controllers\Controller;
 
 	class UserController extends Controller

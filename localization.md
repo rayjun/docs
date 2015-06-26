@@ -1,16 +1,16 @@
-# Localization
+# 本地化
 
-- [Introduction](#introduction)
-- [Basic Usage](#basic-usage)
-	- [Pluralization](#pluralization)
-- [Overriding Vendor Language Files](#overriding-package-language-files)
+- [介绍](#introduction)
+- [基本用法](#basic-usage)
+	- [复数化](#pluralization)
+- [覆写提供商语言文件](#overriding-package-language-files)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-Laravel's localization features provide a convenient way to retrieve strings in various languages, allowing you to easily support multiple languages within your application.
+Laravel 的本地化特性提供了一种方便的方式从各种语言文件中获取字符串，使你可以很方便地在你的应用程序中支持多语言。
 
-Language strings are stored in files within the `resources/lang` directory. Within this directory there should be a subdirectory for each language supported by the application:
+语言字符串存储在 `resources/lang` 目录下的文件中，在这个目录中，需要为每一种程序所支持的语言创建一个子目录：
 
 	/resources
 		/lang
@@ -19,7 +19,7 @@ Language strings are stored in files within the `resources/lang` directory. With
 			/es
 				messages.php
 
-All language files simply return an array of keyed strings. For example:
+所有语言文件仅返回一个键值关联数组，例如：
 
 	<?php
 
@@ -27,9 +27,9 @@ All language files simply return an array of keyed strings. For example:
 		'welcome' => 'Welcome to our application'
 	];
 
-#### Configuring The Locale
+#### 配置本地化
 
-The default language for your application is stored in the `config/app.php` configuration file. Of course, you may modify this value to suit the needs of your application. You may also change the active language at runtime using the `setLocale` method on the `App` facade:
+应用程序的默认语言存储在 `config/app.php` 配置文件中，当然，你可以修改这个值来满足你的应用程序的需要。你还可以使用 `App` facade 上的 `setLocale` 方法，在运行时更改当前语言：
 
 	Route::get('welcome/{locale}', function ($locale) {
 		App::setLocale($locale);
@@ -37,51 +37,51 @@ The default language for your application is stored in the `config/app.php` conf
 		//
 	});
 
-You may also configure a "fallback language", which will be used when the active language does not contain a given language line. Like the default language, the fallback language is also configured in the `config/app.php` configuration file:
+你还可以配置一个「备用」语言，当现行语言没有包含某个语言时将会使用，如同默认语言，备用语言也在 `config/app.php` 配置文件中配置：
 
 	'fallback_locale' => 'en',
 
 <a name="basic-usage"></a>
-## Basic Usage
+## 基本用法
 
-You may retrieve lines from language files using the `trans` helper function. The `trans` method accepts the file and key of the language line as its first argument. For example, let's retrieve the language line `welcome` in the `resources/lang/messages.php` language file:
+你可以通过使用 `trans` 辅助函数从语言文件中获取语言串，此方法接受文件和语言串的键作为第一个参数，例如，让我们来获取 `resources/lang/messages.php` 文件中的 `welcome` 语言串：
 
 	echo trans('messages.welcome');
 
-Of course if you are using the [Blade templating engine](/docs/{{version}}/blade), you may use the `{{ }}` syntax to echo the language line:
+当然，如果你正在使用 [Blade 模板引擎](/docs/{{version}}/blade)，你可使用这种 `{{ }}` 语法来输出语言串：
 
 	{{ trans('messages.welcome') }}
 
-If the specified language line does not exist, the `trans` function will simply return the language line key. So, using the example above, the `trans` function would return `messages.welcome` if the language line does not exist.
+如果指定的语言串不存在，`trans` 函数将只返回语言串的键，所以，如上例，当语言串不存时 `trans` 方法将返回 `messages.welcome`。
 
-#### Replacing Parameters In Language Lines
+#### 替换言语串中的参数 
 
-If you wish, you may define place-holders in your language lines. All place-holders are prefixed with a `:`. For example, you may define a welcome message with a place-holder name:
+如果你愿意，你可以在你的语言串中定义占位符，所有的占位符都以 `:` 打头。例如，你可以定义一个带有占位符的欢迎字符串：
 
 	'welcome' => 'Welcome, :name',
 
-To replace the place-holders when retrieving a language line, pass an array of replacements as the second argument to the `trans` function:
+要在获取一个言语串时替换占位符，传入一个替代值数组作为第二个参数到 `trans` 函数中：
 
 	echo trans('messages.welcome', ['name' => 'Dayle']);
 
 <a name="pluralization"></a>
-### Pluralization
+### 复数化
 
-Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. By using a "pipe" character, you may distinguish a singular and plural form of a string:
+复数化是一个复杂的问题，因为每种语言都有许多关于复数的复杂规则，通过使用「管道」符，你可以将一个语言串的单数与复数形工区别开来:
 
 	'apples' => 'There is one apple|There are many apples',
 
-Then, you may then use the `trans_choice` function to retrieve the line for a given "count". In this example, since the count is greater than one, the plural form of the language line is returned:
+然后，你可以使用 `trans_choice` 函数根据一个给定的「数量」来获取语言串。在这个例子中，因为数量大于一，返回语言串的复数形式：
 
 	echo trans_choice('messages.apples', 10);
 
-Since the Laravel translator is powered by the Symfony Translation component, you may create even more complex pluralization rules:
+因为 Laravel 翻译器是由 Symfony 翻译模块提供，你可以创建更为复杂的复数化规则：
 
 	'apples' => '{0} There are none|[1,19] There are some|[20,Inf] There are many',
 
 <a name="overriding-package-language-files"></a>
-## Overriding Package Language Files
+## 覆写提供商语言文件
 
-Some packages may ship with their own language files. Instead of hacking the package's core files to tweak these lines, you may override them by placing your own files in the `resources/lang/vendor/{package}/{locale}` directory.
+有些发布包带有自己的语言文件，调整这些语言串，不是直接修改包中的核心文件，而是可以通过将我们自己的语言文件放置于 `resources/lang/vendor/{package}/{locale}` 目录来将其覆盖。
 
-So, for example, if you need to override the English language lines in `messages.php` for a package named `skyrim/hearthfire`, you would place a language file at: `resources/lang/vendor/hearthfire/en/messages.php`. In this file you should only define the language lines you wish to override. Any language lines you don't override will still be loaded from the package's original language files.
+所以，假如你需要覆写 `messages.php` 文件中一个包的名字 `skyrim/hearthfire` 的英文语言，你可以在此处 `resources/lang/vendor/hearthfire/en/messages.php` 放置你修改的语言，在这个文件中，你只需要定义你希望覆写的语言串，任何你没有覆写的语言串仍然会从包的原始语言文件中获取。

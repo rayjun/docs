@@ -155,7 +155,11 @@ class Repository
 
 所以，要如何实作一个 contract 呢？实际上非常的简单。
 
+<<<<<<< HEAD
 很多 Laravel 的类别都是经由[服务容器](/docs/{{version}}/container) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
+=======
+很多 Laravel 的类别都是经由[服务容器](https://github.com/Laragirl/docs/blob/5.1/container.md) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
+>>>>>>> origin/5.1
 
 例如，我们来看看这个事件监听程式：
 
@@ -200,4 +204,8 @@ class CacheUserInformation
 
 ~~~
 
+<<<<<<< HEAD
 当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件]((/docs/{{version}}/container).
+=======
+当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件](https://github.com/Laragirl/docs/blob/5.1/container.md).
+>>>>>>> origin/5.1
