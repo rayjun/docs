@@ -10,6 +10,7 @@
 - 遵循中文排版指南 [https://github.com/Laragirl/chinese-copywriting-guidelines](https://github.com/Laragirl/chinese-copywriting-guidelines)
 - 中文文档风格指南 [https://open.leancloud.cn/copywriting-style-guide.html](https://open.leancloud.cn/copywriting-style-guide.html)
 - 怎样改进英式中文 [https://open.leancloud.cn/improve-chinese.html](https://open.leancloud.cn/improve-chinese.html)
+- 中文引号「」
 
 ## 专有名词翻译对照表
 
@@ -65,6 +66,7 @@
 - Form 表彰
 - Function 函数
 - (Work) Factor (系数)
+- Fallback (Language) 备用（语言）
 
 ## G
 
