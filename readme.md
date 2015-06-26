@@ -52,7 +52,7 @@
     - [session.md](https://github.com/Laragirl/docs/blob/5.1/session.md)
     - [envoy.md](https://github.com/Laragirl/docs/blob/5.1/envoy.md)
     - [scheduling.md](https://github.com/Laragirl/docs/blob/5.1/scheduling.md)
-    - [testing.md](https://github.com/Laragirl/docs/blob/5.1/testing.md)
+    - [testing.md](https://github.com/Laragirl/docs/blob/5.1/testing.md) @taiwan 100%
     - [validation.md](https://github.com/Laragirl/docs/blob/5.1/validation.md) @everettjf
 - 数据库
     - [database.md](https://github.com/Laragirl/docs/blob/5.1/database.md)  @jixunqiang
