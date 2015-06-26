@@ -61,8 +61,8 @@
     - [seeding.md](https://github.com/Laragirl/docs/blob/5.1/seeding.md) @jixunqiang
 - Eloquent ORM
     - [eloquent.md](https://github.com/Laragirl/docs/blob/5.1/eloquent.md)  @jixunqiang 
-    - [eloquent-relationships.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-relationships.md)  
-    - [eloquent-collections.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-collections.md)  
+    - [eloquent-relationships.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-relationships.md)  @jixunqiang
+    - [eloquent-collections.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-collections.md)  @jixunqiang
     - [eloquent-mutators.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-mutators.md)  
     - [eloquent-serialization.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-serialization.md)  @yinxiaodong
 
