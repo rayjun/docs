@@ -38,6 +38,7 @@ Laravel 包含各种的 PHP「辅助」函数，其中许多方法用于框架�
 [array_pull](#method-array-pull)
 [array_set](#method-array-set)
 [array_sort](#method-array-sort)
+[array_sort_recursive](#method-array-recursive)
 [array_where](#method-array-where)
 [head](#method-head)
 [last](#method-last)
@@ -274,6 +275,41 @@ Laravel 包含各种的 PHP「辅助」函数，其中许多方法用于框架�
 			['name' => 'Chair'],
 			['name' => 'Desk'],
 		]
+	*/
+
+<a name="method-array-sort-recursive"></a>
+#### `array_sort_recursive()` {#collection-method}
+
+The `array_sort_recursive` function recursively sorts the array using the `sort` function:
+
+	$array = [
+		[
+			'Roman',
+			'Taylor',
+			'Li',
+		],
+		[
+			'PHP',
+			'Ruby',
+			'JavaScript',
+		],
+	];
+
+	$array = array_sort_recursive($array);
+
+	/*
+		[
+			[
+				'Li',
+				'Roman',
+				'Taylor',
+			],
+			[
+				'JavaScript',
+				'PHP',
+				'Ruby',
+			]
+		];
 	*/
 
 <a name="method-array-where"></a>

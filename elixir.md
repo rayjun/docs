@@ -54,6 +54,10 @@ elixir(function(mix) {
 
 	npm install
 
+If you are developing on a Windows system, you may need to run the `npm install` command with the `--no-bin-links` switch enabled:
+
+	npm install --no-bin-links
+
 <a name="running-elixir"></a>
 ## 运行 Elixir
 
@@ -87,7 +91,11 @@ elixir(function(mix) {
 });
 ```
 
+<<<<<<< HEAD
 你还可以合并多个 Less 文件成一个单独的 CSS 文件，再次，生成的 CSS 将被存放于 `public/css/app.css` 中，如果你希望自定义 CSS 编译的输出路径，你可以向 `less` 传入第二个参数指定：
+=======
+You may also combine multiple Less files into a single CSS file. Again, the resulting CSS will be placed in `public/css/app.css`:
+>>>>>>> laravel/5.1
 
 ```javascript
 elixir(function(mix) {
@@ -95,6 +103,19 @@ elixir(function(mix) {
 		"app.less",
 		"controllers.less"
 	], "public/assets/css");
+});
+```
+
+If you wish to customize the output location of the compiled CSS, you may pass a second argument to the `less` method:
+
+```javascript
+elixir(function(mix) {
+	mix.less('app.less', 'public/stylesheets');
+});
+
+// Specifying a specific output filename...
+elixir(function(mix) {
+	mix.less('app.less', 'public/stylesheets/style.css');
 });
 ```
 

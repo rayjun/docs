@@ -120,9 +120,9 @@ Laravel 自带两个认证控制器，它们被放置在 `App\Http\Controllers\
 
 由于你已经为这些自带的认证控制器搭建了路由和视图，你可以为你的应用程序注册和认证新用户了，你可以只在浏览器中访问已经定义的路由，认证控制器已经包含了认证现在用户和存储新用户到数据的逻辑（通过它们的 traits）。
 
-一个被认证成功的用户，会被重定向到`/home`，为此你需要注册一个路由来处理这个重定向请求，你可以通过在 `AuthController`中定义一个 `redirectTo` 属性，来自定义你的认证重定向地址：
+当一个用被成功认证，会被重定向到`/home`，为此你需要注册一个路由来处理这个重定向请求，你可以通过在 `AuthController`中定义 `redirectTo` 属性，来自定义认证后的重定向位置：
 
-    protected $redirectTo = '/dashboard';
+    protected $redirectPath = '/dashboard';
 
 #### 自定义
 
