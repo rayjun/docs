@@ -67,6 +67,7 @@
 - Function 函数
 - (Work) Factor (系数)
 - Fallback (Language) 备用（语言）
+- Firing Events 激发事件
 
 ## G
 
@@ -118,7 +119,7 @@
 - Prefix 前缀
 - Presenter
 - Pipeline 管道
-- Firing Events 激发事件
+- Prerequisites 必备条件/知识
 
 ## Q
 

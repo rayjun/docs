@@ -1,47 +1,47 @@
-# Mail
+# 邮件
 
-- [Introduction](#introduction)
-- [Sending Mail](#sending-mail)
-	- [Attachments](#attachments)
-	- [Inline Attachments](#inline-attachments)
-	- [Queueing Mail](#queueing-mail)
-- [Mail & Local Development](#mail-and-local-development)
+- [介绍](#introduction)
+- [发送邮件](#sending-mail)
+	- [附件](#attachments)
+	- [内嵌附件](#inline-attachments)
+	- [邮件队列](#queueing-mail)
+- [邮件与本地开发](#mail-and-local-development)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-Laravel provides a clean, simple API over the popular [SwiftMailer](http://swiftmailer.org) library. Laravel provides drivers for SMTP, Mailgun, Mandrill, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice.
+Laravel 提供了一个基于 [SwiftMailer](http://swiftmailer.org) 函数库的简洁 API，且为 Mandrill, Amazon SES, PHP 的 `mail` 函数以及 `sendmail` 提供了驱动，使你可以通过本地或基于云端的服务，快速实现邮件发送。
 
-### Driver Prerequisites
+### 驱动必备件条
 
-The API based drivers such as Mailgun and Mandrill are often simpler and faster than SMTP servers. All of the API drivers require that the Guzzle HTTP library be installed for your application. You may install Guzzle to your project by adding the following line to your `composer.json` file:
+基于 API 的驱动，如 Mailgun 和 Mandrill 通常比 SMTP 服务器要更简单快捷，所有 API 型的驱动都要求你的应用程序安装 Guzzle HTTP 函数库，你可以通过向你的 `composer.json` 文件中添加下面一行代码来安装 Guzzle：
 
 	"guzzlehttp/guzzle": "~5.3|~6.0"
 
-#### Mailgun Driver
+#### Mailgun 驱动
 
-To use the Mailgun driver, first install Guzzle, then set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
+要使用 Mailgun 驱动，首先安装 Guzzle，然后将你的 `config/mail.php` 配置文件中的 `driver` 项配置成 `mailgun`，下一步，确保你的 `config/services.php` 配置文件中包含如下选项：
 
 	'mailgun' => [
 		'domain' => 'your-mailgun-domain',
 		'secret' => 'your-mailgun-key',
 	],
 
-#### Mandrill Driver
+#### Mandrill 驱动
 
-To use the Mandrill driver, first install Guzzle, then set the `driver` option in your `config/mail.php` configuration file to `mandrill`. Next, verify that your `config/services.php` configuration file contains the following options:
+要使用 Mandrill 驱动，首先安装 Guzzle，然后设置你的 `config/mail.php` 文件中的 `driver` 项为 `mandrill`，下一步，确保你的 `config/services.php` 配置文件中包含如下选项：
 
 	'mandrill' => [
 		'secret' => 'your-mandrill-key',
 	],
 
-#### SES Driver
+#### SES 驱动
 
-To use the Amazon SES driver, install the Amazon AWS SDK for PHP. You may install this library by adding the following line to your `composer.json` file's `require` section:
+要使用 Amazon SES 驱动，安装 PHP 版 Amazon AWS SDK，你可以通过向  `composer.json` 文件的  `require`  区域添加如下行来安装：
 
 	"aws/aws-sdk-php": "~3.0"
 
-Next, set the `driver` option in your `config/mail.php` configuration file to `ses`. Then, verify that your `config/services.php` configuration file contains the following options:
+接下来，设置你的 `config/mail.php` 配置文件中的 `driver` 项为 `ses`，然后，确保你的 `config/services.php` 配置文件包含以配置项：
 
 	'ses' => [
 		'key' => 'your-ses-key',
@@ -50,11 +50,11 @@ Next, set the `driver` option in your `config/mail.php` configuration file to `s
 	],
 
 <a name="sending-mail"></a>
-## Sending Mail
+## 发送邮件
 
-Laravel allows you to store your e-mail messages in [views](/docs/{{version}}/views). For example, to organize your e-mails, you could create an `emails` directory within your `resources/views` directory:
+Laravel 允许你将你的电子邮件消息存储为[视图](/docs/{{version}}/views)格式，例如，为了组织你的邮件，你可以在 `resources/views` 目录中创建一个 `emails` 目录：
 
-To send a message, use the `send` method on the `Mail` [facade](/docs/{{version}}/facades). The `send` method accepts three arguments. First, the name of a [view](/docs/{{version}}/views) that contains the e-mail message. Secondly, an array of data you wish to pass to the view. Lastly, a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
+要发送消息，请使用 `Mail` [facade](/docs/{{version}}/facades) 上的 `send` 方法，`send` 方法接受三个参数，首先是包含邮件消息的[视图](/docs/{{version}}/views)名，其次是你希望传入视图中的数据数组，最后是一个 `Closure` 回调，用于接收一个消息实例，允许你自定义收件人，应该是和其它方面的邮件消息：
 
 	<?php
 
