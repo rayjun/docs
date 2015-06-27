@@ -54,7 +54,7 @@ Laravel 提供了一个基于 [SwiftMailer](http://swiftmailer.org) 函数库的
 
 Laravel 允许你将你的电子邮件消息存储为[视图](/docs/{{version}}/views)格式，例如，为了组织你的邮件，你可以在 `resources/views` 目录中创建一个 `emails` 目录：
 
-要发送消息，请使用 `Mail` [facade](/docs/{{version}}/facades) 上的 `send` 方法，`send` 方法接受三个参数，首先是包含邮件消息的[视图](/docs/{{version}}/views)名，其次是你希望传入视图中的数据数组，最后是一个 `Closure` 回调，用于接收一个消息实例，允许你自定义收件人，应该是和其它方面的邮件消息：
+要发送消息，请使用 `Mail` [facade](/docs/{{version}}/facades) 上的 `send` 方法，`send` 方法接受三个参数，首先是包含邮件消息的[视图](/docs/{{version}}/views)名，其次是你希望传入视图中的数据数组，最后是一个 `Closure` 回调，用于接收一个消息实例，允许你自定义收件人，主题以及邮件的其它信息：
 
 	<?php
 
@@ -84,15 +84,15 @@ Laravel 允许你将你的电子邮件消息存储为[视图](/docs/{{version}}/
 		}
 	}
 
-Since we are passing an array containing the `user` key in the example above, we could display the user's name within our e-mail view using the following PHP code:
+在上例中，因为我们传入了一个包含 `user` 键的数组，我们可以使用如下 PHP 代码将用户的名称显示在电子邮件视图中：
 
 	<?php echo $user->name; ?>
 
-> **Note:** A `$message` variable is always passed to e-mail views, and allows the [inline embedding of attachments](#attachments). So, you should avoid passing a `message` variable in your view payload.
+> **注意:** `$message` 变量常被传入邮件视图，并且允许[内联嵌入附件](#attachments)，所以你应当避免传入 `message` 变量。
 
-#### Building The Message
+#### 构造邮件消息
 
-As previously discussed, the third argument given to the `send` method is a `Closure` allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:
+如上讨论，第三个传入到 `send` 方法的是一个 `Clousure`，使你可以指定不同的参数项到电子邮件消息上。使用这个闭包，你可以指定消息的其它属性，例如副本，创建副本如下：
 
 	Mail::send('emails.welcome', $data, function ($message) {
 		$message->from('us@example.com', 'Laravel');
@@ -100,7 +100,7 @@ As previously discussed, the third argument given to the `send` method is a `Clo
 		$message->to('foo@example.com')->cc('bar@example.com');
 	});
 
-Here is a list of the available methods on the `$message` message builder instance:
+这是 `$message` 构造器实例上的可用方法列表：
 
 	$message->from($address, $name = null);
 	$message->sender($address, $name = null);
@@ -118,30 +118,30 @@ Here is a list of the available methods on the `$message` message builder instan
 	// Get the underlying SwiftMailer message instance...
 	$message->getSwiftMessage();
 
-> **Note:** The message instance passed to a `Mail::send` Closure extends the SwiftMailer message class, allowing you to call any method on that class to build your e-mail messages.
+> **注意:** 传入 `Mail::send` 闭包中的消息实例继承自 SwiftMailer 消息类，使你可以调用这个类上的任何方法来构造你的电子邮件消息。
 
-#### Mailing Plain Text
+#### 纯文本邮件
 
-By default, the view given to the `send` method is assumed to contain HTML. However, by passing an array as the first argument to the `send` method, you may specify a plain text view to send in addition to the HTML view:
+默认情况下，传入 `send` 方法的视图假设包含的是 HTML，然而通过向 `send` 方法传入一个数组作为第一个参数，除 HTML 视图外，你可以指定一个纯文本视图：
 
 	Mail::send(['html.view', 'text.view'], $data, $callback);
 
-Or, if you only need to send a plain text e-mail, you may specify this using the `text` key in the array:
+或者，如果你只需要发送纯文本邮件，你可以在数组中以 `text` 键来指定：
 
 	Mail::send(['text' => 'view'], $data, $callback);
 
-#### Mailing Raw Strings
+#### 原始字符串邮件
 
-You may use the `raw` method if you wish to e-mail a raw string directly:
+如果你希望直接发送原始字符串的邮件，你可以使用 `raw` 方法：
 
 	Mail::raw('Text to e-mail', function ($message) {
 		//
 	});
 
 <a name="attachments"></a>
-### Attachments
+### 附件
 
-To add attachments to an e-mail, use the `attach` method on the `$message` object passed to your Closure. The `attach` method accepts the full path to the file as its first argument:
+添加附件到一封邮件中，请使用 `$message` 对象上的 `attach` 方法，`attach` 接受传入文件的全路径作为第一个参数：
 
 	Mail::send('emails.welcome', $data, function ($message) {
 		//
@@ -149,16 +149,16 @@ To add attachments to an e-mail, use the `attach` method on the `$message` objec
 		$message->attach($pathToFile);
 	});
 
-When attaching files to a message, you may also specify the display name and / or MIME type by passing an `array` as the second argument to the `attach` method:
+当给消息添加附件时，你还可以通过向 `attch` 方法传入一个 `array` 作为第二个参数，来指定显示的名称或者 MIME 类型：
 
 	$message->attach($pathToFile, ['as' => $display, 'mime' => $mime]);
 
 <a name="inline-attachments"></a>
-### Inline Attachments
+### 内联附件
 
-#### Embedding An Image In An E-Mail View
+#### 在邮件视图中嵌入图片
 
-Embedding inline images into your e-mails is typically cumbersome; however, Laravel provides a convenient way to attach images to your e-mails and retrieving the appropriate CID. To embed an inline image, use the `embed` method on the `$message` variable within your e-mail view. Remember, Laravel automatically makes the `$message` variable available to all of your e-mail views:
+将图片内嵌到邮件中通常很繁琐，然后，Laravel 提供了方便的方式将图片添加到邮件中和获取适当的 CID，要嵌入内联图片，请使用 `embed` 邮件视图中，`$message` 对象上的 `embed` 方法，请记住，Laravel 自动让 `$message` 变量在所有的邮件视图中可用：
 
 	<body>
 		Here is an image:
@@ -166,9 +166,9 @@ Embedding inline images into your e-mails is typically cumbersome; however, Lara
 		<img src="<?php echo $message->embed($pathToFile); ?>">
 	</body>
 
-#### Embedding Raw Data In An E-Mail View
+#### 在邮件视图中嵌入原始数据
 
-If you already have a raw data string you wish to embed into an e-mail message, you may use the `embedData` method on the `$message` variable:
+如果你已经有原始数据希望可以嵌入邮件消息中，你可以使用 `$message` 上的`embedData` 方法：
 
 	<body>
 		Here is an image from raw data:
@@ -177,21 +177,21 @@ If you already have a raw data string you wish to embed into an e-mail message, 
 	</body>
 
 <a name="queueing-mail"></a>
-### Queueing Mail
+### 邮件队列
 
-#### Queueing A Mail Message
+#### 将邮件加入队列
 
-Since sending e-mail messages can drastically lengthen the response time of your application, many developers choose to queue e-mail messages for background sending. Laravel makes this easy using its built-in [unified queue API](/docs/{{version}}/queues). To queue a mail message, use the `queue` method on the `Mail` facade:
+因为发送消息可能严重影响应用程序的响应时间，许多程序员选择将邮件消息加入队列而在后台发送，Laravel 通过内建的[统一队列 API](/docs/{{version}}/queues) 让这件事变得非常容易，要将邮件加入队列，请使用 `Mail` facade 上的 `queue` 方法：
 
 	Mail::queue('emails.welcome', $data, function ($message) {
 		//
 	});
 
-This method will automatically take care of pushing a job onto the queue to send the mail message in the background. Of course, you will need to [configure your queues](/docs/{{version}}/queues) before using this feature.
+这个方法负责自动将一个任务（job）加入队列而在后台将邮件发送，当免烧砖机，在使用此功能前，你需要先[配置你的队列](/docs/{{version}}/queues) ：
 
-#### Delayed Message Queueing
+#### 延时邮件队列
 
-If you wish to delay the delivery of a queued e-mail message, you may use the `later` method. To get started, simply pass the number of seconds by which you wish to delay the sending of the message as the first argument to the method:
+你如果你希望将邮件队列消息的发送延迟，你可使用 `later` 方法，通过向此方法的第一个参数传入一个分钟数来表示延迟的发送的时间：
 
 	Mail::later(5, 'emails.welcome', $data, function ($message) {
 		//
@@ -210,17 +210,17 @@ If you wish to specify a specific queue on which to push the message, you may do
 	});
 
 <a name="mail-and-local-development"></a>
-## Mail & Local Development
+## 邮件与本地开发
 
-When developing an application that sends e-mail, you probably don't want to actually send e-mails to live e-mail addresses. Laravel provides several ways to "disable" the actual sending of e-mail messages.
+当开发邮件发送程序时，你可能不想实际上发送邮件到真实的邮件地址，Laravel 提供多种方法「屏蔽」实际的邮件发送：
 
-#### Log Driver
+#### 日志驱动
 
-One solution is to use the `log` mail driver during local development. This driver will write all e-mail messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](/docs/{{version}}/installation#environment-configuration).
+一种解决方案是在本地开发中使用 `log` 邮件驱动，此驱动会将所以有邮件消息配置文档写入日志文件以供调查。对于更多的关于应用环境的配置信息，请查看[配置文档](/docs/{{version}}/installation#environment-configuration)。
 
-#### Universal To
+#### 全局发送
 
-Another solution provided by Laravel is to set a universal recipient of all e-mails sent by the framework. This way, all the emails generated by your application will be sent to a specific address, instead of the address actually specified when sending the message. This can be done via the `to` option in your `config/mail.php` configuration file:
+Laravel 提供的另一种解决方案是设置邮件的的全局收件人，通过这种方式，由程序生成的所有邮件将发送到指定地址，而不是发送邮件实际指定的地址，可以通过 `config/mail.php` 配置文件中的 `to` 配置来设置：
 
 	'to' => [
 	    'address' => 'dev@domain.com',
@@ -229,4 +229,4 @@ Another solution provided by Laravel is to set a universal recipient of all e-ma
 
 #### Mailtrap
 
-Finally, you may use a service like [Mailtrap](https://mailtrap.io) and the `smtp` driver to send your e-mail messages to a "dummy" mailbox where you may view them in a true e-mail client. This approach has the benefit of allowing you to actually inspect the final e-mails in Mailtrap's message viewer.
+最后，你可以使用 [Mailtrap](https://mailtrap.io) 这样的服务和 `smtp` 驱动，将你的邮件消息发送到「模拟」邮箱，然后在邮件客户端查看，这个方法的好处是你可以实际上在 Mailtrap 的消息查看器上查看邮件。
