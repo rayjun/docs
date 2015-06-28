@@ -74,6 +74,7 @@
 
 ### 参与方法
 
+- 视频展示 [http://www.tudou.com/programs/view/G9iSwH-Ajto/](http://www.tudou.com/programs/view/G9iSwH-Ajto/)
 - **领取任务** 更新此文档（readme.md），在对应章节后追加你的 GitHub ID 表示领取，每次至多领取一个章节
 - **任务类型** 翻译在 ID 前加 T（Translator），校对则加 E(Editor)，每章节可以有多名翻译者和校对者
 - **编辑工具**
