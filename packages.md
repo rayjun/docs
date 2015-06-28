@@ -1,37 +1,37 @@
-# Package Development
+# 组件开发
 
-- [Introduction](#introduction)
-- [Service Providers](#service-providers)
-- [Routing](#routing)
-- [Resources](#resources)
-	- [Views](#views)
-	- [Translations](#translations)
-	- [Configuration](#configuration)
-- [Public Assets](#public-assets)
+- [介绍](#introduction)
+- [服务容器](#service-providers)
+- [路由](#routing)
+- [资源](#resources)
+	- [视图](#views)
+	- [翻译](#translations)
+	- [配置](#configuration)
+- [公共资产](#public-assets)
 - [Publishing File Groups](#publishing-file-groups)
 
 <a name="introduction"></a>
 ## Introduction
 
-Packages are the primary way of adding functionality to Laravel. Packages might be anything from a great way to work with dates like [Carbon](https://github.com/briannesbitt/Carbon), or an entire BDD testing framework like [Behat](https://github.com/Behat/Behat).
+组件开发是 Laravel 扩展功能的主要方式，从操作日期的 [Carbon](https://github.com/briannesbitt/Carbon)，到类似 [Behat](https://github.com/Behat/Behat) 这种完整的测试框架，组件可以是任何形式的。
 
-Of course, there are different types of packages. Some packages are stand-alone, meaning they work with any framework, not just Laravel. Both Carbon and Behat are examples of stand-alone packages. Any of these packages may be used with Laravel by simply requesting them in your `composer.json` file.
+当然，有许多不同类型的组件，有些组件是独立的，意味着它们可以跟任何框架一起使用，而不仅是 Laravel。Carbon 和 Behat 都是独立组件的例子，所有这些组件，只需要将其依赖加入你的 `composer.json` 文件就可以在 Laravel 中使用。
 
-On the other hand, other packages are specifically intended for use with Laravel. These packages may have routes, controllers, views, and configuration specifically intended to enhance a Laravel application. This guide primarily covers the development of those packages that are Laravel specific.
+另一方面，其它一些组件是专门为了在 Laravel 中使用而开发的，这些组件可能包含路由，控制器，视图和配置，是专门为了增加 Laravel 程序而开发的，这份指南主要涵盖这一类组件的开发内容。
 
 <a name="service-providers"></a>
-## Service Providers
+## 服务提供者
 
-[Service providers](/docs/{{version}}/providers) are the connection points between your package and Laravel. A service provider is responsible for binding things into Laravel's [service container](/docs/{{version}}/container) and informing Laravel where to load package resources such as views, configuration, and localization files.
+[服务提供者](/docs/{{version}}/providers)是 Laravel 和组件的连接点，服务提供者负责将组件绑定到 Laravel 的[服务容器](/docs/{{version}}/container)中且告知 Laravel 如何加组件的资源，如视图，配置和本地化语言文件。
 
-A service provider extends the `Illuminate\Support\ServiceProvider` class and contains two methods: `register` and `boot`. The base `ServiceProvider` class is located in the `illuminate/support` Composer package, which you should add to your own package's dependencies.
+一个服务提供者继承于 `Illuminate\Support\ServiceProvider` 类且包含两个方法： `register` 和 `boot`，基础类 `ServiceProvider` 位于 `illuminate/support` Composer 组件中，你需要将此组件的依赖加入你自己的包依赖中。
 
-To learn more about the structure and purpose of service providers, check out [their documentation](/docs/{{version}}/providers).
+要了解更多关于服务提供者的结构与用途，请查看[相关文档](/docs/{{version}}/providers)。
 
 <a name="routing"></a>
-## Routing
+## 路由
 
-To define routes for your package, simply `require` the routes file from within your package service provider's `boot` method. From within your routes file, you may use the `Route` facade to [register routes](/docs/{{version}}/routing) just as you would within a typical Laravel application:
+为组件定义路由，你只需在组件服务提供者的 `boot` 方法中 `require` 相关的路由配置文件即可，在路由配置文件中，你可以使用 `Route` facade，和在一般 Laravel 应用程序中一样来[注册路由](/docs/{{version}}/routing)。
 
 	/**
 	 * Perform post-registration booting of services.
@@ -46,11 +46,12 @@ To define routes for your package, simply `require` the routes file from within 
 	}
 
 <a name="resources"></a>
-## Resources
+## 资源
 
 <a name="views"></a>
-### Views
+### 视图
 
+要将你的组件中的视图注册到 Laravel 中，你需要告诉 Laravel 视图的位置，你可以使用服务容器的 `loadViewsFrom` 方法来加载视图，这个方法接受两个参数：指向视图模板的路径和你的组件名，例如，如果你的包名是「courier」，将下面的代码添加到你的服务提供者中：
 To register your package's [views](/docs/{{version}}/views) with Laravel, you need to tell Laravel where the views are located. You may do this using the service provider's `loadViewsFrom` method. The `loadViewsFrom` method accepts two arguments: the path to your view templates and your package's name. For example, if your package name is "courier", add the following to your service provider's `boot` method:
 
 	/**
