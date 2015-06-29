@@ -51,8 +51,7 @@
 <a name="views"></a>
 ### 视图
 
-要将你的组件中的视图注册到 Laravel 中，你需要告诉 Laravel 视图的位置，你可以使用服务容器的 `loadViewsFrom` 方法来加载视图，这个方法接受两个参数：指向视图模板的路径和你的组件名，例如，如果你的包名是「courier」，将下面的代码添加到你的服务提供者中：
-To register your package's [views](/docs/{{version}}/views) with Laravel, you need to tell Laravel where the views are located. You may do this using the service provider's `loadViewsFrom` method. The `loadViewsFrom` method accepts two arguments: the path to your view templates and your package's name. For example, if your package name is "courier", add the following to your service provider's `boot` method:
+要将你的组件中的视图注册到 Laravel 中，你需要告诉 Laravel 视图的位置，你可以使用服务容器的 `loadViewsFrom` 方法来加载视图，这个方法接受两个参数：指向视图模板的路径和你的组件名，例如，如果你的包名是「courier」，将以下代码添加到你的服提供者的 `boot` 方法中：
 
 	/**
 	 * Perform post-registration booting of services.
@@ -63,15 +62,15 @@ To register your package's [views](/docs/{{version}}/views) with Laravel, you ne
 	{
 		$this->loadViewsFrom(__DIR__.'/path/to/views', 'courier');
 	}
-
-Package views are referenced using a double-colon `package::view` syntax. So, you may load the `admin` view from the `courier` package like so:
+组件视图的引用使用的是双冒号 `package::view` 语法，所以你可以像这样从 `courier` 组件中加截 `admin` 视图：
 
 	Route::get('admin', function () {
 		return view('courier::admin');
 	});
 
-#### Overriding Package Views
+#### 重写组件视图
 
+当你使用 `loadViewsFrom` 方法时，Laravel 实际上为你的视图注册了**两个**位置：
 When you use the `loadViewsFrom` method, Laravel actually registers **two** locations for your views: one in the application's `resources/views/vendor` directory and one in the directory you specify. So, using our `courier` example: when requesting a package view, Laravel will first check if a custom version of the view has been provided by the developer in `resources/views/vendor/courier`. Then, if the view has not been customized, Laravel will search the package view directory you specified in your call to `loadViewsFrom`. This makes it easy for end-users to customize / override your package's views.
 
 #### Publishing Views
