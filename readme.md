@@ -18,7 +18,7 @@
 - 基本知识
     - [routing.md](https://github.com/Laragirl/docs/blob/5.1/routing.md) T:@kphcdr
     - [middleware.md](https://github.com/Laragirl/docs/blob/5.1/middleware.md) T:@rayjun
-    - [controllers.md](https://github.com/Laragirl/docs/blob/5.1/controllers.md)
+    - [controllers.md](https://github.com/Laragirl/docs/blob/5.1/controllers.md) T:@RryLee
     - [requests.md](https://github.com/Laragirl/docs/blob/5.1/requests.md)
     - [responses.md](https://github.com/Laragirl/docs/blob/5.1/responses.md)
     - [views.md](https://github.com/Laragirl/docs/blob/5.1/views.md)

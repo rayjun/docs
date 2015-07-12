@@ -1,4 +1,4 @@
-# HTTP Controllers
+# HTTP 控制器
 
 - [Introduction](#introduction)
 - [Basic Controllers](#basic-controllers)
