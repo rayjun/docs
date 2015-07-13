@@ -19,9 +19,9 @@
     - [routing.md](https://github.com/Laragirl/docs/blob/5.1/routing.md) T:@kphcdr
     - [middleware.md](https://github.com/Laragirl/docs/blob/5.1/middleware.md) T:@rayjun
     - [**controllers.md**](https://github.com/Laragirl/docs/blob/5.1/controllers.md) T:@RryLee
-    - [requests.md](https://github.com/Laragirl/docs/blob/5.1/requests.md)
-    - [responses.md](https://github.com/Laragirl/docs/blob/5.1/responses.md)
-    - [views.md](https://github.com/Laragirl/docs/blob/5.1/views.md) T:@RryLee
+    - [**requests.md**](https://github.com/Laragirl/docs/blob/5.1/requests.md) T:@RryLee
+    - [**responses.md**](https://github.com/Laragirl/docs/blob/5.1/responses.md) T:@RryLee
+    - [**views.md**](https://github.com/Laragirl/docs/blob/5.1/views.md) T:@RryLee
     - [**blade.md**](https://github.com/Laragirl/docs/blob/5.1/blade.md) T:@kphcdr
 - 架构基础
     - [**lifecycle.md**](https://github.com/Laragirl/docs/blob/5.1/lifecycle.md) T:@silentred
@@ -63,7 +63,7 @@
     - [eloquent.md](https://github.com/Laragirl/docs/blob/5.1/eloquent.md)  T:@jixunqiang
     - [eloquent-relationships.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-relationships.md)  T:@jixunqiang
     - [eloquent-collections.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-collections.md)  T:@jixunqiang
-    - [eloquent-mutators.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-mutators.md)  
+    - [eloquent-mutators.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-mutators.md)
     - [eloquent-serialization.md](https://github.com/Laragirl/docs/blob/5.1/eloquent-serialization.md)  T:@yinxiaodong
 
 ## 参与翻译
