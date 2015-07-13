@@ -24,8 +24,8 @@ Laravel Elixir 提供了简洁、流畅的 API 为你的 Laravel 应用程序定
 
 ```javascript
 elixir(function(mix) {
-	mix.sass('app.scss')
-	   .coffee('app.coffee');
+    mix.sass('app.scss')
+       .coffee('app.coffee');
 });
 ```
 
@@ -52,28 +52,28 @@ elixir(function(mix) {
 
 最后一步是安装 Elixir，在新创建的 Laravel 程序中，你可以在根目录下找到 `package.json` 文件，把它想像成 `composer.json` 文件，只不过它定义的是 Node 的依赖关系而不是 PHP 的，你可以通过运行以下命令安装所有依赖：
 
-	npm install
+    npm install
 
 If you are developing on a Windows system, you may need to run the `npm install` command with the `--no-bin-links` switch enabled:
 
-	npm install --no-bin-links
+    npm install --no-bin-links
 
 <a name="running-elixir"></a>
 ## 运行 Elixir
 
 Elixir 创建于[Gulp](http://gulpjs.com)之上，所以运行 Elixir 任务你只需要在命令终端运行 [Gulp](http://gulpjs.com)，在命令后面加上 `--production` 标识表示压缩 CSS 和 Javascript 文件：
 
-	// Run all tasks...
-	gulp
+    // Run all tasks...
+    gulp
 
-	// Run all tasks and minify all CSS and JavaScript...
-	gulp --production
+    // Run all tasks and minify all CSS and JavaScript...
+    gulp --production
 
 #### 监听 Assets 修改
 
 因为每次对 assets 修改后都要在终端运行 `gulp` 命令不方便，你可以使用 `gulp watch`，这个命令将一起在终端运行并且监听 assets 的任何修改。当修改发生时，将自动编译生成新的文件：
 
-	gulp watch
+    gulp watch
 
 <a name="working-with-stylesheets"></a>
 ## 操作样式表
@@ -87,7 +87,7 @@ Elixir 创建于[Gulp](http://gulpjs.com)之上，所以运行 Elixir 任务你�
 
 ```javascript
 elixir(function(mix) {
-	mix.less("app.less");
+    mix.less("app.less");
 });
 ```
 
@@ -99,10 +99,10 @@ You may also combine multiple Less files into a single CSS file. Again, the resu
 
 ```javascript
 elixir(function(mix) {
-	mix.less([
-		"app.less",
-		"controllers.less"
-	], "public/assets/css");
+    mix.less([
+        "app.less",
+        "controllers.less"
+    ], "public/assets/css");
 });
 ```
 
@@ -110,12 +110,12 @@ If you wish to customize the output location of the compiled CSS, you may pass a
 
 ```javascript
 elixir(function(mix) {
-	mix.less('app.less', 'public/stylesheets');
+    mix.less('app.less', 'public/stylesheets');
 });
 
 // Specifying a specific output filename...
 elixir(function(mix) {
-	mix.less('app.less', 'public/stylesheets/style.css');
+    mix.less('app.less', 'public/stylesheets/style.css');
 });
 ```
 
@@ -126,7 +126,7 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.sass("app.scss");
+    mix.sass("app.scss");
 });
 ```
 
@@ -134,10 +134,10 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.sass([
-		"app.scss",
-		"controllers.scss"
-	], "public/assets/css");
+    mix.sass([
+        "app.scss",
+        "controllers.scss"
+    ], "public/assets/css");
 });
 ```
 
@@ -147,7 +147,7 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.rubySass("app.scss");
+    mix.rubySass("app.scss");
 });
 ```
 
@@ -158,10 +158,10 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.styles([
-		"normalize.css",
-		"main.css"
-	]);
+    mix.styles([
+        "normalize.css",
+        "main.css"
+    ]);
 });
 ```
 
@@ -169,10 +169,10 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.styles([
-		"normalize.css",
-		"main.css"
-	], "public/assets/css");
+    mix.styles([
+        "normalize.css",
+        "main.css"
+    ], "public/assets/css");
 });
 ```
 
@@ -187,7 +187,7 @@ Source maps 功能是开箱即用的，所以，对于每个编译生成文件�
 elixir.config.sourcemaps = false;
 
 elixir(function(mix) {
-	mix.sass("app.scss");
+    mix.sass("app.scss");
 });
 ```
 
@@ -203,7 +203,7 @@ Elixir 还提供了一些方法来帮助你操作脚本文件，例如编译 ECM
 
 ```javascript
 elixir(function(mix) {
-	mix.coffee(['app.coffee', 'controllers.coffee']);
+    mix.coffee(['app.coffee', 'controllers.coffee']);
 });
 ```
 
@@ -216,7 +216,7 @@ Elixir 还包含 `browserify` 方法，使得可以方便地加载所有模块�
 
 ```javascript
 elixir(function(mix) {
-	mix.browserify('index.js');
+    mix.browserify('index.js');
 });
 ```
 
@@ -227,7 +227,7 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.babel([
+    mix.babel([
                 "order.js",
                 "product.js"
         ]);
@@ -246,10 +246,10 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.scripts([
-		"jquery.js",
-		"app.js"
-	]);
+    mix.scripts([
+        "jquery.js",
+        "app.js"
+    ]);
 });
 ```
 
@@ -266,7 +266,7 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.scriptsIn("public/js/some/directory");
+    mix.scriptsIn("public/js/some/directory");
 });
 ```
 
@@ -279,13 +279,13 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.version("css/all.css");
+    mix.version("css/all.css");
 });
 ```
 
 生成版本文件之后，你还可以在 [视图](/docs/{{version}}/views) 中使用 Laravel 全局方法 `elixir`，帮助你正确加载 asset 文件，`elixir` 方法会自动判断出哈希后的文件：
 
-	<link rel="stylesheet" href="{{ elixir('css/all.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
 
 #### 版本控制多个文件
 
@@ -293,15 +293,15 @@ elixir(function(mix) {
 
 ```javascript
 elixir(function(mix) {
-	mix.version(["css/all.css", "js/app.js"]);
+    mix.version(["css/all.css", "js/app.js"]);
 });
 ```
 
 一旦文件加入版本控制，你可以使用 `elixir` 方法定位正确的哈希文件，请记住，你只需要传入未哈希的文件，`elixir`将帮助你找到当前哈希后的文件：
 
-	<link rel="stylesheet" href="{{ elixir('css/all.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
 
-	<script src="{{ elixir('js/app.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
 
 <a name="calling-existing-gulp-tasks"></a>
 ## 调用既有 Gulp 任务 
@@ -310,9 +310,9 @@ elixir(function(mix) {
 
 ```javascript
 gulp.task("speak", function() {
-	var message = "Tea...Earl Grey...Hot";
+    var message = "Tea...Earl Grey...Hot";
 
-	gulp.src("").pipe(shell("say " + message));
+    gulp.src("").pipe(shell("say " + message));
 });
 ```
 
@@ -348,11 +348,11 @@ var elixir = require("laravel-elixir");
 
 elixir.extend("speak", function(message) {
 
-	gulp.task("speak", function() {
-		gulp.src("").pipe(shell("say " + message));
-	});
+    gulp.task("speak", function() {
+        gulp.src("").pipe(shell("say " + message));
+    });
 
-	return this.queueTask("speak");
+    return this.queueTask("speak");
 
  });
 ```
@@ -364,10 +364,10 @@ elixir.extend("speak", function(message) {
 
 var elixir = require("laravel-elixir");
 
-require("./elixir-tasks")
+require("./elixir-extensions")
 
 elixir(function(mix) {
-	mix.speak("Tea, Earl Grey, Hot");
+    mix.speak("Tea, Earl Grey, Hot");
 });
 ```
 

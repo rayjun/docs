@@ -321,6 +321,12 @@ Artisan 是 Laravel  中命令行接口的名字，提供了一些有用的命�
         //
     });
 
+If you need to specify the value of an option that does not accept string values, such as the `--force` flag on the `migrate:refresh` command, you may pass a booelan `true` or `false`:
+
+    $exitCode = Artisan::call('migrate:refresh', [
+        '--force' => true,
+    ]);
+
 ### 在命令中调用命令
 
 有时你可能想从一个已经存在的命令中调用其它命令，你可以通过调用 `call` 方法来做到这一点，`call` 接收命令的名字和一个命令参数数组作为参数：

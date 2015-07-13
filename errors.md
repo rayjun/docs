@@ -1,5 +1,6 @@
 # Errors & Logging
 
+<<<<<<< HEAD
 - [介绍](#introduction)
 - [配置](#configuration)
 - [异常处理](#the-exception-handler)
@@ -8,6 +9,16 @@
 - [HTTP 异常](#http-exceptions)
 	- [自定义 HTTP 错误页面](#custom-http-error-pages)
 - [日志](#logging)
+=======
+- [Introduction](#introduction)
+- [Configuration](#configuration)
+- [The Exception Handler](#the-exception-handler)
+    - [Report Method](#report-method)
+    - [Render Method](#render-method)
+- [HTTP Exceptions](#http-exceptions)
+    - [Custom HTTP Error Pages](#custom-http-error-pages)
+- [Logging](#logging)
+>>>>>>> laravel/5.1
 
 <a name="introduction"></a>
 ## 介绍
@@ -27,17 +38,17 @@
 
 在框架之外，Laravel 支持 `single`, `daily`, `syslog` 和 `errorlog` 多种日志模式，例如，如果你希望使用按天的日志文件而不是单个文件，你只需要将 `config/app.php` 中的 `log` 配置为：
 
-	'log' => 'daily'
+    'log' => 'daily'
 
 #### 配置 Monolog 
 
 如果你希望完全控制应用程序中 Monolog 的配置方式，你可以使用程序中 `configureMonologUsing` 方法，你应该在 `bootstrap/app.php` 文件中，返回 `$app` 变量之前，调用此方法：
 
-	$app->configureMonologUsing(function($monolog) {
-		$monolog->pushHandler(...);
-	});
+    $app->configureMonologUsing(function($monolog) {
+        $monolog->pushHandler(...);
+    });
 
-	return $app;
+    return $app;
 
 <a name="the-exception-handler"></a>
 ##  异常处理
@@ -51,22 +62,22 @@
 
 例如，如果你需要以不同的方式报告不同类型的异常，你可以使用 PHP `instanceof` 比较操作符：
 
-	/**
-	 * Report or log an exception.
-	 *
-	 * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-	 *
-	 * @param  \Exception  $e
-	 * @return void
-	 */
-	public function report(Exception $e)
-	{
-		if ($e instanceof CustomException) {
-			//
-		}
+    /**
+     * Report or log an exception.
+     *
+     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+     *
+     * @param  \Exception  $e
+     * @return void
+     */
+    public function report(Exception $e)
+    {
+        if ($e instanceof CustomException) {
+            //
+        }
 
-		return parent::report($e);
-	}
+        return parent::report($e);
+    }
 
 #### 根据类型忽略异常
 
@@ -86,9 +97,9 @@
      */
     public function render($request, Exception $e)
     {
-    	if ($e instanceof CustomException) {
-    		return response()->view('errors.custom', [], 500);
-    	}
+        if ($e instanceof CustomException) {
+            return response()->view('errors.custom', [], 500);
+        }
 
         return parent::render($request, $e);
     }
@@ -98,11 +109,11 @@
 
 一些异常描述来自服务器的 HTTP 错误码，例如，这个可以是⎡页面未找到⎦错误（404），“未经授权错误”（401）或者甚至程序员生成的 500 错误，为了在程序的任何地方生成这样的一个响应，请使用如下代码：
 
-	abort(404);
+    abort(404);
 
 `abort` 方法会立即引发一个异常，这个异常将由异常处理程序发出，可选地，你可以提供一个响应的文本：
 
-	abort(403, 'Unauthorized action.');
+    abort(403, 'Unauthorized action.');
 
 这个方法可能会在请求的生命周期的任何时间被用到。
 
@@ -118,48 +129,53 @@ Laravel 很容易根据各种 HTTP 状态码返回自定义的错误页面，例
 
 Laravel 日志工具提供一个简单的控制层，构建于强大的[Monolog](http://github.com/seldaek/monolog)库之上，默认情况下，Laravel 配置为按天生成日志文件，存放于 `storage/logs` 目录，你可以使用 `Log` [facade](/docs/{{version}}/facades)向日志中写入信息：
 
-	<?php
+    <?php
 
-	namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-	use Log;
-	use App\User;
-	use App\Http\Controllers\Controller;
+    use Log;
+    use App\User;
+    use App\Http\Controllers\Controller;
 
-	class UserController extends Controller
-	{
-		/**
-		 * Show the profile for the given user.
-		 *
-		 * @param  int  $id
-		 * @return Response
-		 */
-		public function showProfile($id)
-		{
-			Log::info('Showing user profile for user: '.$id);
+    class UserController extends Controller
+    {
+        /**
+         * Show the profile for the given user.
+         *
+         * @param  int  $id
+         * @return Response
+         */
+        public function showProfile($id)
+        {
+            Log::info('Showing user profile for user: '.$id);
 
-			return view('user.profile', ['user' => User::findOrFail($id)]);
-		}
-	}
+            return view('user.profile', ['user' => User::findOrFail($id)]);
+        }
+    }
 
+<<<<<<< HEAD
 [RFC 5424](http://tools.ietf.org/html/rfc5424)定义了日志程序提供的七层日志级别：**debug**, **info**, **notice**, **warning**, **error**, **critical**, 和 **alert**。
+=======
+The logger provides the eight logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
+>>>>>>> laravel/5.1
 
-	Log::debug($error);
-	Log::info($error);
-	Log::notice($error);
-	Log::warning($error);
-	Log::error($error);
-	Log::critical($error);
-	Log::alert($error);
+    Log::emergency($error);
+    Log::alert($error);
+    Log::critical($error);
+    Log::error($error);
+    Log::warning($error);
+    Log::notice($error);
+    Log::info($error);
+    Log::debug($error);
 
 #### 上下文信息
 
 上下文数据数组也可以被传入日志方法，这个上下文数据将被格式化并和日志消息一起被显示：
 
-	Log::info('User failed to login.', ['id' => $user->id]);
+    Log::info('User failed to login.', ['id' => $user->id]);
 
 #### 访问底层 Monolog 实例
 
 Monolog 包含各种额外的，你可能在日志记录中会用到的处理程序，如果需要，你可以访问 Laravel 的底层 Monolog 实例：
 
-	$monolog = Log::getMonolog();
+    $monolog = Log::getMonolog();

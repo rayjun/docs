@@ -1,5 +1,6 @@
 # Installation
 
+<<<<<<< HEAD
 - [安装](#installation)
 - [配置](#configuration)
 	- [基本配置](#basic-configuration)
@@ -8,6 +9,16 @@
 	- [获取配置](#accessing-configuration-values)
 	- [应用程序命名](#naming-your-application)
 - [维护模式](#maintenance-mode)
+=======
+- [Installation](#installation)
+- [Configuration](#configuration)
+    - [Basic Configuration](#basic-configuration)
+    - [Environment Configuration](#environment-configuration)
+    - [Configuration Caching](#configuration-caching)
+    - [Accessing Configuration Values](#accessing-configuration-values)
+    - [Naming Your Application](#naming-your-application)
+- [Maintenance Mode](#maintenance-mode)
+>>>>>>> laravel/5.1
 
 <a name="installation"></a>
 ## 安装
@@ -33,19 +44,19 @@ Laravel 使用 [Composer](http://getcomposer.org/) 来管理其依赖关系。�
 
 首先, 使用 Composer 下载 Laravel 安装程序:
 
-	composer global require "laravel/installer=~1.1"
+    composer global require "laravel/installer=~1.1"
 
 请确保 `~/.composer/vendor/bin` 目录在你的 `PATH` 中。这样，Laravel 可执行文件才会存在于你的系统中。
 
 一单安装后, 将可以使用一个简单的命令 `laravel new` 来创建一个全新的 Laravel 安装在你指定的目录。例如，`laravel new blog` 将创建一个名为 blog 的目录，并在该目录中创建一个全新安装的 Laravel，并且，所有 Laravel 的依赖已被安装。这个方法比通过 Composer 安装更快:
 
-	laravel new blog
+    laravel new blog
 
 #### 通过 Composer 创建项目
 
 你也可以通过 Composer `create-project` 命令来安装 Laravel:
 
-	composer create-project laravel/laravel --prefer-dist
+    composer create-project laravel/laravel --prefer-dist
 
 <a name="configuration"></a>
 ## 配置
@@ -82,20 +93,20 @@ Laravel 安装后几乎不需要任何配置即可开始使用。你可以很轻
 
 如果这个 `.htaccess` 不起作用，你可以试试这样:
 
-	Options +FollowSymLinks
-	RewriteEngine On
+    Options +FollowSymLinks
+    RewriteEngine On
 
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^ index.php [L]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
 
 **Nginx**
 
 在 Nginx 中，以下配置将允许你使用　"美观的 URL":
 
-	location / {
-		try_files $uri $uri/ /index.php?$query_string;
-	}
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
 
 当然，在使用 [Homestead](/docs/{{version}}/homestead) 时，"美观的 URL" 已被自动配置！
 
@@ -118,21 +129,21 @@ Laravel 通过 DotEnv Vance Lucas 写的一个 PHP 类库。 在全新安装好�
 
 如果你需要访问当前应用环境，可以通过 `App` [facade](/docs/{{version}}/facades):
 
-	$environment = App::environment();
+    $environment = App::environment();
 
 你也可以传递参数给 `environment` 来确认当前环境是否符合一个指定的值，你也可以传递多个值:
 
-	if (App::environment('local')) {
-		// The environment is local
-	}
+    if (App::environment('local')) {
+        // The environment is local
+    }
 
-	if (App::environment('local', 'staging')) {
-		// The environment is either local OR staging...
-	}
+    if (App::environment('local', 'staging')) {
+        // The environment is either local OR staging...
+    }
 
 一个应用实例也可以被通过 `app` 辅助方法访问到:
 
-	$environment = app()->environment();
+    $environment = app()->environment();
 
 <a name="configuration-caching"></a>
 ### 配置缓存
@@ -145,11 +156,11 @@ Laravel 通过 DotEnv Vance Lucas 写的一个 PHP 类库。 在全新安装好�
 
 你可以使用 `config` 全局辅助方法很容易地访问你的配置值。这个配置值可以被使用 "点" 语法访问到，其中包括你要访问的配置名，与该配置所在的文件名。你也可以指定一个如果配置不存在将返回的默认值:
 
-	$value = config('app.timezone');
+    $value = config('app.timezone');
 
 要在程序运行时设置一个配置值，需传递一个数组到 `config` 辅助方法:
 
-	config(['app.timezone' => 'America/Chicago']);
+    config(['app.timezone' => 'America/Chicago']);
 
 <a name="naming-your-application"></a>
 ### 应用程序命名
@@ -158,7 +169,7 @@ Laravel 通过 DotEnv Vance Lucas 写的一个 PHP 类库。 在全新安装好�
 
 例如，如果你的应用被命名为 "Horsefly"，你可以在框架根目录下执行以下命令:
 
-	php artisan app:name Horsefly
+    php artisan app:name Horsefly
 
 重命名你的应用不是必须的。如果你希望，你完全可以保留默认的命名空间 `App`。
 
@@ -169,11 +180,11 @@ Laravel 通过 DotEnv Vance Lucas 写的一个 PHP 类库。 在全新安装好�
 
 要开启维护模式，你可以简单地使用 `down` Artisan 命令:
 
-	php artisan down
+    php artisan down
 
 要关闭维护模式，你可以简单地使用 `up` Artisan 命令:
 
-	php artisan up
+    php artisan up
 
 ### 维护模式响应模板
 
