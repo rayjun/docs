@@ -24,11 +24,17 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
     
 这个命令将会在你的 `app/Http/Middleware` 目录中生成一个名称为 `OldMiddleware` 类。在这个中间件中，我们只允许参数 `age` 大于200的请求才能访问路由。否则，我们会将这个请求重定向到 “home” URI。
     
+要创建一个中间件，可以使用 `make:middleware` Artisan 命令:
+
+    php artisan make:middleware OldMiddleware
+
+This command will place a new `OldMiddleware` class within your `app/Http/Middleware` directory. In this middleware, we will only allow access to the route if the supplied `age` is greater than 200. Otherwise, we will redirect the users back to the "home" URI.
+
     <?php
 
-	namespace App\Http\Middleware;
+    namespace App\Http\Middleware;
 
-	use Closure;
+    use Closure;
 
 	class OldMiddleware
 	{
@@ -56,6 +62,7 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
 ### Before / After 中间件
 
+
 一个中间件运行在一个请求之前还是在一个请求之后取决于这个中间件本身。举个例子，在应用程序处理这个请求之前，这个中间件完成一些前置的任务:
 
      <?php
@@ -78,9 +85,9 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
     <?php
 
-	namespace App\Http\Middleware;
+    namespace App\Http\Middleware;
 
-	use Closure;
+    use Closure;
 
 	class AfterMiddleware
 	{
@@ -105,7 +112,7 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
 如果你想给一个特定的路由指定中间件，需要先在 `app/Http/Kernel.php` 为中间件配置一个键值。默认情况下，这个类中的 `$routeMiddleware` 属性中列出了目前 Laravel 中配置的中间件。要增加你自己的配置，只需要在这个列表中增加你自己的键值就行，举个例子:
 
-	// Within App\Http\Kernel Class...
+    // Within App\Http\Kernel Class...
 
 	protected $routeMiddleware = [
     	'auth' => \App\Http\Middleware\Authenticate::class,
@@ -120,6 +127,7 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
     	//
 	}]);
 
+
 <a name="middleware-parameters"></a>
 ## 中间件参数
 
@@ -127,11 +135,11 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
 新增加的参数在 `$next` 参数后面:
 
-	<?php
+    <?php
 
-	namespace App\Http\Middleware;
+    namespace App\Http\Middleware;
 
-	use Closure;
+    use Closure;
 
 	class RoleMiddleware
 	{
@@ -160,6 +168,7 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
     //
 	}]);
 
+
 <a name="terminable-middleware"></a>
 ## 可终止中间件
 有些情况下中间件需要在 `HTTP` 响应已经被发送到客户端之后才执行。例如 `Laravel` 的 `session` 中间件保存 `session` 数据是在响应被发送到浏览器之后才执行的。为了达到这一点，可以通过定义一个 `terminate` 方法来创建一个可终止的中间件:
@@ -168,19 +177,21 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
 	namespace Illuminate\Session\Middleware;
 
-	use Closure;
+    use Closure;
 
-	class StartSession
-	{
-    	public function handle($request, Closure $next)
-	    {	
-    	    return $next($request);
-	    }
 
-    	public function terminate($request, $response)
-	    {
-    	    // Store the session data...
-	    }
-	}
+    class StartSession
+    {
+        public function handle($request, Closure $next)
+        {
+            return $next($request);
+        }
+
+        public function terminate($request, $response)
+        {
+            // Store the session data...
+        }
+    }
+
 
 这个 `terminate` 方法应该同时接收请求和响应参数。一旦你定义了一个可终止的中间件，你应该把它加到 `HTTP kernel` 中全局中间件列表中。

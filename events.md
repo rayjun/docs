@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 事件
 
 - [介绍](#introduction)
@@ -12,6 +13,22 @@
 	- [广播数据](#broadcast-data)
 	- [消费事件广播](#consuming-event-broadcasts)
 - [事件订阅](#event-subscribers)
+=======
+# Events
+
+- [Introduction](#introduction)
+- [Registering Events / Listeners](#registering-events-and-listeners)
+- [Defining Events](#defining-events)
+- [Defining Listeners](#defining-listeners)
+    - [Queued Event Listeners](#queued-event-listeners)
+- [Firing Events](#firing-events)
+- [Broadcasting Events](#broadcasting-events)
+    - [Configuration](#broadcast-configuration)
+    - [Marking Events For Broadcast](#marking-events-for-broadcast)
+    - [Broadcast Data](#broadcast-data)
+    - [Consuming Event Broadcasts](#consuming-event-broadcasts)
+- [Event Subscribers](#event-subscribers)
+>>>>>>> laravel/5.1
 
 <a name="introduction"></a>
 ## 介绍
@@ -23,53 +40,53 @@ Laravel 事件提供一个简单的观察者模式的实现，允许你订阅和
 
 Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册所有的事件监听器，`listen` 属性包含一个所有事件（键）和相应监听器（值）的数组，所以，你可以根据应用程序的需要添加事件到数组中，例如，让我们来添加 `PodcastWasPurchased` 事件：
 
-	/**
-	 * The event listener mappings for the application.
-	 *
-	 * @var array
-	 */
-	protected $listen = [
-		'App\Events\PodcastWasPurchased' => [
-			'App\Listeners\EmailPurchaseConfirmation',
-		],
-	];
+    /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        'App\Events\PodcastWasPurchased' => [
+            'App\Listeners\EmailPurchaseConfirmation',
+        ],
+    ];
 
 ### 生成事件 / 监听器类
 
 当然，手动为每个事件和监听器生成文件很麻烦，另一种方式，你可以只添加监听器和事件到 `EventServiceProvider` 然后使用 `event:generate` 命令，这个命令将生成 `EventServiceProvider` 中列出的所有事件和监听器，当然，已经存在的事件和进监听器不包含在内：
 
-	php artisan event:generate
+    php artisan event:generate
 
 <a name="defining-events"></a>
 ## 定义事件
 
 一个事件类只是一个数据容器，持有与事件相关的信息，例如，假设一下我们生成的 `PodcastWasPurchased` 事件接受一个[Eloquent ORM](/docs/{{version}}/eloquent) 对象：
 
-	<?php
+    <?php
 
-	namespace App\Events;
+    namespace App\Events;
 
-	use App\Podcast;
-	use App\Events\Event;
-	use Illuminate\Queue\SerializesModels;
+    use App\Podcast;
+    use App\Events\Event;
+    use Illuminate\Queue\SerializesModels;
 
-	class PodcastWasPurchased extends Event
-	{
-	    use SerializesModels;
+    class PodcastWasPurchased extends Event
+    {
+        use SerializesModels;
 
-	    public $podcast;
+        public $podcast;
 
-	    /**
-	     * Create a new event instance.
-	     *
-	     * @param  Podcast  $podcast
-	     * @return void
-	     */
-	    public function __construct(Podcast $podcast)
-	    {
-	        $this->podcast = $podcast;
-	    }
-	}
+        /**
+         * Create a new event instance.
+         *
+         * @param  Podcast  $podcast
+         * @return void
+         */
+        public function __construct(Podcast $podcast)
+        {
+            $this->podcast = $podcast;
+        }
+    }
 
 正如你所见，这个事件类没有特殊逻辑，只是所购买的 `Podcast` 对象的一个容器，如果事件对象被 PHP 的 `serialize` 函数序列化，事件类引入的 `SerializesModels` trait 将会优雅地将所有 Eloquent 模型序列化。
 
@@ -78,46 +95,46 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 接下来，让我们来看一下示例事件对应的监听器，事件监听器通过 `handle` 方法接收相应的事件实例，`event:generate` 命令将自动导入正确的事件类且在 `handle` 方法上类型提示（type-hint）相应的事件类。在 `handle` 方法中，你可以执行任何必要的逻辑来响应事件：
 
-	<?php
+    <?php
 
-	namespace App\Listeners;
+    namespace App\Listeners;
 
-	use App\Events\PodcastWasPurchased;
-	use Illuminate\Queue\InteractsWithQueue;
-	use Illuminate\Contracts\Queue\ShouldQueue;
+    use App\Events\PodcastWasPurchased;
+    use Illuminate\Queue\InteractsWithQueue;
+    use Illuminate\Contracts\Queue\ShouldQueue;
 
-	class EmailPurchaseConfirmation
-	{
-	    /**
-	     * Create the event listener.
-	     *
-	     * @return void
-	     */
-	    public function __construct()
-	    {
-	        //
-	    }
+    class EmailPurchaseConfirmation
+    {
+        /**
+         * Create the event listener.
+         *
+         * @return void
+         */
+        public function __construct()
+        {
+            //
+        }
 
-	    /**
-	     * Handle the event.
-	     *
-	     * @param  PodcastWasPurchased  $event
-	     * @return void
-	     */
-	    public function handle(PodcastWasPurchased $event)
-	    {
-	        // Access the podcast using $event->podcast...
-	    }
-	}
+        /**
+         * Handle the event.
+         *
+         * @param  PodcastWasPurchased  $event
+         * @return void
+         */
+        public function handle(PodcastWasPurchased $event)
+        {
+            // Access the podcast using $event->podcast...
+        }
+    }
 
 你的事件监听器还可以在构造函数上类型提示任何需要的依赖，所有的事件监听器都将通过 Laravel [服务容器](/docs/{{version}}/container) 来实例化，所以依赖将被自动注入：
 
-	use Illuminate\Contracts\Mail\Mailer;
+    use Illuminate\Contracts\Mail\Mailer;
 
-	public function __construct(Mailer $mailer)
-	{
-		$this->mailer = $mailer;
-	}
+    public function __construct(Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
 
 #### 阻止事件传播
 
@@ -128,18 +145,18 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 需要将事件监听器加入[队列](/docs/{{version}}/queues)吗? 这个再容易不过了，只需要将 `ShouldQueue` 接口加入监听器类。由 `event:generate` Artisan 命令生成的监听器类已经将这个接口导入到了当前的命名空间中，所以你可以直接使用：
 
-	<?php
+    <?php
 
-	namespace App\Listeners;
+    namespace App\Listeners;
 
-	use App\Events\PodcastWasPurchased;
-	use Illuminate\Queue\InteractsWithQueue;
-	use Illuminate\Contracts\Queue\ShouldQueue;
+    use App\Events\PodcastWasPurchased;
+    use Illuminate\Queue\InteractsWithQueue;
+    use Illuminate\Contracts\Queue\ShouldQueue;
 
-	class EmailPurchaseConfirmation implements ShouldQueue
-	{
-		//
-	}
+    class EmailPurchaseConfirmation implements ShouldQueue
+    {
+        //
+    }
 
 就是这样！现在，当监听器因为一个事件而被调用时，这个监听器将会被使用自 Laravel[队列系统](/docs/{{version}}/queues)的事件转发器自动加入队列。如果当监听器被队列执行的过程当中没有报出异常，这个被队列的任务将自动害处理完后被删除。
 
@@ -147,25 +164,25 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 如果你需要手动访问底层队列任务的 `delete` 和 `release` 方法，你可以这样做。`Illuminate\Queue\InteractsWithQueue` trait 是默认导入生成的监听器中的，使你可以访问这些方法：
 
-	<?php
+    <?php
 
-	namespace App\Listeners;
+    namespace App\Listeners;
 
-	use App\Events\PodcastWasPurchased;
-	use Illuminate\Queue\InteractsWithQueue;
-	use Illuminate\Contracts\Queue\ShouldQueue;
+    use App\Events\PodcastWasPurchased;
+    use Illuminate\Queue\InteractsWithQueue;
+    use Illuminate\Contracts\Queue\ShouldQueue;
 
-	class EmailPurchaseConfirmation implements ShouldQueue
-	{
-		use InteractsWithQueue;
+    class EmailPurchaseConfirmation implements ShouldQueue
+    {
+        use InteractsWithQueue;
 
-		public function handle(PodcastWasPurchased $event)
-		{
-			if (true) {
-				$this->release(30);
-			}
-		}
-	}
+        public function handle(PodcastWasPurchased $event)
+        {
+            if (true) {
+                $this->release(30);
+            }
+        }
+    }
 
 <a name="firing-events"></a>
 ## 激发事件
@@ -173,37 +190,37 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 激发一个事件，你可以使用 `Event` [facade](/docs/{{version}}/facades)，传递一个事件的实例给 `fire` 方法。`fire` 方法将这个事件转发给相关的注册事件：
 
-	<?php
+    <?php
 
-	namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-	use Event;
-	use App\Podcast;
-	use App\Events\PodcastWasPurchased;
-	use App\Http\Controllers\Controller;
+    use Event;
+    use App\Podcast;
+    use App\Events\PodcastWasPurchased;
+    use App\Http\Controllers\Controller;
 
-	class UserController extends Controller
-	{
-		/**
-		 * Show the profile for the given user.
-		 *
-		 * @param  int  $userId
-		 * @param  int  $podcastId
-		 * @return Response
-		 */
-		public function purchasePodcast($userId, $podcastId)
-		{
-			$podcast = Podcast::findOrFail($podcastId);
+    class UserController extends Controller
+    {
+        /**
+         * Show the profile for the given user.
+         *
+         * @param  int  $userId
+         * @param  int  $podcastId
+         * @return Response
+         */
+        public function purchasePodcast($userId, $podcastId)
+        {
+            $podcast = Podcast::findOrFail($podcastId);
 
-			// Purchase podcast logic...
+            // Purchase podcast logic...
 
-			Event::fire(new PodcastWasPurchased($podcast));
-		}
-	}
+            Event::fire(new PodcastWasPurchased($podcast));
+        }
+    }
 
 可选的，你可以使用全局的 `event` 辅助函数激发事件：
 
-	event(new PodcastWasPurchased($podcast));
+    event(new PodcastWasPurchased($podcast));
 
 <a name="broadcasting-events"></a>
 ## 广播事件
@@ -233,41 +250,41 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 为了告知 Laravel 一个给定的事件需要广播，事件类需要实现 `Illuminate\Contracts\Broadcasting\ShouldBroadcast` 接口，`ShouldBroadcast` 接口只需要你实现一个方法：`broadcastOn`，`broadcastOn`返回一个「渠道」名数组，事件将在这些渠道上广播：
 
-	<?php
+    <?php
 
-	namespace App\Events;
+    namespace App\Events;
 
-	use App\User;
-	use App\Events\Event;
-	use Illuminate\Queue\SerializesModels;
-	use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+    use App\User;
+    use App\Events\Event;
+    use Illuminate\Queue\SerializesModels;
+    use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-	class ServerCreated extends Event implements ShouldBroadcast
-	{
-	    use SerializesModels;
+    class ServerCreated extends Event implements ShouldBroadcast
+    {
+        use SerializesModels;
 
-	    public $user;
+        public $user;
 
-	    /**
-	     * Create a new event instance.
-	     *
-	     * @return void
-	     */
-	    public function __construct(User $user)
-	    {
-	        $this->user = $user;
-	    }
+        /**
+         * Create a new event instance.
+         *
+         * @return void
+         */
+        public function __construct(User $user)
+        {
+            $this->user = $user;
+        }
 
-	    /**
-	     * Get the channels the event should be broadcast on.
-	     *
-	     * @return array
-	     */
-	    public function broadcastOn()
-	    {
-	        return ['user.'.$this->user->id];
-	    }
-	}
+        /**
+         * Get the channels the event should be broadcast on.
+         *
+         * @return array
+         */
+        public function broadcastOn()
+        {
+            return ['user.'.$this->user->id];
+        }
+    }
 
 然后，你只需要按照正常操作[激发事件](#firing-events)，一旦这个事件被激发，一个[队列任务](/docs/{{version}}/queues) 将通过你指定的广播驱动，将此事件自动广播出去。
 
@@ -276,13 +293,13 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 当一个事件被广播时，其所有的 `public` 属性将自动被序列化且作为事件负载（payload）被广播，从而使你通过 JavaScript 程序可以访问其所有的公共数据。所以，例如事件只有一个 `$user` 属性，此属性包含一个 Eloquent 模型，广播负载将如下：
 
-	{
-		"user": {
-			"id": 1,
-			"name": "Jonathan Banks"
-			...
-		}
-	}
+    {
+        "user": {
+            "id": 1,
+            "name": "Jonathan Banks"
+            ...
+        }
+    }
 
 然而，如果你希望对广播负载有更细粒度的控制，你可以在事件中添加 `broadcastWith` 方法，此方法应该返回数组数据，表示你所希望广播的事件：
 
@@ -303,13 +320,13 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 你可以通过 Pusher 的 JavaScript SDK 使用[Pusher](https://pusher.com)驱动方便地消费事件广播。例如，让我们在前一个示例中消费一个 `App\Events\ServerCreated` 事件：
 
-	this.pusher = new Pusher('pusher-key');
+    this.pusher = new Pusher('pusher-key');
 
-	this.pusherChannel = this.pusher.subscribe('user.' + USER_ID);
+    this.pusherChannel = this.pusher.subscribe('user.' + USER_ID);
 
-	this.pusherChannel.bind('App\\Events\\ServerCreated', function(message) {
-		console.log(message.user);
-	});
+    this.pusherChannel.bind('App\\Events\\ServerCreated', function(message) {
+        console.log(message.user);
+    });
 
 #### Redis
 
@@ -317,75 +334,75 @@ Laravel 中的 `EventServiceProvider` 提供一个方便的地方，用于注册
 
 使用 `socket.io` 和 `ioredis`  Node 库，你能很快地编写一个事件广播器，用于发布所有 Laravel 广播的事件：
 
-	var app = require('http').createServer(handler);
-	var io = require('socket.io')(app);
+    var app = require('http').createServer(handler);
+    var io = require('socket.io')(app);
 
-	var Redis = require('ioredis');
-	var redis = new Redis();
+    var Redis = require('ioredis');
+    var redis = new Redis();
 
-	app.listen(6001, function() {
-		console.log('Server is running!');
-	});
+    app.listen(6001, function() {
+        console.log('Server is running!');
+    });
 
-	function handler(req, res) {
-		res.writeHead(200);
-		res.end('');
-	}
+    function handler(req, res) {
+        res.writeHead(200);
+        res.end('');
+    }
 
-	io.on('connection', function(socket) {
-		//
-	});
+    io.on('connection', function(socket) {
+        //
+    });
 
-	redis.psubscribe('*', function(err, count) {
-		//
-	});
+    redis.psubscribe('*', function(err, count) {
+        //
+    });
 
-	redis.on('pmessage', function(subscribed, channel, message) {
-		message = JSON.parse(message);
-		io.emit(channel + ':' + message.event, message.data);
-	});
+    redis.on('pmessage', function(subscribed, channel, message) {
+        message = JSON.parse(message);
+        io.emit(channel + ':' + message.event, message.data);
+    });
 
 <a name="event-subscribers"></a>
 ## 事件订阅器
 
 事件订阅器是一种可以在其中订阅多个事件的类，你可以在单个类中定义多个事件处理器。订阅器应该定义一个 `subscribe` 方法，传入一个事件转发器实例：
 
-	<?php
+    <?php
 
-	namespace App\Listeners;
+    namespace App\Listeners;
 
-	class UserEventListener
-	{
-		/**
-		 * Handle user login events.
-		 */
-		public function onUserLogin($event) {}
+    class UserEventListener
+    {
+        /**
+         * Handle user login events.
+         */
+        public function onUserLogin($event) {}
 
-		/**
-		 * Handle user logout events.
-		 */
-		public function onUserLogout($event) {}
+        /**
+         * Handle user logout events.
+         */
+        public function onUserLogout($event) {}
 
-		/**
-		 * Register the listeners for the subscriber.
-		 *
-		 * @param  Illuminate\Events\Dispatcher  $events
-		 * @return array
-		 */
-		public function subscribe($events)
-		{
-			$events->listen(
-				'App\Events\UserLoggedIn',
-				'App\Listeners\UserEventListener@onUserLogin'
-			);
+        /**
+         * Register the listeners for the subscriber.
+         *
+         * @param  Illuminate\Events\Dispatcher  $events
+         * @return array
+         */
+        public function subscribe($events)
+        {
+            $events->listen(
+                'App\Events\UserLoggedIn',
+                'App\Listeners\UserEventListener@onUserLogin'
+            );
 
-			$events->listen(
-				'App\Events\UserLoggedOut',
-				'App\Listeners\UserEventListener@onUserLogout'
-			);
-		}
+            $events->listen(
+                'App\Events\UserLoggedOut',
+                'App\Listeners\UserEventListener@onUserLogout'
+            );
+        }
 
-	}
+    }
 
 #### 注册事件订阅器
 

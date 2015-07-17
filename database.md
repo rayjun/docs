@@ -2,7 +2,7 @@
 
 - [介绍](#introduction)
 - [Running Raw SQL Queries](#running-queries)
-	- [Listening For Query Events](#listening-for-query-events)
+    - [Listening For Query Events](#listening-for-query-events)
 - [Database Transactions](#database-transactions)
 - [Using Multiple Database Connections](#accessing-connections)
 
@@ -32,21 +32,21 @@ Laravel非常简单地与数据库连接和查询。应用数据库配置在`con
 如何配置 读/写 连接，请看下面的例子：
 example:
 
-	'mysql' => [
-		'read' => [
-			'host' => '192.168.1.1',
-		],
-		'write' => [
-			'host' => '196.168.1.2'
-		],
-		'driver'    => 'mysql',
-		'database'  => 'database',
-		'username'  => 'root',
-		'password'  => '',
-		'charset'   => 'utf8',
-		'collation' => 'utf8_unicode_ci',
-		'prefix'    => '',
-	],
+    'mysql' => [
+        'read' => [
+            'host' => '192.168.1.1',
+        ],
+        'write' => [
+            'host' => '196.168.1.2'
+        ],
+        'driver'    => 'mysql',
+        'database'  => 'database',
+        'username'  => 'root',
+        'password'  => '',
+        'charset'   => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix'    => '',
+    ],
 
 注意： `读` 和 `写` 两个键被添加在配置数组中，两个键都包含单一的键 `host` 的数组值。其余的数据库选项都合并在主 `mysql` 数组中。
 
@@ -61,127 +61,127 @@ example:
 
 执行基本的查询，在 `DB` facade 上使用 `select` 方法：
 
-	<?php
+    <?php
 
-	namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-	use DB;
-	use App\Http\Controllers\Controller;
+    use DB;
+    use App\Http\Controllers\Controller;
 
-	class UserController extends Controller
-	{
-		/**
-		 * Show a list of all of the application's users.
-		 *
-		 * @return Response
-		 */
-		public function index()
-		{
-			$users = DB::select('select * from users where active = ?', [1]);
+    class UserController extends Controller
+    {
+        /**
+         * Show a list of all of the application's users.
+         *
+         * @return Response
+         */
+        public function index()
+        {
+            $users = DB::select('select * from users where active = ?', [1]);
 
-			return view('user.index', ['users' => $users]);
-		}
-	}
+            return view('user.index', ['users' => $users]);
+        }
+    }
 
 `select` 方法的第一个参数是 raw SQL 查询，第二个参数是任意需要绑定查询的参数绑定。最有代表性地是 `where` 子句约束的值，参数绑定防止不利的 SQL 注入。
 
 `select` 返回的是 `数组` 记录。数组内的每一条记录是一个 PHP `StdClass` 对象，允许存取记录的值：
 
-	foreach ($users as $user) {
-		echo $user->name;
-	}
+    foreach ($users as $user) {
+        echo $user->name;
+    }
 
 #### 使用命名绑定
 
 可以使用命名绑定执行查询，替换`?`参数绑定：
 
-	$results = DB::select('select * from users where id = :id', ['id' => 1]);
+    $results = DB::select('select * from users where id = :id', ['id' => 1]);
 
 #### 执行插入语句
 
 在 `DB` facade 上使用 `insert` 方法，执行一条插入语句。和 `select` 一样，`insert` 方法的第一个参数是 raw SQL 查询，第二个参数是绑定：
 
-	DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+    DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
 
 #### 执行一条更新语句
 
 `update` 方法用于更新数据库中已有记录。该方法返回的是影响行数：
 
-	$affected = DB::update('update users set votes = 100 where name = ?', ['John']);
+    $affected = DB::update('update users set votes = 100 where name = ?', ['John']);
 
 #### 执行一条删除语句
 
 `delete` 方法用于删除数据库中的记录。和 `update` 方法一样，返回影响行数：
 
-	$deleted = DB::delete('delete from users');
+    $deleted = DB::delete('delete from users');
 
 #### 执行一般的语句
 
 一些数据库语句没有返回值。对于这样的操作，可以在 `DB` facade 上使用 `statement` 方法：
 
-	DB::statement('drop table users');
+    DB::statement('drop table users');
 
 <a name="listening-for-query-events"></a>
 ### 查询事件监听
 
 如果你想得到应用程序执行的每个SQL查询，可是使用 `listen` 方法。`listen` 方法对日记记录和调试非常有用。你可以注册查询监听到[服务供应者](/docs/{{version}}/providers)中:
 
-	<?php
+    <?php
 
-	namespace App\Providers;
+    namespace App\Providers;
 
-	use DB;
-	use Illuminate\Support\ServiceProvider;
+    use DB;
+    use Illuminate\Support\ServiceProvider;
 
-	class AppServiceProvider extends ServiceProvider
-	{
-	    /**
-	     * Bootstrap any application services.
-	     *
-	     * @return void
-	     */
-		public function boot()
-		{
-			DB::listen(function($sql, $bindings, $time) {
-				//
-			});
-		}
+    class AppServiceProvider extends ServiceProvider
+    {
+        /**
+         * Bootstrap any application services.
+         *
+         * @return void
+         */
+        public function boot()
+        {
+            DB::listen(function($sql, $bindings, $time) {
+                //
+            });
+        }
 
-		/**
-		 * Register the service provider.
-		 *
-		 * @return void
-		 */
-		public function register()
-		{
-			//
-		}
-	}
+        /**
+         * Register the service provider.
+         *
+         * @return void
+         */
+        public function register()
+        {
+            //
+        }
+    }
 
 <a name="database-transactions"></a>
 ## 数据库事务
 
 要在数据库事务执行一组操作，可以使用在 `DB` facade 上使用 `transaction` 方法。如果事务 `闭包` 内抛出异常，则事务自动回滚。如果闭包执行成功，则事务自动提交。当使用 `transaction` 方法时，你不需要为手动地回滚或提交而担心：
 
-	DB::transaction(function () {
-		DB::table('users')->update(['votes' => 1]);
+    DB::transaction(function () {
+        DB::table('users')->update(['votes' => 1]);
 
-		DB::table('posts')->delete();
-	});
+        DB::table('posts')->delete();
+    });
 
 #### 手动使用事务
 
 如果你喜欢手动开始一个事务和完全控制回滚和提交，可以在 `DB` facade 上使用 `beginTransaction` 方法：
 
-	DB::beginTransaction();
+    DB::beginTransaction();
 
 You can rollback the transaction via the `rollBack` method:
 
-	DB::rollBack();
+    DB::rollBack();
 
 Lastly, you can commit a transaction via the `commit` method:
 
-	DB::commit();
+    DB::commit();
 
 > **主要:** 使用 `DB` facade 事务方法也可以控制 [查询构造器](/docs/{{version}}/queries) 和 [Eloquent ORM](/docs/{{version}}/eloquent)事务。
 
@@ -190,8 +190,8 @@ Lastly, you can commit a transaction via the `commit` method:
 
 当使用多种数据库连接时，可以 `DB` facade 上使用 `connection` 方法取得每个连接。并把与 `config/database.php` 配置文件中的连接列表相应的一个值 `name` 传递给 `connection` 方法。
 
-	$users = DB::connection('foo')->select(...);
+    $users = DB::connection('foo')->select(...);
 
 也可以在 connection 实例上使用 `getPdo` 方法，取得raw, 基本的 PDO 实例：
 
-	$pdo = DB::connection()->getPdo();
+    $pdo = DB::connection()->getPdo();

@@ -31,7 +31,7 @@
 - Cache 緩存
 - Classes 类
 - CLI 命令行界面
-- Command 
+- Command
 - Command Line 命令行
 - Component 组件
 - Console 终端
@@ -113,7 +113,7 @@
 
 ## P
 
-- Package 包
+- Package 包/组件
 - Packagist (公定名称，不翻)
 - Provider 提供者
 - Prefix 前缀
@@ -181,6 +181,6 @@
 
 ## Z
 
-## 参考 
+## 参考
 
 - [https://laraveltw.hackpad.com/Laravel-5.1--ZYNn4rULGlB](https://laraveltw.hackpad.com/Laravel-5.1--ZYNn4rULGlB)

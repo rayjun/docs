@@ -7,6 +7,7 @@
     - [认证](#included-authenticating)
     - [检索通过认证的用户](#retrieving-the-authenticated-user)
     - [保护路由](#protecting-routes)
+    - [Authentication Throttling](#authentication-throttling)
 - [手动认证用户](#authenticating-users)
     - [记住用户](#remembering-users)
     - [其它认证方法](#other-authentication-methods)
@@ -124,6 +125,10 @@ Laravel 自带两个认证控制器，它们被放置在 `App\Http\Controllers\
 
     protected $redirectPath = '/dashboard';
 
+When a user is not successfully authenticated, they will be redirected to the `/auth/login` URI. You can customize the failed post-authentication redirect location by defining a `loginPath` property on the `AuthController`:
+
+    protected $loginPath = '/login';
+
 #### 自定义
 
 要修改当一个新用户注册时所需的表单字段，或者自定义新用户记录被插入数据库的方式，你可以修改 `AuthController` 控制器类，应用程序中的这个类负责验证和创建新用户。
@@ -197,6 +202,28 @@ Laravel 自带两个认证控制器，它们被放置在 `App\Http\Controllers\
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+<a name="authentication-throttling"></a>
+### Authentication Throttling
+
+If you are using Laravel's built-in `AuthController` class, the `Illuminate\Foundation\Auth\ThrottlesLogins` trait may be used to throttle login attempts to your application. By default, the user will not be able to login for one minute if they fail to provide the correct credentials after several attempts. The throttling is unique to the user's username / e-mail address and their IP address:
+
+    <?php
+
+    namespace App\Http\Controllers\Auth;
+
+    use App\User;
+    use Validator;
+    use App\Http\Controllers\Controller;
+    use Illuminate\Foundation\Auth\ThrottlesLogins;
+    use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
+    class AuthController extends Controller
+    {
+        use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+        // Rest of AuthController class...
     }
 
 <a name="authenticating-users"></a>
@@ -309,7 +336,9 @@ redirector 上的 `intended` 方法会在被认证过滤器拦截之前将用户
 
 你也可以使用 HTTP 基本认证而不在会话中设置一个用户标识符，这对于 API 认证特别有用。若要这样做, 请[定义中间件](/docs/{{version}}/middleware)调用 `onceBasic` 方法，请求可以被进一步传递到应用程序中：
 
-    <?php namespace Illuminate\Auth\Middleware;
+    <?php
+
+    namespace Illuminate\Auth\Middleware;
 
     use Auth;
     use Closure;
@@ -381,7 +410,7 @@ Laravel 自带 `Auth\PasswordController`，其中包含重置用户密码必要�
         {!! csrf_field() !!}
 
         <div>
-        	Email
+            Email
             <input type="email" name="email" value="{{ old('email') }}">
         </div>
 
@@ -513,6 +542,14 @@ Laravel 自带 `Auth\PasswordController`，其中包含重置用户密码必要�
     return Socialite::driver('github')
                 ->scopes(['scope1', 'scope2'])->redirect();
 
+Of course, you will need to define routes to your controller methods:
+
+    <?php
+
+        Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+        Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+
+
 #### 获取用户详细信息
 
 一旦你得到了一个用户实例，你可以获得一些更多关于用户的信息：
@@ -580,7 +617,9 @@ Laravel 自带 `Auth\PasswordController`，其中包含重置用户密码必要�
 
 让我们来看一下 `Illuminate\Contracts\Auth\UserProvider` 接口：
 
-    <?php namespace Illuminate\Contracts\Auth;
+    <?php
+
+    namespace Illuminate\Contracts\Auth;
 
     interface UserProvider {
 
@@ -606,7 +645,9 @@ Laravel 自带 `Auth\PasswordController`，其中包含重置用户密码必要�
 
 既然我们已经看过 `UserProvider` 的每一个方法，让我们一起来看一下 `Authenticatable`，记住，提供者程序应该从 `retrieveById` 和 `retrieveByCredentials` 方法返回这个接口的实现：:
 
-    <?php namespace Illuminate\Contracts\Auth;
+    <?php
+
+    namespace Illuminate\Contracts\Auth;
 
     interface Authenticatable {
 
