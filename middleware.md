@@ -86,9 +86,14 @@ This command will place a new `OldMiddleware` class within your `app/Http/Middle
     <?php
 
     namespace App\Http\Middleware;
+<<<<<<< HEAD
 
     use Closure;
+=======
+>>>>>>> Laragirl-5.1
 
+    use Closure;
+    
 	class AfterMiddleware
 	{
     	public function handle($request, Closure $next)
@@ -178,6 +183,7 @@ This command will place a new `OldMiddleware` class within your `app/Http/Middle
 	namespace Illuminate\Session\Middleware;
 
     use Closure;
+<<<<<<< HEAD
 
 
     class StartSession
@@ -192,6 +198,9 @@ This command will place a new `OldMiddleware` class within your `app/Http/Middle
             // Store the session data...
         }
     }
+=======
+>>>>>>> Laragirl-5.1
+
 
 
 这个 `terminate` 方法应该同时接收请求和响应参数。一旦你定义了一个可终止的中间件，你应该把它加到 `HTTP kernel` 中全局中间件列表中。
