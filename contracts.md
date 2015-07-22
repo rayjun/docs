@@ -74,6 +74,7 @@ class Repository
 
 同样的，如果想要将底层的快取技术（比如 Memcached ）抽换成另一种（像 Redis ），又一次的我们必须修改这个 repository 类别。我们的 储存库不应该知道这麽多关于谁提供了资料，或是如何提供等等细节。
 
+
 **比起上面的做法，我们可以改用一个简单、和套件无关的介面来改进代码：**
 
 ~~~
@@ -109,6 +110,7 @@ class Repository
 
 
 <a name="contract-reference"></a>
+
 ## Contract 参考
 
 以下是大部分 Laravel Contracts 的参考，以及相对应的「facade」：
@@ -155,11 +157,7 @@ class Repository
 
 所以，要如何实作一个 contract 呢？实际上非常的简单。
 
-<<<<<<< HEAD
 很多 Laravel 的类别都是经由[服务容器](/docs/{{version}}/container) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
-=======
-很多 Laravel 的类别都是经由[服务容器](https://github.com/Laragirl/docs/blob/5.1/container.md) 来解析，包含控制器，事件监听，中介层，队列任务，甚至是路由闭包。所以，要实作一个 contract，你可以在类别的建构子使用「型别提示」解析类别。
->>>>>>> origin/5.1
 
 例如，我们来看看这个事件监听程式：
 
@@ -204,8 +202,93 @@ class CacheUserInformation
 
 ~~~
 
-<<<<<<< HEAD
 当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件]((/docs/{{version}}/container).
-=======
-当事件监听被解析时，服务容器会经由类别建构子参数的型别提示，注入适当的值。要知道怎麽注册更多服务容器，参考[这份文件](https://github.com/Laragirl/docs/blob/5.1/container.md).
->>>>>>> origin/5.1
+
+## Contract Reference
+
+This is a reference to most Laravel Contracts, as well as their Laravel "facade" counterparts:
+
+Contract  |  References Facade
+------------- | -------------
+[Illuminate\Contracts\Auth\Guard](https://github.com/illuminate/contracts/blob/master/Auth/Guard.php)  |  Auth
+[Illuminate\Contracts\Auth\PasswordBroker](https://github.com/illuminate/contracts/blob/master/Auth/PasswordBroker.php)  |  Password
+[Illuminate\Contracts\Bus\Dispatcher](https://github.com/illuminate/contracts/blob/master/Bus/Dispatcher.php)  |  Bus
+[Illuminate\Contracts\Broadcasting\Broadcaster](https://github.com/illuminate/contracts/blob/master/Broadcasting/Broadcaster.php)  | &nbsp;
+[Illuminate\Contracts\Cache\Repository](https://github.com/illuminate/contracts/blob/master/Cache/Repository.php) | Cache
+[Illuminate\Contracts\Cache\Factory](https://github.com/illuminate/contracts/blob/master/Cache/Factory.php) | Cache::driver()
+[Illuminate\Contracts\Config\Repository](https://github.com/illuminate/contracts/blob/master/Config/Repository.php) | Config
+[Illuminate\Contracts\Container\Container](https://github.com/illuminate/contracts/blob/master/Container/Container.php) | App
+[Illuminate\Contracts\Cookie\Factory](https://github.com/illuminate/contracts/blob/master/Cookie/Factory.php) | Cookie
+[Illuminate\Contracts\Cookie\QueueingFactory](https://github.com/illuminate/contracts/blob/master/Cookie/QueueingFactory.php) | Cookie::queue()
+[Illuminate\Contracts\Encryption\Encrypter](https://github.com/illuminate/contracts/blob/master/Encryption/Encrypter.php) | Crypt
+[Illuminate\Contracts\Events\Dispatcher](https://github.com/illuminate/contracts/blob/master/Events/Dispatcher.php) | Event
+[Illuminate\Contracts\Filesystem\Cloud](https://github.com/illuminate/contracts/blob/master/Filesystem/Cloud.php) | &nbsp;
+[Illuminate\Contracts\Filesystem\Factory](https://github.com/illuminate/contracts/blob/master/Filesystem/Factory.php) | File
+[Illuminate\Contracts\Filesystem\Filesystem](https://github.com/illuminate/contracts/blob/master/Filesystem/Filesystem.php) | File
+[Illuminate\Contracts\Foundation\Application](https://github.com/illuminate/contracts/blob/master/Foundation/Application.php) | App
+[Illuminate\Contracts\Hashing\Hasher](https://github.com/illuminate/contracts/blob/master/Hashing/Hasher.php) | Hash
+[Illuminate\Contracts\Logging\Log](https://github.com/illuminate/contracts/blob/master/Logging/Log.php) | Log
+[Illuminate\Contracts\Mail\MailQueue](https://github.com/illuminate/contracts/blob/master/Mail/MailQueue.php) | Mail::queue()
+[Illuminate\Contracts\Mail\Mailer](https://github.com/illuminate/contracts/blob/master/Mail/Mailer.php) | Mail
+[Illuminate\Contracts\Queue\Factory](https://github.com/illuminate/contracts/blob/master/Queue/Factory.php) | Queue::driver()
+[Illuminate\Contracts\Queue\Queue](https://github.com/illuminate/contracts/blob/master/Queue/Queue.php) | Queue
+[Illuminate\Contracts\Redis\Database](https://github.com/illuminate/contracts/blob/master/Redis/Database.php) | Redis
+[Illuminate\Contracts\Routing\Registrar](https://github.com/illuminate/contracts/blob/master/Routing/Registrar.php) | Route
+[Illuminate\Contracts\Routing\ResponseFactory](https://github.com/illuminate/contracts/blob/master/Routing/ResponseFactory.php) | Response
+[Illuminate\Contracts\Routing\UrlGenerator](https://github.com/illuminate/contracts/blob/master/Routing/UrlGenerator.php) | URL
+[Illuminate\Contracts\Support\Arrayable](https://github.com/illuminate/contracts/blob/master/Support/Arrayable.php) | &nbsp;
+[Illuminate\Contracts\Support\Jsonable](https://github.com/illuminate/contracts/blob/master/Support/Jsonable.php) | &nbsp;
+[Illuminate\Contracts\Support\Renderable](https://github.com/illuminate/contracts/blob/master/Support/Renderable.php) | &nbsp;
+[Illuminate\Contracts\Validation\Factory](https://github.com/illuminate/contracts/blob/master/Validation/Factory.php) | Validator::make()
+[Illuminate\Contracts\Validation\Validator](https://github.com/illuminate/contracts/blob/master/Validation/Validator.php) | &nbsp;
+[Illuminate\Contracts\View\Factory](https://github.com/illuminate/contracts/blob/master/View/Factory.php) | View::make()
+[Illuminate\Contracts\View\View](https://github.com/illuminate/contracts/blob/master/View/View.php) | &nbsp;
+
+<a name="how-to-use-contracts"></a>
+## How To Use Contracts
+
+So, how do you get an implementation of a contract? It's actually quite simple.
+
+Many types of classes in Laravel are resolved through the [service container](/docs/{{version}}/container), including controllers, event listeners, middleware, queued jobs, and even route Closures. So, to get an implementation of a contract, you can just "type-hint" the interface in the constructor of the class being resolved.
+
+For example, take a look at this event listener:
+
+    <?php
+
+    namespace App\Listeners;
+
+    use App\User;
+    use App\Events\NewUserRegistered;
+    use Illuminate\Contracts\Redis\Database;
+
+    class CacheUserInformation
+    {
+        /**
+         * The Redis database implementation.
+         */
+        protected $redis;
+
+        /**
+         * Create a new event handler instance.
+         *
+         * @param  Database  $redis
+         * @return void
+         */
+        public function __construct(Database $redis)
+        {
+            $this->redis = $redis;
+        }
+
+        /**
+         * Handle the event.
+         *
+         * @param  NewUserRegistered  $event
+         * @return void
+         */
+        public function handle(NewUserRegistered $event)
+        {
+            //
+        }
+    }
+
+When the event listener is resolved, the service container will read the type-hints on the constructor of the class, and inject the appropriate value. To learn more about registering things in the service container, check out [its documentation](/docs/{{version}}/container).

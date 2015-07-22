@@ -17,42 +17,42 @@
 
 例如，我们可以使用 `encrypt` 方法对密码加密且将其存储到[Eloquent 模型](/docs/{{version}}/eloquent)中：
 
-	<?php
+    <?php
 
-	namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-	use Crypt;
-	use App\User;
-	use Illuminate\Http\Request;
-	use App\Http\Controllers\Controller;
+    use Crypt;
+    use App\User;
+    use Illuminate\Http\Request;
+    use App\Http\Controllers\Controller;
 
-	class UserController extends Controller
-	{
-		/**
-		 * Store a secret message for the user.
-		 *
-		 * @param  Request  $request
-		 * @param  int  $id
-		 * @return Response
-		 */
-		public function storeSecret(Request $request, $id)
-		{
-			$user = User::findOrFail($id);
+    class UserController extends Controller
+    {
+        /**
+         * Store a secret message for the user.
+         *
+         * @param  Request  $request
+         * @param  int  $id
+         * @return Response
+         */
+        public function storeSecret(Request $request, $id)
+        {
+            $user = User::findOrFail($id);
 
-			$user->fill([
-				'secret' => Crypt::encrypt($request->secret)
-			])->save();
-		}
-	}
+            $user->fill([
+                'secret' => Crypt::encrypt($request->secret)
+            ])->save();
+        }
+    }
 
 #### 解密
 
 当然，你可以通过 `Crypt` facade 上的 `decrypt` 方法将一个值解密，如果此值未被正确加密，例如，当 MAC 无效时，一个 `Illuminate\Contracts\Encryption\DecryptException` 异常将被抛出：
 
-	use Illuminate\Contracts\Encryption\DecryptException;
+    use Illuminate\Contracts\Encryption\DecryptException;
 
-	try {
-		$decrypted = Crypt::decrypt($encryptedValue);
-	} catch (DecryptException $e) {
-		//
-	}
+    try {
+        $decrypted = Crypt::decrypt($encryptedValue);
+    } catch (DecryptException $e) {
+        //
+    }

@@ -26,9 +26,9 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
     
     <?php
 
-	namespace App\Http\Middleware;
+    namespace App\Http\Middleware;
 
-	use Closure;
+    use Closure;
 
 	class OldMiddleware
 	{
@@ -78,10 +78,10 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
     <?php
 
-	namespace App\Http\Middleware;
+    namespace App\Http\Middleware;
 
-	use Closure;
-
+    use Closure;
+    
 	class AfterMiddleware
 	{
     	public function handle($request, Closure $next)
@@ -105,7 +105,7 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
 如果你想给一个特定的路由指定中间件，需要先在 `app/Http/Kernel.php` 为中间件配置一个键值。默认情况下，这个类中的 `$routeMiddleware` 属性中列出了目前 Laravel 中配置的中间件。要增加你自己的配置，只需要在这个列表中增加你自己的键值就行，举个例子:
 
-	// Within App\Http\Kernel Class...
+    // Within App\Http\Kernel Class...
 
 	protected $routeMiddleware = [
     	'auth' => \App\Http\Middleware\Authenticate::class,
@@ -127,11 +127,11 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
 新增加的参数在 `$next` 参数后面:
 
-	<?php
+    <?php
 
-	namespace App\Http\Middleware;
+    namespace App\Http\Middleware;
 
-	use Closure;
+    use Closure;
 
 	class RoleMiddleware
 	{
@@ -168,7 +168,7 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
 
 	namespace Illuminate\Session\Middleware;
 
-	use Closure;
+    use Closure;
 
 	class StartSession
 	{
@@ -182,5 +182,6 @@ Laravel 框架默认包含了几个中间件，包括维护，认证，CSRF 保�
     	    // Store the session data...
 	    }
 	}
+
 
 这个 `terminate` 方法应该同时接收请求和响应参数。一旦你定义了一个可终止的中间件，你应该把它加到 `HTTP kernel` 中全局中间件列表中。

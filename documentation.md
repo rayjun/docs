@@ -36,7 +36,7 @@
     - [辅助函数](/docs/{{version}}/helpers)
     - [本地化](/docs/{{version}}/localization)
     - [邮件](/docs/{{version}}/mail)
-    - [扩展包开发](/docs/{{version}}/packages)
+    - [组件开发](/docs/{{version}}/packages)
     - [分页](/docs/{{version}}/pagination)
     - [队列](/docs/{{version}}/queues)
     - [Redis](/docs/{{version}}/redis)
